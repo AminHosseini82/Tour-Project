@@ -1,0 +1,199 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            direction: rtl;
+            margin: 0;
+            padding: 0;
+
+        }
+        body {
+
+            min-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background:  rgba(225, 225, 225, 0.421);
+        }
+        h1 {
+            color: black;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            flex: 1 0 21%; /* 21% برای فاصله بین کارت‌ها */
+            max-width: 21%;
+            height: 215px;
+            margin: 30px 10px;
+            padding: 20px 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: 0.3s ease-in-out;
+        }
+        .card:hover {
+            height: 450px;
+        }
+        .imgContainer {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            z-index: 1;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .imgContainer img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .content {
+            position: relative;
+            margin-top: -140px;
+            padding: 10px 15px;
+            text-align: center;
+            color: black;
+            visibility: hidden;
+            opacity: 0;
+            {#pointer-events: none;#}
+            transition: 0.3s ease-in-out;
+            white-space: nowrap; /* جلوگیری از پیچیدن متن به چند خط */
+            text-overflow: ellipsis;
+             white-space: normal; /* اجازه به پیچیدن متن به چند خط */
+             word-wrap: break-word; /* شکستن کلمات طولانی در صورت نیاز */
+        }
+        .content p {
+            color:  #00b4d8;
+             font-size: 30px;
+             margin: 0; /* حذف فاصله اضافی */
+        }
+        .card:hover .content {
+            visibility: visible;
+            opacity: 1;
+            margin-top: -40px;
+            transition-delay: 0.3s;
+        }
+        .buttons {
+            margin-top: 10px; /* فاصله از متن */
+        }
+        .btn {
+            background-color:  #00b4d8;
+            color: white;
+            padding: 7px 25px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .btn-delete {
+            background-color: #f72585; /* رنگ قرمز برای دکمه حذف */
+            color: white;
+            padding: 7px 25px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .addbtn{
+            margin-top: 30px;
+            background-color :  #00b4d8; /* رنگ قرمز برای دکمه حذف */
+            color: black;
+            font-size: 15px;
+            padding: 15px 20px;
+            border: none;
+            border-radius:40px;
+            {#cursor: pointer;#}
+
+        }
+
+        @media (max-width: 992px) { /* سایز لپ تاپ */
+            .card {
+                flex: 1 0 45%;
+                max-width: 45%;
+            }
+        }
+        @media (max-width: 576px) { /* سایز موبایل */
+            .card {
+                flex: 1 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>اقامتگاه ها</h1>
+<div class="container">
+   {% for house in houses %}
+    <div class="card">
+        <div class="imgContainer">
+
+{#            <img src="{{ house.image_house.url }}" alt="{{ news.title_news }}">#}
+              {% if house.image_house %}
+                    <img src="{{ house.image_house.url }}" id="productImg" alt="{{ news.title_news }}">
+                {% else %}
+                    <img src="{% static 'path/to/media/tour/image.jpg' %}" id="productImg" alt="Default Image"> <!-- تصویر پیش‌فرض -->
+                {% endif %}
+        </div>
+        <div class="content">
+            <h2>{{ house.name_house }}</h2>
+            <p>{{ house.description_house }}</p>
+
+           {% if user.is_authenticated and user.email == 'aminhosseini822003@gmail.com' %}
+    <!-- دکمه ویرایش -->
+    <button class="btn">
+        <a href="{% url 'house:edit_houses' house.id %}" style="color: inherit; text-decoration: none;">ویرایش</a>
+    </button>
+
+    <!-- دکمه حذف با فرم POST -->
+    <form action="{% url 'house:delete_houses' house.id %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button class="btn-delete" type="submit">حذف</button>
+    </form>
+{% endif %}
+</div>
+</div>
+
+    {% endfor %}
+</div>
+ <div >
+      <button class="addbtn" onclick="location.href='{% url 'tour:main_page' %}'">برگشت به صفحه اصلی</button>
+ </div>
+    <div>
+      {% if user.is_authenticated and user.email == "aminhosseini822003@gmail.com" %}
+{#      <button class="addbtn"> اضافه کردن خبر جدید  </button>#}
+       <button class="addbtn" onclick="location.href='{% url 'house:add_houses' %}'">ایجاد اقامتگاه جدید</button>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
+
+{#{% block content %}#}
+{#    <h1>لیست اقامتگاه‌ها</h1>#}
+{##}
+{#    {% if houses %}#}
+{#        <ul>#}
+{#            {% for house in houses %}#}
+{#                <li>#}
+{#                    <h2>{{ house.name }}</h2>  <!-- نام اقامتگاه -->#}
+{#                    <p>{{ house.description }}</p>  <!-- توضیحات اقامتگاه -->#}
+{#                    <p>قیمت: {{ house.price }} تومان</p>  <!-- قیمت اقامتگاه -->#}
+{#                    <img src="{{ house.image.url }}" alt="{{ house.name }}" style="max-width: 200px;">  <!-- تصویر اقامتگاه -->#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    {% else %}#}
+{#        <p>هیچ اقامتگاهی برای نمایش وجود ندارد.</p>#}
+{#    {% endif %}#}
+{#{% endblock %}#}

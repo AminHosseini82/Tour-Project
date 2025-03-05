@@ -1,0 +1,1189 @@
+{#{% load static %}#}
+<!DOCTYPE html>
+<!---Coding By CodingLab | www.codinglabweb.com--->
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <!--<title>Registration Form in HTML CSS</title>-->
+
+    <style>
+
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            direction: rtl;
+
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 110vh;
+        {#background: rgba(40, 135, 255, 0.75);#}{#background: rgba(1, 70, 80, 0.4);#}{#background: #737373;#} background: rgba(1, 70, 80, 0.4);
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            height: 100px;
+            line-height: 100px;
+            background: linear-gradient(rgba(39, 39, 39, 0.6), transparent);
+            z-index: 100;
+        }
+
+        .nav-logo p {
+            color: white;
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .nav-menu ul {
+            display: flex;
+        }
+
+        .nav-menu ul li {
+            list-style-type: none;
+        }
+
+        .nav-menu ul li .link {
+            text-decoration: none;
+            font-weight: 500;
+            color: #fff;
+            padding-bottom: 15px;
+            margin: 0 25px;
+        }
+
+        .link:hover, .active {
+            border-bottom: 2px solid #fff;
+        }
+
+        .nav-button .btn {
+            width: 130px;
+            height: 40px;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: .3s ease;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        #registerBtn {
+            margin-left: 15px;
+        }
+
+        .btn.white-btn {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .btn.btn.white-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-menu-btn {
+            display: none;
+        }
+
+        .form-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 512px;
+            height: 500px;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .login-container {
+            position: absolute;
+            left: 4px;
+            width: 500px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: .5s ease-in-out;
+        }
+
+        .register-container {
+            position: absolute;
+            right: -520px;
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            transition: .5s ease-in-out;
+        }
+
+        .top span {
+            color: #fff;
+            font-size: small;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .top span a {
+            font-weight: 500;
+            color: #fff;
+            margin-left: 5px;
+        }
+
+        header {
+            color: #fff;
+            font-size: 30px;
+            text-align: center;
+            padding: 10px 0 30px 0;
+        }
+
+        .two-forms {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-field {
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            height: 50px;
+            width: 100%;
+            padding: 10px 10px 0 45px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 50px;
+            border: none;
+            border-radius: 30px;
+            outline: none;
+            transition: .2s ease;
+        }
+
+        .input-field:hover, .input-field:focus {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        ::-webkit-input-placeholder {
+            color: #fff;
+        }
+
+        .input-box i {
+            position: relative;
+            top: -35px;
+            left: 17px;
+            color: #fff;
+        }
+
+        .submit {
+            font-size: 15px;
+            font-weight: 500;
+            color: black;
+            height: 45px;
+            width: 100%;
+            border: none;
+            border-radius: 30px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: .3s ease-in-out;
+            margin-top: 30px;
+        }
+
+        .submit:hover {
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .two-col {
+            display: flex;
+            justify-content: space-between;
+            color: #fff;
+            font-size: small;
+            margin-top: 10px;
+        }
+
+        .two-col .one {
+            display: flex;
+            gap: 5px;
+        }
+
+        .two label a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .two label a:hover {
+            text-decoration: underline;
+        }
+
+        @media only screen and (max-width: 786px) {
+            .nav-button {
+                display: none;
+            }
+
+            .nav-menu.responsive {
+                top: 100px;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: -800px;
+                display: flex;
+                justify-content: center;
+                background: rgba(255, 255, 255, 0.2);
+                width: 100%;
+                height: 90vh;
+                backdrop-filter: blur(20px);
+                transition: .3s;
+            }
+
+            .nav-menu ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-menu-btn {
+                display: block;
+            }
+
+            .nav-menu-btn i {
+                font-size: 25px;
+                color: #fff;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                cursor: pointer;
+                transition: .3s;
+            }
+
+            .nav-menu-btn i:hover {
+                background: rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        @media only screen and (max-width: 540px) {
+            .wrapper {
+                min-height: 100vh;
+            }
+
+            .form-box {
+                width: 100%;
+                height: 500px;
+            }
+
+            .register-container, .login-container {
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .register-container .two-forms {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        h1 {
+            color: white;
+        }
+
+        .input-field {
+            color: black; /* رنگ متن تمامی گزینه‌ها را سیاه می‌کند */
+        }
+
+        .input-field option {
+            color: black; /* رنگ متن گزینه‌ها را سیاه می‌کند */
+        }
+
+        label {
+            color: white;
+        }
+    </style>
+</head>
+
+
+{#  این کد درست کار میکنه👇#}
+
+{#  <body>#}
+{#    <div class="wrapper">#}
+{#    <nav class="nav">#}
+{##}
+{#        <div class="nav-menu" id="navMenu">#}
+{#            <h1>فرم اطلاعات گردشگری </h1>#}
+{#        </div>#}
+{#    </nav>#}
+{##}
+{#    <div class="form-box">#}
+{##}
+{#        <div class="login-container" id="login">#}
+{#                    <form action="{% if tourism.id %}{% url 'tourism:edittourism' tourism.id %}{% else %}{% url 'tourism:addtourism' %}{% endif %}" method="post" class="form" enctype="multipart/form-data">#}
+{#        {% csrf_token %} <!-- این خط برای امنیت و جلوگیری از حملات CSRF ضروری است -->#}
+{##}
+{#        <div class="two-forms">#}
+{#            <div class="input-box">#}
+{#                <input type="text" class="input-field" name="title"   value="{% if tour_id %}{{ form.title_tourism.value }}{% endif %}" placeholder="نام تور" required>#}
+{#            </div>#}
+{#            <div class="input-box">#}
+{#                <input type="number" class="input-field" name="idtour" value="{% if tour_id %}{{ form.price_tourism.value }}{% endif %}" placeholder="هزینه تور" required>#}
+{#            </div>#}
+{#            <div class="input-box">#}
+{#                <input type="number" class="input-field" name="capacity" value="{% if tour_id %}{{ form.capacity_tourism.value }}{% endif %}" placeholder="ظرفیت تور" required>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <div class="input-box">#}
+{#            <select name="firstdistination" class="input-field" required>#}
+{#                <option hidden>مبدا تور</option>#}
+{#                <option value="کرمان" {% if tour_id.firstdistination_tourism == "کرمان" %}selected{% endif %}>کرمان</option>#}
+{#                <option value="شیراز" {% if tour_id.firstdistination_tourism == "شیراز" %}selected{% endif %}>شیراز</option>#}
+{#                <option value="اصفهان" {% if tour_id.firstdistination_tourism == "اصفهان" %}selected{% endif %}>اصفهان</option>#}
+{#                <option value="تهران" {% if tour_id.firstdistination_tourism == "تهران" %}selected{% endif %}>تهران</option>#}
+{#                <option value="گیلان" {% if tour_id.firstdistination_tourism == "گیلان" %}selected{% endif %}>گیلان</option>#}
+{#                <option value="یزد" {% if tour_id.firstdistination_tourism == "یزد" %}selected{% endif %}>یزد</option>#}
+{#                <option value="همدان" {% if tour_id.firstdistination_tourism == "همدان" %}selected{% endif %}>همدان</option>#}
+{#                <option value="مشهد" {% if tour_id.firstdistination_tourism == "مشهد" %}selected{% endif %}>مشهد</option>#}
+{#                <option value="هرمزگان" {% if tour_id.firstdistination_tourism == "هرمزگان" %}selected{% endif %}>هرمزگان</option>#}
+{#            </select>#}
+{#        </div>#}
+{##}
+{#        <div class="input-box">#}
+{#            <input#}
+{#                type="file"#}
+{#                class="input-field"#}
+{#                name="image"#}
+{#                required#}
+{#                placeholder="تصویر">#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="input-box">#}
+{#        <label>تاریخ حرکت</label>#}
+{#        <input#}
+{#            type="date"#}
+{#            class="input-field"#}
+{#            name="startdate"#}
+{#            value="{% if tour_id %}{{ form.capacity_tourism.value }}{% endif %}"#}
+{#            required placeholder="تاریخ حرکت">#}
+{##}
+{#    </div>#}
+{##}
+{##}
+{#    <label>بلیط</label>#}
+{#    <div class="two-forms">#}
+{#        <div class="input-box">#}
+{#            <input type="radio" id="check-bus" name="ticket_type" value="bus" {% if tour_item.ticket_type == "bus" %}checked{% endif %} />#}
+{#            <label for="check-bus">اتوبوس</label>#}
+{#        </div>#}
+{#        <div class="input-box">#}
+{#            <input type="radio" id="check-train" name="ticket_type" value="train" {% if tour_item.ticket_type == "train" %}checked{% endif %} />#}
+{#            <label for="check-train">قطار</label>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="input-box">#}
+{#        <input type="submit" class="submit" value="{% if tour_item %}ویرایش تور{% else %}اضافه کردن تور{% endif %}">#}
+{#    </div>#}
+{#</form>#}
+{#             <form action="{% if tourism.id %}{% url 'tourism:edittourism' tourism.id %}{% else %}{% url 'tourism:addtourism' %}{% endif %}" method="post" class="form" enctype="multipart/form-data">#}
+{#    <form action="{% url 'tourism:addtourism' %}" method="POST" class="form" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        <div class="two-forms">#}
+{#            <div class="input-box">#}
+{#                <input type="text" class="input-field" name="title_tourism" value="{% if tour_id %}{{ form.title_tourism.value }}{% endif %}" placeholder="نام گردشگری" required>#}
+{#            </div>#}
+{#            <div class="input-box">#}
+{#                <input type="number" class="input-field" name="price_tourism"  value="{% if tour_id %}{{ form.price_tourism.value }}{% endif %}" placeholder="هزینه گردشگری" required>#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{##}
+{#        <div class="two-forms">#}
+{#          <div class="input-box">#}
+{#                <input type="text" class="input-field" name="firstdistination_tourism"  value="{% if tour_id %}{{ form.firstdistination_tourism.value }}{% endif %}"placeholder="مبدا گردشگری" required>#}
+{#            </div>#}
+{#            <div class="input-box">#}
+{#                <input type="number" class="input-field" name="capacity_tourism" value="{% if tour_id %}{{ form.capacity_tourism.value }}{% endif %}" placeholder="ظرفیت گردشگری" required>#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{##}
+{#        <div class="input-box">#}
+{#            <label>تاریخ حرکت:</label>#}
+{#            <input type="date" class="input-field" name="startdate_tourism"  value="{% if tour_id %}{{ form.startdate_tourism.value }}{% endif %}" required placeholder="تاریخ حرکت">#}
+{#        </div>#}
+{#             <div class="input-box">#}
+{#    <label>تاریخ حرکت:</label>#}
+{#    <input type="date" class="input-field" name="startdate_tourism" value="{% if tour_id and form.startdate_tourism.value %}{{ form.startdate_tourism.value|date:'Y-m-d' }}{% endif %}" required placeholder="تاریخ حرکت">#}
+{#</div>#}
+{#<label>تصویر مربوطه:</label>#}
+{#<div class="input-box">#}
+{#                <input type="file" class="input-field" name="image_tourism" required placeholder="تصویر">#}
+{#            </div>#}
+{#<label>تصویر مربوطه:</label>#}
+{#<div class="input-box">#}
+{#    <!-- نمایش تصویر فعلی -->#}
+{#    <img id="currentImage" src="{{ tour_id.image_tourism.url }}" alt="تصویر فعلی" style="max-width: 200px; max-height: 200px; display: block; margin-bottom: 10px;">#}
+{#    <input type="file" class="input-field" name="image_tourism" required placeholder="تصویر" id="image" onchange="previewImage(event)">#}
+{#    <small id="video-label" style="display: none; color: #555;"></small> <!-- جایی برای نمایش نام فایل انتخاب شده -->#}
+{#</div>#}
+{#<div class="input-box">#}
+{#    <!-- نمایش تصویر فعلی -->#}
+{#    <img id="currentImage" src="{{ tour_id.image_tourism.url }}" alt="تصویر فعلی" style="max-width: 200px; max-height: 200px; display: block;">#}
+{#    <input type="file" class="input-field" name="image_tourism" placeholder="تصویر" onchange="previewImage(event)">#}
+{#</div>#}
+{#<label>نوع بلیط:</label>#}
+{#  <div class="two-forms">#}
+{#    <div class="input-box">#}
+{#     <input type="radio" id="check-bus" name="ticket_typetourism" value="bus" {% if tour_id.ticket_typetourism == "bus" %}checked{% endif %} />#}
+{#      <label for="check-bus">اتوبوس</label>#}
+{#    </div>#}
+{#    <div class="input-box">#}
+{#      <input type="radio" id="check-train" name="ticket_typetourism"  value="train" {% if tour_id.ticket_typetourism == "train" %}checked{% endif %} />#}
+{#      <label for="check-train">قطار</label>#}
+{#    </div>#}
+{#  </div>#}
+{#        <div class="input-box">#}
+{#            <input type="submit" class="submit" value="ارسال">#}
+{#        </div>#}
+{#    </form>#}
+{#</div>#}
+{##}
+{#    <section class="container">#}
+{#      <header dir="auto">فرم اطلاعات گردشگری</header>#}
+{#      <form action="{% url 'tourism:addtourism' %}" method="post" class="form"enctype="multipart/form-data">#}
+{#        {% csrf_token %}  <!-- این خط برای امنیت و جلوگیری از حملات CSRF ضروری است -->#}
+{#        <div class="input-box">#}
+{#            <div class="column">#}
+{#                <div class="input-box">#}
+{#                  <label>نام گردشگری :</label>#}
+{#                  <input type="text" name="title_tourism" placeholder="نام گردشگری را وارد کنید" required />#}
+{#                </div>#}
+{#                <div class="input-box">#}
+{#                  <label>هزینه گردشگری:</label>#}
+{#                  <input type="number" name="price_tourism" placeholder="هزینه را وارد کنید" required />#}
+{#                </div>#}
+{##}
+{#                          <div class="input-box">#}
+{#            <label>ظرفیت تور:</label>#}
+{#            <input type="number" name="capacity_tourism" placeholder="ظرفیت گردشگری را وارد کنید" required />#}
+{#          </div>#}
+{#              </div>#}
+{#              <div class="input-box address">#}
+{#                <div class="column">#}
+{#                  <div class="select-box">#}
+{##}
+{#                    <select name="firstdistination_tourism" required>#}
+{#                      <option hidden>شهر گردشگری</option>#}
+{#                      <option value="کرمان">کرمان</option>#}
+{#                      <option value="شیراز">شیراز</option>#}
+{#                      <option value="اصفهان">اصفهان</option>#}
+{#                      <option value="تهران">تهران</option>#}
+{#                    </select>#}
+{#                  </div>#}
+{##}
+{#                  <div class="select-box">#}
+{##}
+{#                    <select name="lastDestination" required>#}
+{#                      <option>مقصد تور</option>#}
+{#                      <option value="کرمان">کرمان</option>#}
+{#                      <option value="شیراز">شیراز</option>#}
+{#                      <option value="اصفهان">اصفهان</option>#}
+{#                      <option value="تهران">تهران</option>#}
+{#                    </select>#}
+{#                  </div>#}
+{#                        <div class="input-box">#}
+{#                <label>تصاویر مربوط به گردشگری:</label>#}
+{#                <input type="file" name="image" required /> <!-- تغییر به نوع file -->#}
+{#            </div>#}
+{#              </div>#}
+{#                  <div class="input-box">#}
+{#                <label>تصاویر مربوط به گردشگری:</label>#}
+{#                <input type="file" name="image" required /> <!-- تغییر به نوع file -->#}
+{#            </div>#}
+{##}
+{#              </div>#}
+{#        <div class="column">#}
+{#            <div class="input-box">#}
+{#              <label>تاریخ حرکت:</label>#}
+{#              <input type="date" name="startdate_tourism" placeholder="تاریخ حرکت را وارد کنید" required />#}
+{#            </div>#}
+{#            <div class="input-box">#}
+{#              <label>تاریخ برگشت:</label>#}
+{#              <input type="date" name="finishdate" placeholder="تاریخ برگشت را وارد کنید" required />#}
+{#            </div>#}
+{#          </div>#}
+{# <div class="login-container" id="login">#}
+{#    <form action="#" method="post" class="form" enctype="multipart/form-data">#}
+{#        {% csrf_token %} <!-- این خط برای امنیت و جلوگیری از حملات CSRF ضروری است -->#}
+{##}
+{#        <div class="two-forms">#}
+{#            <div class="input-box">#}
+{#                <input type="text" class="input-field" name="title" placeholder="نام تور" required>#}
+{#            </div>#}
+{#            <div class="input-box">#}
+{#                <input type="number" class="input-field" name="idtour" placeholder="هزینه تور" required>#}
+{#            </div>#}
+{#            <div class="input-box">#}
+{#                <input type="number" class="input-field" name="capacity" placeholder="ظرفیت تور" required>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="two-forms">#}
+{#            <div class="input-box">#}
+{#                <select name="firstdistination" class="input-field" required>#}
+{#                    <option hidden>مبدا تور</option>#}
+{#                    <option value="کرمان">کرمان</option>#}
+{#                    <option value="شیراز">شیراز</option>#}
+{#                    <option value="اصفهان">اصفهان</option>#}
+{#                    <option value="تهران">تهران</option>#}
+{#                    <option value="گیلان">گیلان</option>#}
+{#                    <option value="یزد">یزد</option>#}
+{#                    <option value="همدان">همدان</option>#}
+{#                    <option value="مشهد">مشهد</option>#}
+{#                    <option value="هرمزگان">هرمزگان</option>#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="input-box">#}
+{#                <select name="lastDestination" class="input-field" required>#}
+{#                    <option hidden>مقصد تور</option>#}
+{#                    <option value="کرمان">کرمان</option>#}
+{#                    <option value="شیراز">شیراز</option>#}
+{#                    <option value="اصفهان">اصفهان</option>#}
+{#                    <option value="تهران">تهران</option>#}
+{#                    <option value="گیلان">گیلان</option>#}
+{#                    <option value="یزد">یزد</option>#}
+{#                    <option value="همدان">همدان</option>#}
+{#                    <option value="مشهد">مشهد</option>#}
+{#                    <option value="هرمزگان">هرمزگان</option>#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="input-box">#}
+{#                <input type="file" class="input-field" name="image" required placeholder="تصویر">#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="input-box">#}
+{#            <label>تاریخ حرکت</label>#}
+{#            <input type="date" class="input-field" name="startdate" required placeholder="تاریخ حرکت">#}
+{#        </div>#}
+{#        <div class="input-box">#}
+{#            <label>تاریخ برگشت</label>#}
+{#            <input type="date" class="input-field" name="finishdate" required placeholder="تاریخ برگشت">#}
+{#        </div>#}
+{#<label>بلیط</label>#}
+{#  <div class="two-forms">#}
+{#    <div class="input-box">#}
+{#     <input type="radio" id="check-bus" name="ticket_type" value="bus" checked />#}
+{#      <label for="check-bus">اتوبوس</label>#}
+{#    </div>#}
+{#    <div class="input-box">#}
+{#      <input type="radio" id="check-train" name="ticket_type" value="train" />#}
+{#      <label for="check-train">قطار</label>#}
+{#    </div>#}
+{#  </div>#}
+{#        <div class="input-box">#}
+{#            <input type="submit" class="submit" value="ارسال">#}
+{#        </div>#}
+{#    </form>#}
+{#</div>#}
+{#    </section>#}
+{#</body>#}
+
+{#  این کد درست کار میکنه👆#}
+
+
+{#  این کد درست کار میکنه جدید👇#}
+
+
+{#<body>#}
+{#<div class="wrapper">#}
+{#    <nav class="nav">#}
+{#        <div class="nav-menu" id="navMenu">#}
+{#            <h1>فرم اطلاعات گردشگری</h1>#}
+{#        </div>#}
+{#    </nav>#}
+{##}
+{#    <div class="form-box">#}
+{#        <!-- تنظیم action به صورت داینامیک برای ویرایش یا اضافه کردن -->#}
+{#        <form action="#}
+{#                {% if tour_id %}{% url 'tourism:edittourism' tour_id.id %}{% else %}{% url 'tourism:addtourism' %}{% endif %}"#}
+{#              method="post"#}
+{#              class="form"#}
+{#              enctype="multipart/form-data">#}
+{#            {% csrf_token %}#}
+{##}
+{#            <div class="two-forms">#}
+{#                <div class="input-box">#}
+{#                    <input type="text"#}
+{#                           class="input-field"#}
+{#                           name="title_tourism"#}
+{#                           value="{{ form.title_tourism.value|default:'' }}"#}
+{#                           placeholder="نام گردشگری"#}
+{#                           required>#}
+{#                </div>#}
+{#                <div class="input-box">#}
+{#                    <input type="number"#}
+{#                           class="input-field"#}
+{#                           name="price_tourism"#}
+{#                           value="{{ form.price_tourism.value|default:'' }}"#}
+{#                           placeholder="هزینه گردشگری"#}
+{#                           required>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="two-forms">#}
+{#                <div class="input-box">#}
+{#                    <input type="text"#}
+{#                           class="input-field"#}
+{#                           name="firstdistination_tourism"#}
+{#                           value="{{ form.firstdistination_tourism.value|default:'' }}"#}
+{#                           placeholder="مبدا گردشگری"#}
+{#                           required>#}
+{#                </div>#}
+{#                <div class="input-box">#}
+{#                    <input type="number"#}
+{#                           class="input-field"#}
+{#                           name="capacity_tourism"#}
+{#                           value="{{ form.capacity_tourism.value|default:'' }}"#}
+{#                           placeholder="ظرفیت گردشگری"#}
+{#                           required>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="input-box">#}
+{#                <label>تاریخ حرکت:</label>#}
+{#                <input type="date"#}
+{#                       class="input-field"#}
+{#                       name="startdate_tourism"#}
+{#                       value="#}
+{##}
+{#                               {% if form.startdate_tourism.value %}{{ form.startdate_tourism.value|date:'Y-m-d' }}{% endif %}"#}
+{#                       required#}
+{#                       placeholder="تاریخ حرکت">#}
+{#            </div>#}
+{##}
+{#            <label>تصویر مربوطه:</label>#}
+{#            <div class="input-box">#}
+{#                <!-- نمایش تصویر فعلی اگه وجود داره -->#}
+{#                {% if tour_id.image_tourism %}#}
+{#                    <img src="{{ tour_id.image_tourism.url }}"#}
+{#                         alt="تصویر فعلی"#}
+{#                         style="max-width: 200px; max-height: 200px; display: block; margin-bottom: 10px;">#}
+{#                {% endif %}#}
+{#                <input type="file"#}
+{#                       class="input-field"#}
+{#                       name="image_tourism"#}
+{#                       {% if not tour_id %}required{% endif %}#}
+{#                       placeholder="تصویر">#}
+{#            </div>#}
+{##}
+{#            <label>نوع بلیط:</label>#}
+{#            <div class="two-forms">#}
+{#                <div class="input-box">#}
+{#                    <input type="radio"#}
+{#                           id="check-bus"#}
+{#                           name="ticket_typetourism"#}
+{#                           value="bus"#}
+{#                           {% if form.ticket_typetourism.value == "bus" %}checked{% endif %}>#}
+{#                    <label for="check-bus">اتوبوس</label>#}
+{#                </div>#}
+{#                <div class="input-box">#}
+{#                    <input type="radio"#}
+{#                           id="check-train"#}
+{#                           name="ticket_typetourism"#}
+{#                           value="train"#}
+{#                           {% if form.ticket_typetourism.value == "train" %}checked{% endif %}>#}
+{#                    <label for="check-train">قطار</label>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="input-box">#}
+{#                <input type="submit"#}
+{#                       class="submit"#}
+{#                       value="{% if tour_id %}ویرایش تور{% else %}ارسال{% endif %}">#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+{#</div>#}
+{#</body>#}
+
+
+{#  این کد درست کار میکنه جدیذ 👆#}
+
+
+{#  این کد درست کار میکنه از همه جدیدتر هست 👇#}
+
+{##}
+{#<body>#}
+{#    <div class="wrapper">#}
+{#        <nav class="nav">#}
+{#            <div class="nav-menu" id="navMenu">#}
+{#                <h1>فرم اطلاعات گردشگری</h1>#}
+{#            </div>#}
+{#        </nav>#}
+{##}
+{#        <div class="form-box">#}
+{#            <!-- نمایش خطاها توی بالای فرم -->#}
+{#            {% if form.errors %}#}
+{#                <div style="color: red; padding: 10px; background-color: #ffebee; border-radius: 4px;">#}
+{#                    {% for field in form %}#}
+{#                        {% for error in field.errors %}#}
+{#                            <p>{{ error }}</p>#}
+{#                        {% endfor %}#}
+{#                    {% endfor %}#}
+{#                    {% for error in form.non_field_errors %}#}
+{#                        <p>{{ error }}</p>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            {% endif %}#}
+{##}
+{#            <!-- تنظیم action به صورت داینامیک برای ویرایش یا اضافه کردن -->#}
+{#            <form action="{% if tour_id %}{% url 'tourism:edittourism' tour_id.id %}{% else %}{% url 'tourism:addtourism' %}{% endif %}"#}
+{#                  method="post"#}
+{#                  class="form"#}
+{#                  enctype="multipart/form-data">#}
+{#                {% csrf_token %}#}
+{##}
+{#                <div class="two-forms">#}
+{#                    <div class="input-box">#}
+{#                        <input type="text"#}
+{#                               class="input-field"#}
+{#                               name="title_tourism"#}
+{#                               value="{{ form.title_tourism.value|default:'' }}"#}
+{#                               placeholder="نام گردشگری"#}
+{#                               required>#}
+{#                    </div>#}
+{#                    <div class="input-box">#}
+{#                        <input type="number"#}
+{#                               class="input-field"#}
+{#                               name="price_tourism"#}
+{#                               value="{{ form.price_tourism.value|default:'' }}"#}
+{#                               placeholder="هزینه گردشگری"#}
+{#                               required>#}
+{#                        <!-- نمایش خطاها زیر فیلد هزینه -->#}
+{#                        {% if form.price_tourism.errors %}#}
+{#                            <span style="color: red; font-size: 0.9em;">{{ form.price_tourism.errors|join:", " }}</span>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="two-forms">#}
+{#                    <div class="input-box">#}
+{#                        <input type="text"#}
+{#                               class="input-field"#}
+{#                               name="firstdistination_tourism"#}
+{#                               value="{{ form.firstdistination_tourism.value|default:'' }}"#}
+{#                               placeholder="مبدا گردشگری"#}
+{#                               required>#}
+{#                    </div>#}
+{#                    <div class="input-box">#}
+{#                        <input type="number"#}
+{#                               class="input-field"#}
+{#                               name="capacity_tourism"#}
+{#                               value="{{ form.capacity_tourism.value|default:'' }}"#}
+{#                               placeholder="ظرفیت گردشگری"#}
+{#                               required>#}
+{#                        <!-- نمایش خطاها زیر فیلد ظرفیت -->#}
+{#                        {% if form.capacity_tourism.errors %}#}
+{#                            <span style="color: red; font-size: 0.9em;">{{ form.capacity_tourism.errors|join:", " }}</span>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="input-box">#}
+{#                    <label>تاریخ حرکت:</label>#}
+{#                    <input type="date"#}
+{#                           class="input-field"#}
+{#                           name="startdate_tourism"#}
+{#                           value="{% if form.startdate_tourism.value %}{{ form.startdate_tourism.value|date:'Y-m-d' }}{% endif %}"#}
+{#                           required#}
+{#                           placeholder="تاریخ حرکت">#}
+{#                </div>#}
+{##}
+{#                <label>تصویر مربوطه:</label>#}
+{#                <div class="input-box">#}
+{#                    <!-- نمایش تصویر فعلی اگه وجود داره -->#}
+{#                    {% if tour_id.image_tourism %}#}
+{#                        <img src="{{ tour_id.image_tourism.url }}"#}
+{#                             alt="تصویر فعلی"#}
+{#                             style="max-width: 200px; max-height: 200px; display: block; margin-bottom: 10px;">#}
+{#                        <p>تصویر موجود هست</p>#}
+{#                    {% endif %}#}
+{#                    <input type="file"#}
+{#                           class="input-field"#}
+{#                           name="image_tourism"#}
+{#                           {% if not tour_id %}required{% endif %}#}
+{#                           placeholder="تصویر">#}
+{#                </div>#}
+{##}
+{#                <label>نوع بلیط:</label>#}
+{#                <div class="two-forms">#}
+{#                    <div class="input-box">#}
+{#                        <input type="radio"#}
+{#                               id="check-bus"#}
+{#                               name="ticket_typetourism"#}
+{#                               value="bus"#}
+{#                               {% if form.ticket_typetourism.value == "bus" %}checked{% endif %}>#}
+{#                        <label for="check-bus">اتوبوس</label>#}
+{#                    </div>#}
+{#                    <div class="input-box">#}
+{#                        <input type="radio"#}
+{#                               id="check-train"#}
+{#                               name="ticket_typetourism"#}
+{#                               value="train"#}
+{#                               {% if form.ticket_typetourism.value == "train" %}checked{% endif %}>#}
+{#                        <label for="check-train">قطار</label>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="input-box">#}
+{#                    <input type="submit"#}
+{#                           class="submit"#}
+{#                           value="{% if tour_id %}ویرایش تور{% else %}ارسال{% endif %}">#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#</body>#}
+
+
+{#  این کد درست کار میکنه از همه جدیدتر هست 👆#}
+
+
+{#  این کد درست کار میکنه ویرایش 20 👇#}
+
+
+{#<body>#}
+{#<div class="wrapper">#}
+{#    <nav class="nav">#}
+{#        <div class="nav-menu" id="navMenu">#}
+{#            <h1>فرم اطلاعات گردشگری</h1>#}
+{#        </div>#}
+{#    </nav>#}
+{##}
+{#    <div class="form-box">#}
+{#        <!-- نمایش خطاها توی بالای فرم -->#}
+{#        {% if form.errors %}#}
+{#            <div style="color: red; padding: 10px; background-color: #ffebee; border-radius: 4px;">#}
+{#                {% for error in form.non_field_errors %}#}
+{#                    <p>{{ error }}</p>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        {% endif %}#}
+{##}
+{#        <!-- تنظیم action به صورت داینامیک برای ویرایش یا اضافه کردن -->#}
+{#        <form action="#}
+{#                {% if tour_id %}{% url 'tourism:edittourism' tour_id.id %}{% else %}{% url 'tourism:addtourism' %}{% endif %}"#}
+{#              method="post"#}
+{#              class="form"#}
+{#              enctype="multipart/form-data">#}
+{#            {% csrf_token %}#}
+{##}
+{#            <div class="two-forms">#}
+{#                <div class="input-box">#}
+{#                    <input type="text"#}
+{#                           class="input-field"#}
+{#                           name="title_tourism"#}
+{#                           value="{{ form.title_tourism.value|default:'' }}"#}
+{#                           placeholder="نام گردشگری"#}
+{#                           required>#}
+{#                </div>#}
+{#                <div class="input-box">#}
+{#                    <input type="number"#}
+{#                           class="input-field"#}
+{#                           name="price_tourism"#}
+{#                           value="{{ form.price_tourism.value|default:'' }}"#}
+{#                           placeholder="هزینه گردشگری"#}
+{#                           required>#}
+{#                    <!-- نمایش خطاها زیر فیلد هزینه -->#}
+{#                    {% if form.price_tourism.errors %}#}
+{#                        <span style="color: red; font-size: 0.9em;">{{ form.price_tourism.errors|join:", " }}</span>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="two-forms">#}
+{#                <div class="input-box">#}
+{#                    <input type="text"#}
+{#                           class="input-field"#}
+{#                           name="firstdistination_tourism"#}
+{#                           value="{{ form.firstdistination_tourism.value|default:'' }}"#}
+{#                           placeholder="مبدا گردشگری"#}
+{#                           required>#}
+{#                </div>#}
+{#                <div class="input-box">#}
+{#                    <input type="number"#}
+{#                           class="input-field"#}
+{#                           name="capacity_tourism"#}
+{#                           value="{{ form.capacity_tourism.value|default:'' }}"#}
+{#                           placeholder="ظرفیت گردشگری"#}
+{#                           required>#}
+{#                    <!-- نمایش خطاها زیر فیلد ظرفیت -->#}
+{#                    {% if form.capacity_tourism.errors %}#}
+{#                        <span style="color: red; font-size: 0.9em;">{{ form.capacity_tourism.errors|join:", " }}</span>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="input-box">#}
+{#                <label>تاریخ حرکت:</label>#}
+{#                <input type="date"#}
+{#                       class="input-field"#}
+{#                       name="startdate_tourism"#}
+{#                       value="#}
+{#                               {% if form.startdate_tourism.value %}{{ form.startdate_tourism.value|date:'Y-m-d' }}{% endif %}"#}
+{#                       required#}
+{#                       placeholder="تاریخ حرکت">#}
+{#                <!-- نمایش خطاها زیر فیلد تاریخ -->#}
+{#                {% if form.startdate_tourism.errors %}#}
+{#                    <span style="color: red; font-size: 0.9em;">{{ form.startdate_tourism.errors|join:", " }}</span>#}
+{#                {% endif %}#}
+{#            </div>#}
+{##}
+{#            <label>تصویر مربوطه:</label>#}
+{#            <div class="input-box">#}
+{#                <!-- نمایش تصویر فعلی اگه وجود داره -->#}
+{#                {% if tour_id.image_tourism %}#}
+{#                    <p>تصویر موجود هست</p>#}
+{#                {% endif %}#}
+{#                <input type="file"#}
+{#                       class="input-field"#}
+{#                       name="image_tourism"#}
+{#                       {% if not tour_id %}required{% endif %}#}
+{#                       placeholder="تصویر">#}
+{#            </div>#}
+{##}
+{#            <label>نوع بلیط:</label>#}
+{#            <div class="two-forms">#}
+{#                <div class="input-box">#}
+{#                    <input type="radio"#}
+{#                           id="check-bus"#}
+{#                           name="ticket_typetourism"#}
+{#                           value="bus"#}
+{#                           {% if form.ticket_typetourism.value == "bus" %}checked{% endif %}>#}
+{#                    <label for="check-bus">اتوبوس</label>#}
+{#                </div>#}
+{#                <div class="input-box">#}
+{#                    <input type="radio"#}
+{#                           id="check-train"#}
+{#                           name="ticket_typetourism"#}
+{#                           value="train"#}
+{#                           {% if form.ticket_typetourism.value == "train" %}checked{% endif %}>#}
+{#                    <label for="check-train">قطار</label>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="input-box">#}
+{#                <input type="submit"#}
+{#                       class="submit"#}
+{#                       value="{% if tour_id %}ویرایش تور{% else %}ارسال{% endif %}">#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+{#</div>#}
+{#</body>#}
+
+{#  این کد درست کار میکنه ویرایش 20 👆#}
+
+
+<body>
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-menu" id="navMenu">
+                <h1>فرم اطلاعات گردشگری</h1>
+            </div>
+        </nav>
+
+        <div class="form-box">
+            <!-- نمایش خطاها توی بالای فرم -->
+            {% if form.errors %}
+                <div style="color: red; padding: 10px; background-color: #ffebee; border-radius: 4px;">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- تنظیم action به صورت داینامیک برای ویرایش یا اضافه کردن -->
+            <form action="{% if tour_id %}{% url 'tourism:edittourism' tour_id.id %}{% else %}{% url 'tourism:addtourism' %}{% endif %}"
+                  method="post"
+                  class="form"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="text"
+                               class="input-field"
+                               name="title_tourism"
+                               value="{{ form.title_tourism.value|default:'' }}"
+                               placeholder="نام گردشگری"
+                               required>
+                    </div>
+                    <div class="input-box">
+                        <input type="number"
+                               class="input-field"
+                               name="price_tourism"
+                               value="{{ form.price_tourism.value|default:'' }}"
+                               placeholder="هزینه گردشگری"
+                               required>
+                        <!-- نمایش خطاها زیر فیلد هزینه -->
+                        {% if form.price_tourism.errors %}
+                            <span style="color: red; font-size: 0.9em;">{{ form.price_tourism.errors|join:", " }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="text"
+                               class="input-field"
+                               name="firstdistination_tourism"
+                               value="{{ form.firstdistination_tourism.value|default:'' }}"
+                               placeholder="مبدا گردشگری"
+                               required>
+                    </div>
+                    <div class="input-box">
+                        <input type="number"
+                               class="input-field"
+                               name="capacity_tourism"
+                               value="{{ form.capacity_tourism.value|default:'' }}"
+                               placeholder="ظرفیت گردشگری"
+                               required>
+                        <!-- نمایش خطاها زیر فیلد ظرفیت -->
+                        {% if form.capacity_tourism.errors %}
+                            <span style="color: red; font-size: 0.9em;">{{ form.capacity_tourism.errors|join:", " }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>تاریخ حرکت:</label>
+                    <input type="date"
+                           class="input-field"
+                           name="startdate_tourism"
+                           value="{% if form.startdate_tourism.value %}{{ form.startdate_tourism.value|date:'Y-m-d' }}{% endif %}"
+                           required
+                           placeholder="تاریخ حرکت">
+                    <!-- نمایش خطاها زیر فیلد تاریخ -->
+                    {% if form.startdate_tourism.errors %}
+                        <span style="color: red; font-size: 0.9em;">{{ form.startdate_tourism.errors|join:", " }}</span>
+                    {% endif %}
+                </div>
+
+                <label>تصویر مربوطه:</label>
+                <div class="input-box">
+                    <!-- نمایش تصویر فعلی اگه وجود داره -->
+                    {% if tour_id.image_tourism %}
+                        <p>تصویر موجود هست</p>
+                    {% endif %}
+                    <input type="file"
+                           class="input-field"
+                           name="image_tourism"
+                           {% if not tour_id %}required{% endif %}
+                           placeholder="تصویر">
+                </div>
+
+                <label>نوع بلیط:</label>
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="radio"
+                               id="check-bus"
+                               name="ticket_typetourism"
+                               value="bus"
+                               {% if form.ticket_typetourism.value == "bus" %}checked{% endif %}>
+                        <label for="check-bus">اتوبوس</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="radio"
+                               id="check-train"
+                               name="ticket_typetourism"
+                               value="train"
+                               {% if form.ticket_typetourism.value == "train" %}checked{% endif %}>
+                        <label for="check-train">قطار</label>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <input type="submit"
+                           class="submit"
+                           value="{% if tour_id %}ویرایش تور{% else %}ارسال{% endif %}">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+<script>
+    {#function previewImage(event) {#}
+    {#    const image = document.getElementById('currentImage');#}
+    {#    const file = event.target.files[0];#}
+    {#    const videoLabel = document.getElementById('video-label');#}
+    {##}
+    {#    // حذف نمایش نام فایل قبلی#}
+    {#    videoLabel.style.display = 'none';#}
+    {##}
+    {#    if (file) {#}
+    {#        const reader = new FileReader();#}
+    {#        reader.onload = function(e) {#}
+    {#            image.src = e.target.result;  // به‌روزرسانی منبع تصویر به فایل انتخابی#}
+    {#        };#}
+    {#        reader.readAsDataURL(file); // خواندن فایل به عنوان URL داده#}
+    {##}
+    {#            // نمایش نام فایل انتخاب شده#}
+    {#            videoLabel.textContent = `تصویر انتخاب شده: ${file.name}`;#}
+    {#            videoLabel.style.display = 'block'; // نمایش نام فایل#}
+    {#        } else {#}
+    {#            // اگر فایل خالی باشد، تصویر قبلی را نمایش بده#}
+    {#            image.src = "{{ tour_id.image_tourism.url }}";#}
+    {#        }#}
+    {#    }#}
+    {# function previewImage(event) {#}
+    {#    const image = document.getElementById('currentImage');#}
+    {#    const file = event.target.files[0];#}
+    {##}
+    {#    if (file) {#}
+    {#        const reader = new FileReader();#}
+    {#        reader.onload = function(e) {#}
+    {#            image.src = e.target.result;  // به‌روزرسانی منبع تصویر به فایل انتخابی#}
+    {#        };#}
+    {#        reader.readAsDataURL(file); // خواندن فایل به عنوان URL داده#}
+    {#    } else {#}
+    {#        // اگر فایل خالی باشد، تصویر قبلی را نمایش بده#}
+    {#        image.src = "{{ tour_id.image_tourism.url }}";#}
+    {#    }#}
+
+
+</script>
+</html>
+
+
+
+
+

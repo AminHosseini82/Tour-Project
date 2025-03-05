@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تور شما ویرایش شد! ✏️</title>
+    <style>
+        body {
+            font-family: 'Vazir', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            color: #333;
+            line-height: 1.8;
+            padding: 30px;
+            direction: rtl;
+            text-align: right;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #0288d1;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            background-color: #f5faff;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 16px;
+            border-left: 4px solid #4caf50;
+        }
+
+        .highlight {
+            color: #d81b60;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .tour-details {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #4caf50;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .old-tour, .new-tour {
+            width: 48%;
+        }
+
+        .old-tour {
+            background-color: #ffebee; /* رنگ قرمز ملایم برای تور قدیمی */
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .new-tour {
+            background-color: #e8f5e9; /* رنگ سبز ملایم برای تور جدید */
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+
+        .emoji {
+            font-size: 20px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>تور شما با موفقیت ویرایش شد! 🌟</h2>
+    <p>سلام دوست عزیز! 👋 توی تاریخ <span class="highlight">{{ formatted_jdate }}</span> و ساعت <span
+            class="highlight">{{ current_time }}</span> تور خودت رو ویرایش کردی! ✏️</p>
+    <div class="tour-details">
+        <div class="old-tour">
+            <p><strong>مشخصات تور قدیمی:</strong></p>
+            <ul style="list-style-type: none; padding: 0;">
+                <li>📜 <strong>عنوان:</strong> {{ old_tour.title }}</li>
+                <li>🆔 <strong>شناسه:</strong> {{ old_tour.idtour }}</li>
+                <li>🏞 <strong>مبدا:</strong> {{ old_tour.firstdistination }}</li>
+                <li>🏖 <strong>مقصد:</strong> {{ old_tour.lastDestination }}</li>
+                <li>📅 <strong>شروع:</strong> {{ old_tour.startdate }}</li>
+                <li>📅 <strong>پایان:</strong> {{ old_tour.finishdate }}</li>
+                <li>🎫 <strong>نوع بلیط:</strong> {{ old_tour.ticket_type }}</li>
+            </ul>
+        </div>
+        <div class="new-tour">
+            <p><strong>مشخصات تور جدید:</strong></p>
+            <ul style="list-style-type: none; padding: 0;">
+                <li>📜 <strong>عنوان:</strong> {{ new_tour.title }}</li>
+                <li>🆔 <strong>شناسه:</strong> {{ new_tour.idtour }}</li>
+                <li>🏞 <strong>مبدا:</strong> {{ new_tour.firstdistination }}</li>
+                <li>🏖 <strong>مقصد:</strong> {{ new_tour.lastDestination }}</li>
+                <li>📅 <strong>شروع:</strong> {{ new_tour.startdate }}</li>
+                <li>📅 <strong>پایان:</strong> {{ new_tour.finishdate }}</li>
+                <li>🎫 <strong>نوع بلیط:</strong> {{ new_tour.ticket_type }}</li>
+            </ul>
+        </div>
+    </div>
+{#    <p>ما خیلی خوشحالیم که تور جدیدت رو با این تغییرات آماده کردی! 🚗✨</p>#}
+{#    <p class="highlight">بیا با این تور جدید به یه سفر فوق‌العاده بریم! 🌍❤️</p>#}
+    <p class="footer">تیم ما همیشه کنارته! سوالی داشتی، بهمون بگو! 🌟</p>
+</div>
+</body>
+</html>

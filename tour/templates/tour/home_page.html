@@ -1,0 +1,1845 @@
+{% load static %}
+{#<table>#}
+{#    <thead>#}
+{#        <tr>#}
+{#            <th>نام تور</th>#}
+{#            <th>عملیات</th>#}
+{#        </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#        {% for tour in tours %}#}
+{#        <tr>#}
+{#            <td>{{ tour.name }}</td>#}
+{#            <td>#}
+{#                <form action="{% url 'tour:deletetour' tour.idtour %}" method="post" style="display:inline;">#}
+{#                    {% csrf_token %}#}
+{#                    <button type="submit">حذف تور</button>#}
+{#                </form>#}
+{#                <a href="{% url 'tour:edittour' tour.idtour %}">ویرایش</a>#}
+{#            </td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#    </tbody>#}
+{#</table>#}
+{##}
+
+{#این کد قبلی درست بود#}
+{#{% extends "base.html" %}#}
+{#{% block title %}home page{% endblock title %}#}
+{#{% block content %}#}
+{#    <h1>home page</h1>#}
+{#    <h1>جستجوی تورها</h1>#}
+{#    <form method="get" action="">#}
+{#        {{ form.as_p }}  <!-- نمایش فرم -->#}
+{#         <label>نام تور:</label>#}
+{#                  <input type="text" placeholder="نام کامل تور را وارد کنید" required />#}
+{#                </div>#}
+{#        <button type="submit">جستجو</button>#}
+{#    </form>#}
+{##}
+{#    <h2>نتایج جستجو</h2>#}
+{#    <ul>#}
+{#        {% for tour in results %}#}
+{#            <li>{{ tour.title }} - {{ tour.description }}</li>#}
+{#        {% empty %}#}
+{#            <li>نتیجه‌ای یافت نشد.</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#    <h1>تورهای ثبت شده</h1>#}
+{#    <ul>#}
+{#        {% for tour in tour_list %}#}
+{#            <li>#}
+{#                <h2>{{ tour.title }}</h2>#}
+{#                <img src="{{ tour.pic.url }}" alt="{{ tour.title }}" style="width: 200px; height: auto;">#}
+{#                <!-- نمایش عکس -->#}
+{#                <p>{{ tour.description }}</p>  <!-- نمایش توضیحات -->#}
+{##}
+{#                <!-- دکمه‌های Edit و Delete -->#}
+{#                <div class="tour-actions">#}
+{#                    <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>  <!-- ویرایش -->#}
+{#                    <form action="{% url 'tour:deletetour' tour.id %}" method="POST" style="display:inline;">#}
+{#                        {% csrf_token %}#}
+{#                        <button type="submit" class="btn btn-delete">حذف</button>  <!-- حذف -->#}
+{#                    </form>#}
+{#                </div>#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% endblock content %}#}
+
+
+{#------------------کد درست-----3 #}
+{#<form method="get" action="">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <button type="submit">جستجو</button>#}
+{#</form>#}
+{##}
+{#<h2>تورهای موجود</h2>#}
+{#{% if tours %}#}
+{#    <ul>#}
+{#        {% for tour in tours %}#}
+{#            <li>#}
+{#                <h3>{{ tour.title }}</h3>#}
+{#                <p>مقصد: {{ tour.lastDestination }}</p>#}
+{#                <p>مبدا: {{ tour.firstdistination }}</p>#}
+{#                <p>قیمت: {{ tour.price }} USD</p>#}
+{#                <a href="{% url 'tour:tour_detail' tour.id %}">مشاهده جزئیات</a>#}
+{#                <div class="tour-actions">#}
+{#                    <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>  <!-- ویرایش -->#}
+{#                    <form action="{% url 'tour:deletetour' tour.id %}" method="POST" style="display:inline;">#}
+{#                        {% csrf_token %}#}
+{#                        <button type="submit" class="btn btn-delete">حذف</button>  <!-- حذف -->#}
+{#                    </form>#}
+{#                </div>#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% else %}#}
+{#    <p>هیچ تور مرتبطی پیدا نشد.</p>#}
+{#{% endif %}#}
+
+
+{##}
+{#<form method="GET" action="">#}
+{#    {% csrf_token %}#}
+{#    <div class="input-wrapper">#}
+{#        <label for="destination" class="input-label">مبدا</label>#}
+{#        <input type="text" name="destination" id="destination" required placeholder="مبدا دلخواه را وارد کنید" class="input-field">#}
+{#    </div>#}
+{#    <div class="input-wrapper">#}
+{#        <label for="last-destination" class="input-label">مقصد</label>#}
+{#        <input type="text" name="last_destination" id="last-destination" required placeholder="مقصد دلخواه را وارد کنید" class="input-field">#}
+{#    </div>#}
+{#    <button type="submit">جستجو</button>#}
+{#</form>#}
+{#--------------------#}
+{#<style>#}
+{##}
+{#</style>#}
+{##}
+{# <section class="tour-search">#}
+{#        <div class="container">#}
+{##}
+{#            <form method="GET" action="">#}
+{#                {% csrf_token %}#}
+{#                <div class="input-wrapper">#}
+{#                    <label for="destination" class="input-label">مبدا</label>#}
+{#                    <input type="text" name="destination" id="destination" required placeholder="مبدا دلخواه را وارد کنید" class="input-field">#}
+{#                </div>#}
+{#                <div class="input-wrapper">#}
+{#                    <label for="last-destination" class="input-label">مقصد</label>#}
+{#                    <input type="text" name="last_destination" id="last-destination" required placeholder="مقصد دلخواه را وارد کنید" class="input-field">#}
+{#                </div>#}
+{#                <button type="submit" class="btn btn-secondary">جستجو</button>#}
+{#            </form>#}
+{##}
+{#            <!-- <div class="input-wrapper">#}
+{#              <label for="checkin" class="input-label">Checkin Date**</label>#}
+{##}
+{#              <input type="date" name="checkin" id="checkin" required class="input-field">#}
+{#            </div>#}
+{##}
+{#            <div class="input-wrapper">#}
+{#              <label for="checkout" class="input-label">Checkout Date*</label>#}
+{##}
+{#              <input type="date" name="checkout" id="checkout" required class="input-field">#}
+{#            </div>#}
+{##}
+{#            <button type="submit" class="btn btn-secondary">Inquire now</button>#}
+{##}
+{#          </form> -->#}
+{##}
+{#        </div>#}
+{#      </section>#}
+{##}
+{##}
+{##}
+{#<h2>تورهای موجود</h2>#}
+{#{% if tours %}#}
+{#    <ul>#}
+{#        {% for tour in tours %}#}
+{#            <li>#}
+{#                <h3>{{ tour.title }}</h3>#}
+{#                <p>مقصد: {{ tour.lastDestination }}</p>#}
+{#                <p>مبدا: {{ tour.firstdistination }}</p>#}
+{#                <a href="{% url 'tour:tour_detail' tour.id %}">مشاهده جزئیات</a>#}
+{#                <div class="tour-actions">#}
+{#                    <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>#}
+{#                    <form action="{% url 'tour:deletetour' tour.id %}" method="POST" style="display:inline;">#}
+{#                        {% csrf_token %}#}
+{#                        <button type="submit" class="btn btn-delete">حذف</button>#}
+{#                    </form>#}
+{#                </div>#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% else %}#}
+{#    <p>هیچ تور مرتبطی پیدا نشد.</p>#}
+{#{% endif %}#}
+
+{#<section class="tour-search">#}
+{#    <div class="container">#}
+{##}
+{#        <form method="GET" action="" class="tour-search-form">#}
+{#            {% csrf_token %}#}
+{#            <div class="input-wrapper">#}
+{#                <label for="origin" class="input-label">مبدا</label>#}
+{#                <input type="text" name="origin" id="origin" required placeholder="مبدا دلخواه را وارد کنید" class="input-field">#}
+{#            </div>#}
+{#            <div class="input-wrapper">#}
+{#                <label for="destination" class="input-label">مقصد</label>#}
+{#                <input type="text" name="destination" id="destination" required placeholder="مقصد دلخواه را وارد کنید" class="input-field">#}
+{#            </div>#}
+{#            <div class="input-wrapper">#}
+{#                <label for="checkin" class="input-label">تاریخ ورود*</label>#}
+{#                <input type="date" name="checkin" id="checkin" required class="input-field">#}
+{#            </div>#}
+{#            <div class="input-wrapper">#}
+{#                <label for="checkout" class="input-label">تاریخ خروج*</label>#}
+{#                <input type="date" name="checkout" id="checkout" required class="input-field">#}
+{#            </div>#}
+{#            <button type="submit" class="btn btn-secondary">جستجو</button>#}
+{#        </form>#}
+{##}
+{#    </div>#}
+{#</section>#}
+{##}
+{#<h2>تورهای موجود</h2>#}
+{#{% if tours %}#}
+{#    <ul>#}
+{#        {% for tour in tours %}#}
+{#            <li>#}
+{#                <h3>{{ tour.title }}</h3>#}
+{#                <p>مقصد: {{ tour.lastDestination }}</p>#}
+{#                <p>مبدا: {{ tour.firstdistination }}</p>#}
+{#                <p>قیمت: {{ tour.price }} USD</p>#}
+{#                <a href="{% url 'tour:tour_detail' tour.id %}">مشاهده جزئیات</a>#}
+{#                <div class="tour-actions">#}
+{#                    <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>#}
+{#                    <form action="{% url 'tour:deletetour' tour.id %}" method="POST" style="display:inline;">#}
+{#                        {% csrf_token %}#}
+{#                        <button type="submit" class="btn btn-delete">حذف</button>#}
+{#                    </form>#}
+{#                </div>#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% else %}#}
+{#    <p>هیچ تور مرتبطی پیدا نشد.</p>#}
+{#{% endif %}#}
+
+
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourly - Travel agancy</title>
+
+    <!--
+      - favicon
+    -->
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+    <!--
+      - custom css link
+    -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!--
+      - google font link
+    -->
+    <!-- CSS PersianDatePicker -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/PersianDateTimePicker/2.1.0/PersianDateTimePicker.min.css">
+
+    <!-- jQuery (required) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- JS PersianDatePicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PersianDateTimePicker/2.1.0/PersianDateTimePicker.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+            rel="stylesheet">
+</head>
+<style>
+
+
+    /**
+     * copyright 2022 codewithsadee
+     */
+
+
+    /*-----------------------------------*\
+     * #CUSTOM PROPERTY
+    \*-----------------------------------*/
+
+    :root {
+
+        /**
+         * colors
+         */
+
+        --united-nations-blue: hsl(214, 56%, 58%);
+        --bright-navy-blue: hsl(214, 57%, 51%);
+        --spanish-gray: hsl(0, 0%, 60%);
+        --black-coral: hsl(225, 8%, 42%);
+        --oxford-blue: hsl(208, 97%, 12%);
+        --yale-blue: hsl(214, 72%, 33%);
+        --blue-ncs: hsl(197, 100%, 36%);
+        --gunmetal: hsl(206, 34%, 20%);
+        --gainsboro: hsl(0, 0%, 88%);
+        --cultured: hsl(0, 0%, 98%);
+        --white: hsl(0, 0%, 100%);
+        --black: hsl(0, 0%, 0%);
+        --onyx: hsl(0, 0%, 25%);
+        --jet: hsl(0, 0%, 20%);
+
+        /**
+         * typography
+         */
+
+        --ff-poppins: "Poppins", sans-serif;
+        --ff-montserrat: "Montserrat", sans-serif;
+
+        --fs-1: calc(20px + 3.5vw);
+        --fs-2: calc(18px + 1.6vw);
+        --fs-3: calc(16px + 0.45vw);
+        --fs-4: 15px;
+        --fs-5: 14px;
+        --fs-6: 13px;
+        --fs-7: 12px;
+        --fs-8: 11px;
+
+        --fw-500: 500;
+        --fw-600: 600;
+        --fw-700: 700;
+        --fw-800: 800;
+
+        /**
+         * transition
+         */
+
+        --transition: 0.25s ease-in-out;
+
+        /**
+         * spacing
+         */
+
+        --section-padding: 60px;
+
+        /**
+         * border-radius
+         */
+
+        --radius-15: 15px;
+        --radius-25: 25px;
+
+    }
+
+
+    /*-----------------------------------*\
+    * #RESET
+    \*-----------------------------------*/
+    * {
+        direction: rtl;
+    }
+
+    *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a,
+    img,
+    span,
+    input,
+    label,
+    button,
+    ion-icon {
+        display: block;
+    }
+
+    input,
+    button {
+        background: none;
+        border: none;
+        font: inherit;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    ion-icon {
+        pointer-events: none;
+    }
+
+    html {
+        font-family: var(--ff-poppins);
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: var(--white);
+    }
+
+
+    /*-----------------------------------*\
+    * #REUSED STYLE
+    \*-----------------------------------*/
+
+    .container {
+        padding-inline: 15px;
+    }
+
+    .btn {
+        color: var(--white);
+        text-transform: uppercase;
+        font-size: var(--fs-5);
+        border-radius: 50px;
+        padding: var(--padding, 8px 18px);
+        border: var(--border-width, 2px) solid transparent;
+        transition: var(--transition);
+    }
+
+    .btn-primary {
+        background: #00b4d8;
+        border-color: #00b4d8;
+    }
+
+    .btn-primary:is(:hover, :focus) {
+        background: #007f8c;
+        border-color: #0081a7;
+    }
+
+    .btn-secondary {
+        border-color: var(--white);
+    }
+
+    .btn-secondary:is(:hover, :focus) {
+        background: #0081a7
+    }
+
+    .h1,
+    .h2,
+    .h3 {
+        font-weight: var(--fw-800);
+        font-family: var(--ff-montserrat);
+        text-transform: uppercase;
+    }
+
+    .h1 {
+        color: var(--white);
+        font-size: var(--fs-1);
+    }
+
+    .h2,
+    .h3 {
+        color: var(--gunmetal);
+    }
+
+    .h2 {
+        font-size: var(--fs-2);
+    }
+
+    .h3 {
+        font-size: var(--fs-3);
+        font-weight: var(--fw-700);
+    }
+
+    .section-subtitle {
+        color: var(--bright-navy-blue);
+        font-size: var(--fs-5);
+        text-transform: uppercase;
+        font-family: var(--ff-montserrat);
+        margin-bottom: 8px;
+    }
+
+    .section-title {
+        margin-bottom: 15px;
+    }
+
+    .section-text {
+        color: var(--black-coral);
+        margin-bottom: 30px;
+    }
+
+    .card-text {
+        color: var(--black-coral);
+        font-size: var(--fs-5);
+    }
+
+
+    /*-----------------------------------*\
+    * #HEADER
+    \*-----------------------------------*/
+
+    .header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-top: 61px;
+        z-index: 4;
+    }
+
+    .header-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transition: var(--transition);
+        border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+        padding-block: 15px;
+        z-index: 1;
+    }
+
+    .header.active .header-top {
+        position: fixed;
+        background: var(--gunmetal);
+    }
+
+    .header-top .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: flex-start;
+        align-items: center;
+    }
+
+    .helpline-box .wrapper {
+        display: none;
+    }
+
+    .helpline-box .icon-box {
+        background: var(--bright-navy-blue);
+        padding: 6px;
+        border-radius: 50%;
+        color: var(--white);
+    }
+
+    .helpline-box .icon-box ion-icon {
+        --ionicon-stroke-width: 40px;
+    }
+
+    .header-top .logo {
+        margin-inline: auto;
+    }
+
+    .header-top .logo img {
+        max-width: 100px;
+    }
+
+    .header-btn-group {
+        justify-self: flex-end;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--white);
+    }
+
+    .search-btn,
+    .nav-open-btn {
+        font-size: 30px;
+        color: inherit;
+    }
+
+    .search-btn {
+        font-size: 20px;
+    }
+
+    .header-bottom {
+        border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+    }
+
+    .header-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-block: 15px;
+    }
+
+    .social-list {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .social-link {
+        color: var(--white);
+        padding: 8px;
+        border: 1px solid hsla(0, 0%, 100%, 0.3);
+        border-radius: 50%;
+        font-size: 15px;
+        transition: var(--transition);
+    }
+
+    .social-link:is(:hover, :focus) {
+        background: hsla(0, 0%, 100%, 0.2);
+    }
+
+    .header .btn {
+        --padding: 4px 20px;
+    }
+
+    .header .navbar {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 100%;
+        max-width: 300px;
+        height: 100%;
+        background: var(--white);
+        visibility: hidden;
+        pointer-events: none;
+        transition: 0.15s ease-in;
+        z-index: 3;
+    }
+
+    .navbar.active {
+        right: 0;
+        visibility: visible;
+        pointer-events: all;
+        transition: 0.25s ease-out;
+    }
+
+    .navbar-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px 15px;
+    }
+
+    .navbar-top .logo img {
+        width: 150px;
+    }
+
+    .nav-close-btn {
+        font-size: 20px;
+        color: var(--bright-navy-blue);
+    }
+
+    .nav-close-btn ion-icon {
+        --ionicon-stroke-width: 80px;
+    }
+
+    .navbar-list {
+        border-top: 1px solid hsla(0, 0%, 0%, 0.1);
+    }
+
+    .navbar-list li {
+        border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
+    }
+
+    .navbar-link {
+        padding: 15px 20px;
+        color: var(--jet);
+        font-weight: var(--fw-500);
+        font-size: var(--fs-4);
+        transition: var(--transition);
+        text-transform: capitalize;
+    }
+
+    .navbar-link:is(:hover, :focus) {
+        color: var(--bright-navy-blue);
+    }
+
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: var(--black);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 2;
+        transition: var(--transition);
+    }
+
+    .overlay.active {
+        opacity: 0.7;
+        pointer-events: all;
+    }
+
+
+    /*-----------------------------------*\
+    * #TOUR SEARCH
+    \*-----------------------------------*/
+
+    .tour-search {
+        background: #00b4d8;
+        padding-block: var(--section-padding);
+    }
+
+    .tour-search-form .input-label {
+        color: var(--white);
+        font-size: var(--fs-4);
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    .tour-search-form .input-field {
+        background: var(--white);
+        padding: 10px 15px;
+        font-size: var(--fs-5);
+        border-radius: 50px;
+    }
+
+    .tour-search-form .input-field::placeholder {
+        color: var(--spanish-gray);
+    }
+
+    .tour-search-form .input-field::-webkit-datetime-edit {
+        color: var(--spanish-gray);
+        text-transform: uppercase;
+    }
+
+    .tour-search-form .input-wrapper {
+        margin-bottom: 15px;
+    }
+
+    .tour-search .btn {
+        width: 100%;
+        --border-width: 1px;
+        font-weight: var(--fw-600);
+        margin-top: 35px;
+    }
+
+
+    /*-----------------------------------*\
+    * #POPULAR
+    \*-----------------------------------*/
+
+    .popular {
+        padding-block: var(--section-padding);
+    }
+
+    .popular-list,
+    .popular-list > li:not(:last-child) {
+        margin-bottom: 30px;
+    }
+
+    .popular-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius-25);
+        height: 430px;
+    }
+
+    .popular-card .card-img {
+        height: 100%;
+    }
+
+    .popular-card .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .popular-card .card-content {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.7); /* رنگ سفید با شفافیت 50% */
+        border-radius: var(--radius-25);
+        padding: 20px;
+    }
+
+
+    .popular-card .card-rating {
+        background: var(--bright-navy-blue);
+        color: var(--white);
+        position: absolute;
+        top: 0;
+        right: 25px;
+        display: flex;
+        align-items: center;
+        gap: 1px;
+        transform: translateY(-50%);
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+
+    .popular-card .card-subtitle {
+        color: var(--blue-ncs);
+        font-size: var(--fs-6);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .popular-card .card-title {
+        margin-bottom: 5px;
+    }
+
+    .popular-card :is(.card-subtitle, .card-title) > a {
+        color: inherit;
+    }
+
+    .popular .btn {
+        margin-inline: auto;
+    }
+
+
+    /*-----------------------------------*\
+    * #PACKAGE
+    \*-----------------------------------*/
+
+    .package {
+        padding-block: var(--section-padding);
+    }
+
+    .package-list {
+        margin-bottom: 40px;
+    }
+
+    .package-list > li:not(:last-child) {
+        margin-bottom: 30px;
+    }
+
+    .package-card {
+        background: var(--cultured);
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .package-card .card-banner {
+        height: 250px;
+    }
+
+    .package-card .card-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .package-card .card-content {
+        padding: 30px 20px;
+    }
+
+    .package-card .card-title {
+        margin-bottom: 15px;
+    }
+
+    .package-card .card-text {
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .card-meta-list {
+        background: var(--white);
+        max-width: max-content;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+        box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.15);
+        border-radius: 50px;
+    }
+
+    .card-meta-item {
+        position: relative;
+    }
+
+    .card-meta-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        right: -1px;
+        bottom: 4px;
+        width: 1px;
+        background: hsla(0, 0%, 0%, 0.3);
+    }
+
+    .meta-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        padding-inline: 9px;
+        color: var(--black-coral);
+        font-size: var(--fs-8);
+    }
+
+    .meta-box > ion-icon {
+        color: var(--bright-navy-blue);
+        font-size: 13px;
+    }
+
+    .package-card .card-price {
+        background: var(--united-nations-blue);
+        color: var(--white);
+        padding: 25px 20px;
+        text-align: center;
+    }
+
+    .package-card .card-price .wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 5px 15px;
+        margin-bottom: 10px;
+    }
+
+    .package-card .card-price .reviews {
+        font-size: var(--fs-5);
+    }
+
+    .package-card .card-rating {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1px;
+        font-size: 14px;
+    }
+
+    .package-card .card-rating ion-icon:last-child {
+        color: hsl(0, 0%, 80%);
+    }
+
+    .package-card .price {
+        font-size: var(--fs-2);
+        font-family: var(--ff-montserrat);
+        font-weight: var(--fw-800);
+        margin-bottom: 20px;
+    }
+
+    .package-card .price span {
+        font-size: var(--fs-7);
+        font-weight: initial;
+    }
+
+    .package .btn {
+        margin-inline: auto;
+    }
+
+
+    /*-----------------------------------*\
+    * #GALLERY
+    \*-----------------------------------*/
+
+    .gallery {
+        padding-block: var(--section-padding);
+    }
+
+    .gallery-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .gallery-image {
+        width: 100%;
+        height: 100%;
+        border-radius: var(--radius-15);
+        overflow: hidden;
+    }
+
+    .gallery-item:nth-child(3) {
+        grid-area: 1 / 2 / 3 / 3;
+    }
+
+    .gallery-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+    /*-----------------------------------*\
+    * #CTA
+    \*-----------------------------------*/
+
+    .cta {
+        background: var(--bright-navy-blue);
+        padding-block: var(--section-padding);
+    }
+
+    .cta :is(.section-subtitle, .section-title, .section-text) {
+        color: var(--white);
+    }
+
+    .cta .section-text {
+        font-size: var(--fs-5);
+    }
+
+
+    /*-----------------------------------*\
+    * #GO TO TOP
+    \*-----------------------------------*/
+
+    .go-top {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        background: var(--bright-navy-blue);
+        color: var(--white);
+        display: grid;
+        place-items: center;
+        font-size: 18px;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.5);
+        opacity: 0;
+        transform: translateY(10px);
+        visibility: hidden;
+        transition: var(--transition);
+    }
+
+    .go-top.active {
+        opacity: 0.8;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .go-top:is(:hover, :focus) {
+        opacity: 1;
+    }
+
+
+    /*-----------------------------------*\
+    * #MEDIA QUERIES
+    \*-----------------------------------*/
+
+    /**
+    * responsive for larger than 580px screen
+    */
+
+    @media (min-width: 580px) {
+
+        /**
+         * REUSED STYLE
+         */
+        .container {
+            max-width: 580px;
+            margin-inline: auto;
+        }
+
+        .btn {
+            --fs-5: 16px;
+            --padding: 12px 30px;
+        }
+
+        section:not(.cta) :is(.section-subtitle, .section-title, .section-text) {
+            text-align: center;
+        }
+
+        .section-text {
+            margin-bottom: 40px;
+        }
+
+        .card-text {
+            --fs-5: 15px;
+        }
+
+
+        /**
+         * TOUR SEARCH
+         */
+        .tour-search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: flex-end;
+            gap: 15px;
+        }
+
+        .tour-search-form .input-wrapper {
+            margin-bottom: 0;
+        }
+
+        .tour-search-form .input-field {
+            padding: 16px 20px;
+        }
+
+        .tour-search .btn {
+            grid-column: span 2;
+            margin-top: 20px;
+        }
+
+
+        /**
+         * POPULAR
+         */
+        .popular-card .card-content {
+            right: auto;
+        }
+
+
+        /**
+        * responsive for larger than 768px screen
+        */
+        @media (min-width: 768px) {
+
+            /**
+             * CUSTOM PROPERTY
+             */
+            :root {
+
+                /**
+                 * typography
+                 */
+
+                --fs-5: 15px;
+
+            }
+
+
+        }
+        /**
+         * REUSED STYLE
+         */
+        .container {
+            max-width: 800px;
+        }
+
+        .section-text {
+            max-width: 60ch;
+            margin-inline: auto;
+        }
+
+
+        /**
+         * POPULAR
+         */
+        .popular-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .popular-list > li:not(:last-child) {
+            margin-bottom: 0;
+        }
+
+        .popular-card .card-content {
+            right: 20px;
+        }
+
+
+        /**
+         * PACKAGE
+         */
+        .package-list {
+            margin-bottom: 50px;
+        }
+
+        .package-list > li:not(:last-child) {
+            margin-bottom: 40px;
+        }
+
+        .package-card {
+            display: grid;
+            grid-template-columns: 1.3fr 1.5fr 1fr;
+        }
+
+        .package-card .card-banner {
+            height: 100%;
+        }
+
+        .package-card .card-content {
+            padding: 40px;
+        }
+
+        .package-card .card-price {
+            display: grid;
+            place-content: center;
+        }
+
+        .package-card .card-price .wrapper {
+            margin-bottom: 15px;
+        }
+
+
+        /**
+         * CTA
+         */
+        .cta .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cta-content {
+            width: calc(100% - 225px);
+        }
+
+        .cta .section-text {
+            margin-inline: 0;
+        }
+
+
+    }
+
+    /**
+    * responsive for larger than 992px screen
+    */
+
+    @media (min-width: 992px) {
+
+        /**
+         * REUSED STYLE
+         */
+        .container {
+            max-width: 1050px;
+        }
+
+
+        /**
+         * TOUR SEARCH
+         */
+        .tour-search-form {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .tour-search .btn {
+            --padding: 15px;
+            grid-column: unset;
+            margin-top: 0;
+        }
+
+
+        /**
+         * POPULAR
+         */
+        .popular-list {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+
+        /**
+         * PACKAGE
+         */
+        .meta-box {
+            --fs-8: 13px;
+        }
+
+        .meta-box > ion-icon {
+            font-size: 15px;
+        }
+
+
+        /**
+         * CTA
+         */
+        .cta .section-title {
+            max-width: 25ch;
+        }
+
+
+    }
+
+    /**
+    * responsive for larger than 1200px screen
+    */
+
+    @media (min-width: 1200px) {
+
+        /**
+         * CUSTOM PROPERTY
+         */
+        :root {
+
+            /**
+             * spacing
+             */
+
+            --section-padding: 100px;
+
+
+            /**
+             * REUSED STYLE
+             */
+
+            .container {
+                max-width: 1180px;
+            }
+        }
+    }
+
+    {#,hhhhhhhhhhhhhhhhhhhhh#}
+
+
+    .btn:hover {
+        background-color: var(--primary-color-dark);
+    }
+
+    .logo {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--text-dark);
+    }
+
+    img {
+        display: flex;
+        width: 100%;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: 0; /* به جای left: 0 از right استفاده می‌کنیم */
+        width: 250px; /* عرض سایدبار */
+        height: 100%;
+        background-color: #f4f4f4;
+    {##f4f4f4;#}
+
+    }
+
+    a {
+        text-decoration: none;
+        transition: 0.3s;
+
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    html,
+    body {
+        scroll-behavior: smooth;
+    }
+
+    .gulzar-regular {
+        font-family: "Gulzar", serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    body {
+        font-family: "DM Sans", sans-serif;
+
+
+        nav {
+            position: fixed;
+            isolation: isolate;
+            top: 0;
+            width: 100%;
+            z-index: 9;
+            text-align: right;
+        }
+
+
+        header {
+            margin-top: 5rem;
+            padding-inline: 1rem;
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+        }
+
+        header::before {
+            background-color: hsla(0, 0%, 0%, 0.7);
+            background-blend-mode: overlay;
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: calc(100% - 2rem);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-image: url("{% static 'images/bg-img.jpg' %}"); /* استفاده از تگ static */
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 3rem;
+            z-index: -1;
+        }
+
+        .header__container {
+
+            grid-template-columns:
+  minmax(0, 1fr)
+  repeat(5, minmax(0, calc(var(--max-width) / 5)))
+ minmax(0, 1fr);
+        }
+
+        .header__content {
+            padding: 4rem 1rem;
+            grid-column: 2/4;
+            display: flex; /* اطمینان از اینکه flexbox فعال است */
+            flex-direction: column; /* در صورت نیاز به چیدمان عمودی */
+            align-items: center; /* وسط‌چین عمودی */
+            justify-content: center; /* وسط‌چین افقی */
+            text-align: center; /* وسط‌چین کردن متن */
+        }
+
+        .header__content p {
+            margin-bottom: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: right;
+            justify-content: right;
+            gap: 1rem;
+
+
+        }
+
+
+        .destination__container :is(.section__header, .section__description) {
+            text-align: left;
+            margin-inline-start: unset;
+        }
+
+        .destination__grid {
+            margin-top: 4rem;
+            display: grid;
+            gap: 2rem 1rem;
+        }
+
+        .destination__card img {
+            border-radius: 1.5rem;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .destination__card__details {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .destination__card__details h4 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            columns: var(--text-dark);
+        }
+
+        .destination__card__details p {
+            columns: var(--text-light);
+        }
+
+        .destination__rating {
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            color: var(--white);
+            background-color: var(--primary-color);
+            border-radius: 1rem;
+            transition: 0.3s;
+        }
+
+        .destination__card:hover .destination__rating {
+            background-color: var(--primary-color-dark);
+        }
+
+        .journey__grid {
+            margin-top: 2rem;
+            display: grid;
+            gap: 0 1rem;
+        }
+
+        .journey__card {
+            position: relative;
+            isolation: isolate;
+            padding-top: 4rem;
+            overflow: hidden;
+        }
+
+        .journey__card__bg {
+            padding: 2rem;
+            background-color: var(--extra-light);
+            border-top-right-radius: 1rem;
+            border-top-left-radius: 1rem;
+        }
+
+        .journey__card__bg span {
+            display: inline-block;
+            margin-bottom: 4rem;
+            font-size: 1.75rem;
+            color: var(--primary-color);
+        }
+
+        .journey__card__bg h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .journey__card__content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            border-top-right-radius: 1rem;
+            border-top-left-radius: 1rem;
+            transition: 0.3s;
+        }
+
+        .journey__card:hover .journey__card__content {
+            top: 0;
+        }
+
+        .journey__card__content span {
+            display: inline-block;
+            margin-bottom: 1rem;
+            padding: 7px 9px;
+            font-size: 1rem;
+            color: var(--white);
+            border: 2px solid var(--white);
+            border-radius: 100%;
+        }
+
+        .journey__card__content h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .journey__card__content p {
+            color: var(--extra-light);
+        }
+
+
+        footer {
+            background-color: var(--extra-light);
+        }
+
+        .footer__container {
+            display: grid;
+            gap: 4rem 2rem;
+        }
+
+        .footer__col p {
+            max-width: 300px;
+            margin-block: 2rem;
+            color: var(--text-light);
+        }
+
+        .footer__socials {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer__socials a {
+            display: inline-block;
+            padding: 7px 10px;
+            font-size: 1.25rem;
+            color: var(--white);
+            background-color: var(--primary-color);
+            border-radius: 100%;
+        }
+
+        .footer__socials a:hover {
+            background-color: var(--primary-color-dark);
+        }
+
+        .footer__col h4 {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .footer__links {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .footer__links a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+        }
+
+        .footer__links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer__links a span {
+            font-size: 1.25rem;
+        }
+
+        .footer__col form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .footer__col input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background-color: var(--white);
+            border: 1px solid var(--text-light);
+            border-radius: 5px;
+        }
+
+        .footer__col input::placeholder {
+            color: var(--text-light);
+        }
+
+        .footer__col .btn {
+            border-radius: 5px;
+        }
+
+        @media (width > 540px) {
+            .destination__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+
+            .destination__grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (width > 1200px) {
+            .header__content {
+                padding-inline: 1rem 0;
+            }
+
+            .destination__grid {
+                gap: 2rem;
+            }
+        }
+
+
+        .destination__buttons {
+            display: flex; /* استفاده از سیستیم flex برای تنظیم دکمه‌ها در کنار هم */
+            justify-content: space-between; /* توزیع فضای بین دکمه‌ها */
+            margin-top: 5px; /* فاصله از داکیومنت بالا */
+            margin-left: 60px;
+        }
+
+        .destination__buttons .btn-delete {
+        {#background-color: rgba(1, 70, 80, 0.4);#} background-color: #f72585; /* رنگ قرمز برای دکمه حذف */
+            color: white; /* رنگ متن */
+            padding: 10px 40px; /* پدینگ */
+            border-radius: 4px; /* گردی گوشه‌ها */
+            text-decoration: none; /* حذف خط زیر */
+            transition: background 0.3s; /* انیمیشن ملایم برای پس‌زمینه */
+            border-radius: 50px;
+        }
+
+        .destination__buttons .btn {
+            background: #00b4d8; /* رنگ پس‌زمینه */
+            color: white; /* رنگ متن */
+            padding: 10px 40px; /* پدینگ */
+            border-radius: 4px; /* گردی گوشه‌ها */
+            text-decoration: none; /* حذف خط زیر */
+            transition: background 0.3s; /* انیمیشن ملایم برای پس‌زمینه */
+            border-radius: 50px;
+        }
+
+        .destination__buttons .btn:hover {
+            background: #007f8c; /* تغییر رنگ در هاور */
+        }
+
+        .addbtn {
+            margin-top: 20px
+        }
+    }
+</style>
+
+<body id="top">
+
+<main>
+    <article>
+
+
+        <!--
+          - #TOUR SEARCH
+        -->
+
+        <section class="tour-search">
+            <div class="container">
+
+                <form action="{% url 'tour:homepage' %}" method="GET" class="tour-search-form">
+
+                    <div class="input-wrapper">
+                        <label for="firstdistination" class="input-label" id="field1">مبدا</label>
+                        <input type="text" name="firstdistination" id="firstdistination" required
+                               placeholder="مبدا دلخواه را وارد کنید"
+                               class="input-field">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="lastDestination" class="input-label" id="field2">مقصد</label>
+                        <input type="text" name="lastDestination" id="lastDestination" required
+                               placeholder="مقصد دلخواه را وارد کنید"
+                               class="input-field">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="startdate" class="input-label" id="field3">تاریخ رفت</label>
+                        <input type="date" name="startdate" id="startdate" required class="input-field">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="finishdate" class="input-label" id="field4">تاریخ برگشت</label>
+                        <input type="date" name="finishdate" id="finishdate" required class="input-field"
+                               placeholder="YYYY/MM/DD">
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary">جستجو</button>
+                </form>
+
+            </div>
+        </section>
+
+        <section class="popular" id="destination">
+            <div class="container">
+                <p class="section-subtitle">سفرهایی به یادماندنی در نقطه نقطه ایران</p>
+                <h2 class="h2 section-title">تورهای موجود</h2>
+                {#        <p class="section-text">#}
+                {#            Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. Vestibulum cumque laudantium.#}
+                {#            Sit ornare mollitia tenetur, aptent.#}
+                {#        </p>#}
+
+                {#        <ul class="popular-list">#}
+                {#            {% for tour in tours %}#}
+                {#            <li>#}
+                {#                <div class="popular-card">#}
+                {#                    <figure class="card-img">#}
+                {#                        <img src="{{ tour.image.url }}" alt="{{ tour.title }}" loading="lazy">#}
+                {#                    </figure>#}
+                {#<figure class="card-img">#}
+                {#    {% if tour.image %}#}
+                {#        <img src="{{ tour.image.url }}" id="productImg" alt="{{ tour.title }}">#}
+                {#    {% else %}#}
+                {#        <img src="{% static 'path/to/default/image.jpg' %}" id="productImg" alt="Default Image"> <!-- تصویر پیش‌فرض -->#}
+                {#    {% endif %}#}
+                {#</figure>#}
+                {##}
+                {#                    <div class="card-content">#}
+                {#                        <div class="card-rating">  #}
+                {#                            {% for star in range(5) %}  #}
+                {#                                <ion-icon name="star" class="{% if star < tour.rating|floatformat:0 %}active{% endif %}"></ion-icon>  #}
+                {#                            {% endfor %}  #}
+                {#                        </div>  #}
+                {##}
+                {#                        <p class="card-subtitle">#}
+                {##}
+                {#                            <a href="#">{{ tour.firstdistination }} - {{ tour.lastDestination}}</a>  <!-- نمایش مبدا و مقصد -->#}
+                {#                        </p>#}
+                {##}
+                {#                        <h3 class="h3 card-title">#}
+                {#                            <a href="{% url 'tour:tour_detail' tour.id %}">{{ tour.title }}</a>#}
+                {#                        </h3>#}
+                {##}
+                {#                        <p class="card-text">#}
+                {#                             <a href="#">{{ tour.startdate }} - {{ tour.finishdate}}</a>#}
+                {#                        </p>#}
+                {#                        <div class="tour-actions">#}
+                {#                    <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>#}
+                {#                    <form action="{% url 'tour:deletetour' tour.id %}" method="POST" style="display:inline;">#}
+                {#                        {% csrf_token %}#}
+                {#                        <button type="submit" class="btn btn-delete">حذف</button>#}
+                {#                    </form>#}
+                {#                </div>#}
+                {##}
+                {#                    </div>#}
+                {#                </div>#}
+                {#            </li>#}
+                {#            {% endfor %}#}
+                {#        </ul>#}
+                <ul>
+                    <div class="destination__grid">
+                        {% for tour in tours %}
+
+                            <div class="destination__card">
+                                {#            <img src="{{ tour.image.url }}" alt="{{ tour.title }}" >#}
+                                {% if tour.image %}
+                                    <img src="{{ tour.image.url }}" id="productImg" alt="{{ tour.title }}">
+                                {% else %}
+                                    <img src="{% static 'path/to/media/tour/image.jpg' %}" id="productImg"
+                                         alt="Default Image"> <!-- تصویر پیش‌فرض -->
+                                {% endif %}
+                                </figure>
+                                <div class="destination__card__details">
+                                    <div>
+                                        {#                    <h4>{{ tour.title }}</h4>#}
+                                        <h4><a href="{% url 'tour:tour_detail' tour.id %}">{{ tour.title }}</a></h4>
+                                        <p><a href="#">{{ tour.firstdistination }} - {{ tour.lastDestination }}</a></p>
+                                        <p><a href="#">{{ tour.startdate }} - {{ tour.finishdate }}</a></p>
+                                    </div>
+                                    <div class="destination__rating">
+                                        <span><i class="ri-star-fill"></i></span>
+                                        {{ tour.capacity }}  <!-- نمایش نوع تور یا گردشگری -->
+                                    </div>
+                                </div>
+                                <div class="destination__buttons">
+                                    {% if user.is_authenticated and user.email == "aminhosseini822003@gmail.com" %}
+                                        <a href="{% url 'tour:edittour' tour.id %}" class="btn">ویرایش</a>
+                                        <a href="{% url 'tour:deletetour' tour.id %}" class="btn-delete">حذف</a>
+                                    {% endif %}
+                                </div>
+
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                </ul>
+
+                <!-- دکمه "اضافه کردن تور" تنها برای کاربر خاص -->
+                {% if user.is_authenticated and user.email == 'aminhosseini822003@gmail.com' %}
+                    <button class="btn btn-primary" onclick="window.location.href='{% url 'tour:add' %}'">اضافه کردن
+                        تور
+                    </button>
+                {% endif %}
+                {#    <button class="btn btn-primary" onclick="window.location.href='{% url 'tour:add' %}'">اضافه کردن تور</button>#}
+                {#        <button class="btn btn-primary" onclick="window.location.href='{% url 'tour:edittour'  tour.id%}'">اضافه کردن تور</button>#}
+                {#                 <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>#}
+
+                {#{% if is_authorized %}  <!-- بررسی وضعیت دسترسی -->#}
+                {#    <form action="{% url 'tour:add' %}" method="POST">#}
+                {#        {% csrf_token %}#}
+                {#        <button type="submit" class="btn btn-primary">اضافه کردن تور</button>#}
+                {#    </form>#}
+                {#{% else %}#}
+                {#    <p>شما مجاز به اضافه کردن تور نیستید.</p>#}
+                {#{% endif %}#}
+
+                {#        {% if is_authorized %}  <!-- بررسی وضعیت دسترسی -->#}
+                {#            <button class="btn btn-primary" onclick="window.location.href='{% url 'tour:add' %}'">اضافه کردن تور</button>#}
+                {#              <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>  #}
+                {#        {% endif %}#}
+                {#        <button class="btn btn-primary">اضافه کردن تور </button>#}
+                {#        <div><button class="btn btn-primary">ویرایش تور </button></div>#}
+
+                <div class="addbtn">
+                    <button class="btn btn-primary" onclick="location.href='{% url 'tour:main_page' %}'">بازگشت</button>
+
+                </div>
+
+            </div>
+        </section>
+
+
+    </article>
+</main>
+
+</body>
+
+
+</html>

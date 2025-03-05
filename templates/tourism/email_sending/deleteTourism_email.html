@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گردشگریت حذف شد! 🗑️</title>
+    <style>
+        body {
+            font-family: 'Vazir', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #dcedc8, #b3e5fc); /* سبز جنگلی به آبی آسمانی */
+            color: #333;
+            line-height: 1.8;
+            padding: 30px;
+            direction: rtl;
+            text-align: right;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2e7d32; /* سبز تیره جنگلی */
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            background-color: #e8f5e9; /* سبز خیلی ملایم */
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 16px;
+            border-left: 4px solid #4caf50; /* سبز متوسط */
+        }
+
+        .highlight {
+            color: #0277bd; /* آبی آسمانی تیره */
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .tourism-details {
+            background-color: #e1f5fe; /* آبی خیلی روشن */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #0288d1; /* آبی متوسط */
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+
+        .emoji {
+            font-size: 20px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>گردشگریت با موفقیت حذف شد! 🌳</h2>
+    <p>سلام دوست عزیز! 👋 توی تاریخ <span class="highlight">{{ formatted_jdate }}</span> و ساعت <span
+            class="highlight">{{ formatted_time }}</span> گردشگریت رو حذف کردی! 🗑️</p>
+    <div class="tourism-details">
+        <p>مشخصات گردشگری حذف‌شده:</p>
+        {#            <ul style="list-style-type: none; padding: 0;">#}
+        {#                <li>✨ <strong>نام گردشگری:</strong> {{ old_tourism.title }}</li>#}
+        {#                <li>🔑 <strong>کد گردشگری:</strong> {{ old_tourism.idtourism }}</li>#}
+        {#                <li>📍 <strong>نقطه شروع:</strong> {{ old_tourism.start_location }}</li>#}
+        {#                <li>🏁 <strong>نقطه پایان:</strong> {{ old_tourism.end_location }}</li>#}
+        {#                <li>⏳ <strong>زمان شروع:</strong> {{ old_tourism.startdate }}</li>#}
+        {#                <li>⏰ <strong>زمان پایان:</strong> {{ old_tourism.enddate }}</li>#}
+        {#                <li>🚶‍♂️ <strong>سبک سفر:</strong> {{ old_tourism.activity_type }}</li>#}
+        {#            </ul>#}
+        <ul style="list-style-type: none; padding: 0;">
+            <li>✨ <strong>نام گردشگری:</strong> {{ old_tourism.title }}</li>
+{#            <li>🔑 <strong>کد گردشگری:</strong> {{ old_tourism.idtourism }}</li>#}
+            <li>📍 <strong>اغاز گردشگری:</strong> {{ old_tourism.firstdistination_tourism }}</li>
+            <li>🏁 <strong>تصویر گردشگری:</strong> {{ old_tourism.image_tourism }}</li>
+            <li>⏳ <strong>زمان شروع:</strong> {{ old_tourism.startdate_tourism }}</li>
+            <li>⏳ <strong>قیمت:</strong> {{ old_tourism.price_tourism }}</li>
+            {#            <li>⏰ <strong>زمان پایان:</strong> {{ tourism_details.ticket_typetourism }}</li>#}
+            <li>🚶‍♂️ <strong>نوع بلیط:</strong> {{ old_tourism.ticket_typetourism }}</li>
+        </ul>
+
+
+    </div>
+    {#        <p>اگه نظرت عوض شد یا یه تجربه گردشگری دیگه می‌خوای، ما همیشه اینجاییم که کمکت کنیم! 🌈✨</p>#}
+    {#        <p class="highlight">هر وقت آماده بودی، یه سفر جدید بساز! 🌍❤️</p>#}
+    <p class="footer">تیم گردشگری ما همیشه کنارته! سوالی داشتی، بهمون بگو! 🌳</p>
+</div>
+</body>
+</html>
