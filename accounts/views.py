@@ -122,7 +122,8 @@ def login_page(request):
 
 def logout_page(request):
     if request.method == "POST":
-        user_email = request.user.email  # دریافت ایمیل کاربر
+        # user_email = request.user.email  # دریافت ایمیل کاربر
+        user_email = request.session.get('user_email')
         logout(request)
         logout_email(user_email)
         return redirect('tour:main_page')
