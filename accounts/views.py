@@ -9,6 +9,8 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import logout
+import sms_sending
+from sms_sending import sms_test
 
 
 # این درست بوده👇
@@ -90,6 +92,7 @@ def login_page(request):
         if user is not None:
             auth.login(request, user)
             welcome_send_email(user.email)
+            sms_test()
             return redirect('tour:main_page')
         else:
             messages.info(request, 'نام کاربری یا رمز عبور اشتباه است.')
