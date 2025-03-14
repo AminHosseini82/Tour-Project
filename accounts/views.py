@@ -9,7 +9,6 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import logout
-import sms_sending
 from sms_sending import sms_test
 
 

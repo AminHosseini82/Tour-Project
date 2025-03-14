@@ -1,9 +1,4 @@
-from multiprocessing.connection import answer_challenge
 import ghasedakpack
-from ghasedakpack import Ghasedak
-import requests
-import json
-import ghasedak_sms
 
 
 #
@@ -28,14 +23,13 @@ import ghasedak_sms
 #     print(response.text)
 
 def sms_test():
-    sms = ghasedakpack.Ghasedak('4f5508bedeaa98699e6b7f2f76e44ba4017c1992c1ef749fa7242a8283c1ba5asYAhj5sYUhET4uM7')
-    message = "this is just a test! لغو 11"
+    sms = ghasedakpack.Ghasedak('2b8dcce987651120477b7ec169cc69b3760de741cc010a76a46fae8447a6d56bf3vboVB2hmzyFgft')
+    message = "sdfsdf. لغو11"
     my_number_1 = "09133772351"
-    line_number = "30006703249249"
-    context = {
-        "message" : message,"receptor" : my_number_1 , "linenumber":line_number
-    }
-    answer = sms.send(context)
+    line_number = "90002930"
+    answer = sms.send({
+        "message": message, "receptor": my_number_1, "linenumber": line_number
+    })
 #
 # def sms_test():
 #     # کلید جدیدت رو اینجا بذار
