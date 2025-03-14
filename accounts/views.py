@@ -91,7 +91,7 @@ def login_page(request):
         if user is not None:
             auth.login(request, user)
             welcome_send_email(user.email)
-            sms_test()
+            # sms_test()
             return redirect('tour:main_page')
         else:
             messages.info(request, 'نام کاربری یا رمز عبور اشتباه است.')
