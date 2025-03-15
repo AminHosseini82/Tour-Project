@@ -3,12 +3,12 @@ import requests
 import json
 
 
-def sms_test():
+def sms_test(number = "09133958238"):
     url = "https://gateway.ghasedak.me/rest/api/v1/WebService/SendSingleSMS"
     payload = json.dumps({
         "sendDate": "2024-07-03T07:22:15.842Z",
         "lineNumber": "30006703249249",
-        "receptor": "09133958238",
+        "receptor": number,
         "message": "سایت تور و گردشگری. لغو11",
         "clientReferenceId": "string",
         "udh": True

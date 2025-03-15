@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 import random
-
+from sms_sending.source_code import sms_test
 
 # این درست بوده👇
 
@@ -139,10 +139,15 @@ def review_password_sms_sendSMS(request):
         user_mobile = request.POST.get('phone')
         result = UserProfile.objects.filter(phone_number=user_mobile).exists()
         if result:
+            random_number = random.randrange(100000, 999999)
+            sms_test(user_mobile)
+            context = {
+
+            }
+            return render(request, "accounts/sms_view/review_password_sms_sendSMS.html", context)
 
 
-        # random_number = random.randrange(100000, 999999)
-        # if user_mobile == user_mobile:
+    # if user_mobile == user_mobile:
         #     return render(request, 'accounts/sms_view/review_password_sms_sendSms.html')
     else:
         return render(request ,"review_password_sms_sendSMS" )
