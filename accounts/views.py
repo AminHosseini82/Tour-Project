@@ -1,3 +1,4 @@
+from django.contrib.admin.templatetags.admin_list import result_headers
 from django.shortcuts import render
 from accounts.models import UserProfile
 # from django.contrib.auth import login, logout
@@ -7,6 +8,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import logout
+import random
 
 
 # این درست بوده👇
@@ -126,3 +128,31 @@ def logout_page(request):
         logout(request)
         logout_email(user_email)
         return redirect('tour:main_page')
+
+
+def review_password_sms(request):
+
+    return render(request, 'accounts/sms_view/review_password_sms_inputNumber.html')
+
+def review_password_sms_sendSMS(request):
+    if request.method == 'POST':
+        user_mobile = request.POST.get('phone')
+        result = UserProfile.objects.filter(phone_number=user_mobile).exists()
+        if result:
+
+
+        # random_number = random.randrange(100000, 999999)
+        # if user_mobile == user_mobile:
+        #     return render(request, 'accounts/sms_view/review_password_sms_sendSms.html')
+    else:
+        return render(request ,"review_password_sms_sendSMS" )
+
+
+
+
+
+
+
+
+
+
