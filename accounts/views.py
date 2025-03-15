@@ -1,15 +1,12 @@
 from django.shortcuts import render
-
 from accounts.models import UserProfile
 # from django.contrib.auth import login, logout
-from email_sending.accounts.login_email.welcome_again import welcome_again_send_email
 from email_sending.accounts.signin_code.welcome_first_time import welcome_send_email
 from email_sending.accounts.logout_email.massage_logout import logout_email
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import logout
-from sms_sending import sms_test
 
 
 # این درست بوده👇
