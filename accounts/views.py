@@ -1,4 +1,5 @@
 from django.contrib.admin.templatetags.admin_list import result_headers
+from django.http import HttpResponse
 from django.shortcuts import render
 from accounts.models import UserProfile
 # from django.contrib.auth import login, logout
@@ -130,29 +131,28 @@ def logout_page(request):
         return redirect('tour:main_page')
 
 
-def review_password_sms(request):
-
-    return render(request, 'accounts/sms_view/review_password_sms_inputNumber.html')
-
-def review_password_sms_sendSMS(request):
+def review_password_sms_input(request):
     if request.method == 'POST':
         user_mobile = request.POST.get('phone')
         result = UserProfile.objects.filter(phone_number=user_mobile).exists()
         if result:
             random_number = random.randrange(100000, 999999)
-            sms_test(user_mobile)
+            message = f"این شماره احراز هویت شما میباشد {random_number}. لغو11"
+            sms_test(user_mobile, message)
             context = {
-
+                "random_number" : random_number,
             }
             return render(request, "accounts/sms_view/review_password_sms_sendSMS.html", context)
+        else:
+            context={
+                "eroer_text" : "این شماره در سایت ثبت نام نکرده است."
+            }
+            return render(request, 'accounts/sms_view/review_password_sms_sendSMS.html', context)
 
+    return render(request, 'accounts/sms_view/review_password_sms_inputNumber.html')
 
-    # if user_mobile == user_mobile:
-        #     return render(request, 'accounts/sms_view/review_password_sms_sendSms.html')
-    else:
-        return render(request ,"review_password_sms_sendSMS" )
-
-
+def review_password_sms_inputPassword(request):
+    return HttpResponse("فعلا به این مرحله رسیدی!")
 
 
 

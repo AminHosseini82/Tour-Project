@@ -4,7 +4,7 @@ from .views import signup_page, login_page, logout_page
 from . import views
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy  # اضافه کردن این خط
-from .views import review_password_sms , review_password_sms_sendSMS
+from .views import review_password_sms_input,review_password_sms_inputPassword
 
 app_name = 'accounts'
 urlpatterns = [
@@ -12,8 +12,8 @@ urlpatterns = [
     path("login/", login_page, name="login"),
     path("logout/", logout_page, name="logout"),
 
-    path("review_password_sms/", review_password_sms, name="review_password_sms"),
-    path("review_password_sms_sendSMS/" , review_password_sms_sendSMS, name="review_password_sendSMS"),
+    path("review_password_sms_input/", review_password_sms_input, name="review_password_sms_input"),
+    path("review_password_sms_inputPassword/" , review_password_sms_inputPassword, name="review_password_sms_inputPassword"),
     # reset password URL
     # path("login/reset_password/", auth_views.PasswordResetView.as_view(),
     #      name="reset_password"),
