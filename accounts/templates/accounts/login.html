@@ -371,9 +371,6 @@
 {## برای اضافه کردن اپشن ورود با گوگل 👆#}
 
 
-
-
-
 <body>
 
 
@@ -475,7 +472,7 @@
             <p class="login__switch" dir="rtl">
                 رمز خود را فراموش کردین؟
                 {#                <button id="loginButtonRegister">ورود</button>#}
-                <a href="{% url 'accounts:reset_password' %}" id="loginButtonRegister" class="btn">بازیابی رمز عبور حساب
+                <a href="{% url 'accounts:choose_auth_method' %}" id="loginButtonRegister" class="btn">بازیابی رمز عبور حساب
                     خود</a>
             </p>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تأیید کد احراز هویت</title>
+    <title>انتخاب روش احراز هویت</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -44,35 +44,10 @@
             font-size: 14px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            color: #555;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        input[type="text"] {
+        .option-button {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-            direction: ltr; /* برای وارد کردن کد به صورت استاندارد */
-        }
-
-        input[type="text"]:focus {
-            border-color: #74ebd5;
-            outline: none;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
+            margin-bottom: 15px;
             background: linear-gradient(90deg, #74ebd5, #acb6e5);
             border: none;
             border-radius: 8px;
@@ -80,18 +55,14 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        button:hover {
+        .option-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .error-message {
-            color: #e74c3c;
-            font-size: 14px;
-            margin-top: 10px;
         }
 
         .footer-text {
@@ -115,30 +86,10 @@
 </head>
 <body>
     <div class="container">
-        {% if random_number %}
-            <!-- حالت تأیید کد -->
-            <h2>تأیید کد احراز هویت</h2>
-            <p>لطفاً کدی که از طریق SMS دریافت کردید را وارد کنید.</p>
-            <form method="post" action="{% url 'accounts:verify_sms_code' %}" id="verifyForm">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="id_code">کد تأیید:</label>
-                    <input type="text" name="code" id="id_code" placeholder="مثال: 123456" required>
-                    <input type="hidden" name="random_number" value="{{ random_number }}">
-                </div>
-                <button type="submit">تأیید</button>
-                {% if error %}
-                    <p class="error-message">{{ error }}</p>
-                {% endif %}
-            </form>
-        {% else %}
-            <!-- حالت خطا -->
-            <h2>خطا</h2>
-            <p class="error-message">{{ eroer_text }}</p>
-            <div class="footer-text">
-                <p>بازگشت به <a href="{% url 'accounts:password_reset_sms' %}">وارد کردن شماره</a></p>
-            </div>
-        {% endif %}
+        <h2>انتخاب روش احراز هویت</h2>
+        <p>لطفاً روش مورد نظر خود را برای بازنشانی رمز عبور انتخاب کنید:</p>
+        <a href="{% url 'accounts:reset_password' %}" class="option-button">احراز هویت با ایمیل</a>
+        <a href="{% url 'accounts:review_password_sms_input' %}" class="option-button">احراز هویت با SMS</a>
         <div class="footer-text">
             <p>بازگشت به <a href="{% url 'accounts:login' %}">ورود</a></p>
         </div>
