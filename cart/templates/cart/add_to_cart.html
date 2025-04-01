@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اضافه کردن به سبد خرید</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: #f4f4f9; color: #333; line-height: 1.6; }
+        h1 { text-align: center; color: #2c3e50; margin: 20px 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="number"] { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background-color: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #2980b9; }
+        p { text-align: center; font-size: 1.1em; }
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>اضافه کردن به سبد خرید</h1>
+        <p>
+            {% if item_type == 'tour' %}
+                {{ item.title }}
+            {% elif item_type == 'tourism' %}
+                {{ item.title_tourism }}
+            {% endif %}
+        </p>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="quantity">تعداد:</label>
+            <input type="number" name="quantity" value="1" min="1">
+            <button type="submit">اضافه کردن به سبد</button>
+        </form>
+    </div>
+</body>
+</html>

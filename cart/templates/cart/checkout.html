@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسویه‌حساب</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: #f4f4f9; color: #333; line-height: 1.6; }
+        h1 { text-align: center; color: #2c3e50; margin: 20px 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        ul { list-style: none; }
+        li { background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+        p { text-align: center; font-size: 1.2em; font-weight: bold; margin: 15px 0; }
+        button { background-color: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #2980b9; }
+        form { text-align: center; }
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            li { text-align: center; }
+            button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>تسویه‌حساب</h1>
+        <ul>
+            {% for item in cart_items %}
+                <li>
+                    {% if item.tourBuyed %}
+                        {{ item.tourBuyed.title }}
+                    {% elif item.tourismBuyed %}
+                        {{ item.tourismBuyed.title_tourism }}
+                    {% endif %}
+                    - تعداد: {{ item.quantityItem }} - قیمت: {{ item.get_total }} تومان
+                </li>
+            {% endfor %}
+        </ul>
+        <p>جمع کل: {{ total_price }} تومان</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit">ثبت سفارش و رفتن به پرداخت</button>
+        </form>
+    </div>
+</body>
+</html>

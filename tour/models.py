@@ -1,7 +1,3 @@
-from time import timezone
-from django.utils import timezone
-from django.core.exceptions import ValidationError
-from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
@@ -22,6 +18,7 @@ class tour(models.Model):
     clas = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
                              related_name='tour_clas')  # اضافه کردن related_name
     image = models.ImageField(upload_to='tourr/', null=True, blank=True)
+    price = models.PositiveIntegerField('قیمت',default=1000)  # برای محاسبه هزینه
     # اضافه کردن فیلد جدید برای نوع بلیط
     TICKET_TYPES = [
         ('bus', 'اتوبوس'),

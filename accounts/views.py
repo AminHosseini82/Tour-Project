@@ -1,8 +1,6 @@
-from django.contrib.admin.templatetags.admin_list import result_headers
 from django.http import HttpResponse
 from django.shortcuts import render
 from accounts.models import UserProfile
-# from django.contrib.auth import login, logout
 from email_sending.accounts.signin_code.welcome_first_time import welcome_send_email
 from email_sending.accounts.logout_email.massage_logout import logout_email
 from django.contrib.auth.models import User, auth
@@ -132,6 +130,7 @@ def logout_page(request):
         return redirect('tour:main_page')
 
 
+# this function choses the Authentication way, SMS or Email
 def choose_auth_method(request):
     return render(request, "accounts/sms_view/choose_auth_method.html")
 

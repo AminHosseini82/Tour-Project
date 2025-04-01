@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دلیل رد پرداخت</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: #f4f4f9; color: #333; line-height: 1.6; }
+        h1 { text-align: center; color: #2c3e50; margin: 20px 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+        label { display: block; margin-bottom: 10px; font-weight: bold; }
+        textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background-color: #e74c3c; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #c0392b; }
+        @media (max-width: 600px) { .container { padding: 10px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>دلیل رد پرداخت برای سفارش {{ payment.order.id }}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="message">دلیل رد پرداخت:</label>
+            <textarea name="message" id="message" rows="5" placeholder="دلیل رد شدن پرداخت را بنویسید..." required></textarea>
+            <button type="submit">ارسال و رد پرداخت</button>
+        </form>
+    </div>
+
+    {% if success %}
+    <script>
+        Swal.fire({
+            title: "ارسال موفقیت‌آمیز!",
+            text: "پیام رد بلیط برای کاربر فرستاده شده است.",
+            icon: "success",
+            confirmButtonText: "باشه",
+            timer: 3000,  // 3 ثانیه بعد خودکار بسته می‌شه
+            timerProgressBar: true
+        }).then((result) => {
+            // بعد از کلیک روی "باشه" یا اتمام تایمر، به صفحه ادمین برمی‌گرده
+            window.location.href = "{% url 'cart:admin_payment_review' %}";
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

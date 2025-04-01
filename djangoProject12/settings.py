@@ -28,13 +28,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # project app:
     'tour',
     'tourism',
     'accounts',
     'news',
     'house',
     "scores",
-
+    'cart',
     #     برای اضافه کردن اپشن ورود با گوگل👇
     "django.contrib.sites",
     # "users",

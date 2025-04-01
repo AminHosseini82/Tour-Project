@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آپلود پرداخت</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: #f4f4f9; color: #333; line-height: 1.6; }
+        h1 { text-align: center; color: #2c3e50; margin: 20px 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="file"], textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background-color: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #2980b9; }
+        .payment-link {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #e8f8f5;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .payment-link a {
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border: 2px solid #27ae60;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .payment-link a:hover {
+            background-color: #27ae60;
+            color: #fff;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            button { width: 100%; }
+            .payment-link { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>آپلود پرداخت برای سفارش {{ order.id }}</h1>
+        <div class="payment-link">
+            <p>برای پرداخت از این لینک بروید:</p>
+            <a href="https://zarinp.al/saraisafar" target="_blank">پرداخت با زرین‌پال</a>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">ارسال پرداخت</button>
+        </form>
+    </div>
+</body>
+</html>

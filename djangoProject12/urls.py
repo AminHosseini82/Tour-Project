@@ -1,4 +1,6 @@
 # ---------------------------------------این ها درست بودن👇_______________________________________
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from tour import views as tour_views
@@ -20,5 +22,8 @@ urlpatterns = [
     path('house/', include('house.urls')),
     path('media/<str:rootFolder>/<str:fileName>', views.returnImgResponse, name="returnImgResponse"),
     # path('testapp/', include('testapp.urls'))
-]
+    path('cart/', include('cart.urls')),
+
+    ]
 # ---------------------------------------این ها درست بودن👆_______________________________________
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
