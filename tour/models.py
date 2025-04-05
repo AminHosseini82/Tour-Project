@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
+from tourism.models import tourism
+
 
 # from persian import PersianDateTime
 
@@ -31,9 +33,25 @@ class tour(models.Model):
         return self.title
 
 
+
+
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tour_profile')  # اضافه کردن related_name
-    tours = models.ManyToManyField(tour, blank=True, related_name='tour_profiles')  # اضافه کردن related_name
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    tours = models.ManyToManyField(tour, blank=True, related_name='profiles')
+    tourisms = models.ManyToManyField(tourism, blank=True, related_name='profiles')
+
+    def __str__(self):
+        return f"Profile of {self.user.username}"
+
+
+
+
+
+
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tour_profile')  # اضافه کردن related_name
+#     tours = models.ManyToManyField(tour, blank=True, related_name='tour_profiles')  # اضافه کردن related_name
 
     def __str__(self):
         return self.user.username

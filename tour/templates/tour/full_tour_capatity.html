@@ -6,29 +6,39 @@
     <title>ظرفیت تور تکمیل شده</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
             font-family: 'Vazirmatn', sans-serif;
-            background-image: url('https://placehold.co/1920x1080/ffffff/000000?text=[Image+of+Full+Bus]&font=vazirmatn'); /* تصویر مرتبط با "ظرفیت تکمیل" */
+            direction: rtl;
+        }
+
+        body {
+            background-image: url('https://tse1.mm.bing.net/th?id=OIP.SQkX1xSmAP4JYYSTpkd6LQHaNK&w=474&h=474&c=7');
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            direction: rtl;
         }
 
         .container {
             background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
             border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2),
+                        0 8px 10px -6px rgba(0, 0, 0, 0.1);
             padding: 2rem;
             width: 90%;
             max-width: 600px;
             text-align: center;
-            backdrop-filter: blur(5px);
         }
 
         h1 {
@@ -80,13 +90,10 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>ظرفیت تور تکمیل شده</h1>
-    <p>متأسفانه، ظرفیت این تور تکمیل شده است و امکان ثبت نام وجود ندارد.</p>
-    {#        <a href="/tour/profile_view" class="button">بازگشت به لیست تورها</a>#}
-    <a href="{% url 'tour:homepage' %} " class="button">بازگشت به لیست تورها</a>
-
-
-</div>
+    <div class="container">
+        <h1>ظرفیت تور تکمیل شده</h1>
+        <p>متأسفانه، ظرفیت این تور تکمیل شده است و امکان ثبت نام وجود ندارد.</p>
+        <a href="{% url 'tour:homepage' %}" class="button">بازگشت به لیست تورها</a>
+    </div>
 </body>
 </html>

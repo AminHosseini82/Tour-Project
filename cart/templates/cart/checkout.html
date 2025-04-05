@@ -10,15 +10,19 @@
         h1 { text-align: center; color: #2c3e50; margin: 20px 0; }
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         ul { list-style: none; }
-        li { background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+        li { background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center; }
         p { text-align: center; font-size: 1.2em; font-weight: bold; margin: 15px 0; }
+        .buttons { text-align: center; margin-top: 20px; }
         button { background-color: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
         button:hover { background-color: #2980b9; }
-        form { text-align: center; }
+        .delete-btn { background-color: #e74c3c; padding: 5px 10px; font-size: 0.9em; }
+        .delete-btn:hover { background-color: #c0392b; }
+        .more-btn { background-color: #2ecc71; margin-right: 10px; }
+        .more-btn:hover { background-color: #27ae60; }
         @media (max-width: 600px) {
             .container { padding: 10px; }
-            li { text-align: center; }
-            button { width: 100%; }
+            li { flex-direction: column; text-align: center; }
+            button, .delete-btn { width: 100%; margin: 5px 0; }
         }
     </style>
 </head>
@@ -28,20 +32,32 @@
         <ul>
             {% for item in cart_items %}
                 <li>
-                    {% if item.tourBuyed %}
-                        {{ item.tourBuyed.title }}
-                    {% elif item.tourismBuyed %}
-                        {{ item.tourismBuyed.title_tourism }}
-                    {% endif %}
-                    - تعداد: {{ item.quantityItem }} - قیمت: {{ item.get_total }} تومان
+                    <span>
+                        {% if item.tourBuyed %}
+                            {{ item.tourBuyed.title }}
+                        {% elif item.tourismBuyed %}
+                            {{ item.tourismBuyed.title_tourism }}
+                        {% endif %}
+                        - تعداد: {{ item.quantityItem }} - قیمت: {{ item.get_total }} تومان
+                    </span>
+                    <form method="POST" action="{% url 'cart:place_order' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete_item" value="{{ item.id }}">
+                        <button type="submit" class="delete-btn">حذف</button>
+                    </form>
                 </li>
+            {% empty %}
+                <li>سبد خرید شما خالی است</li>
             {% endfor %}
         </ul>
         <p>جمع کل: {{ total_price }} تومان</p>
-        <form method="POST">
-            {% csrf_token %}
-            <button type="submit">ثبت سفارش و رفتن به پرداخت</button>
-        </form>
+        <div class="buttons">
+            <a href="{% url 'main_page' %}" class="more-btn" style="padding: 10px 20px; text-decoration: none; color: #fff; border-radius: 5px;">خرید بیشتر</a>
+            <form method="POST" action="{% url 'cart:place_order' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">ثبت سفارش و رفتن به پرداخت</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
