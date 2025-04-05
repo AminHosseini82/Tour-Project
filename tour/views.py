@@ -565,9 +565,6 @@ def buy_tour(request, tour_id):
 
     # ارسال پیام تأیید به کاربر
     messages.success(request, f"{tour_to_buy.title} به درستی خریداری شد.")
-    # TODO: به این صفحه هم نباید فرستاده بشه قطعا!
-    # TODO: باید به این صفحه بفرستی بعدش باید حالش رو درست بکنی که tour باشه.
-    # TODO: add_to_cart
     # return redirect('tour:profile_view')  #
     # به صفحه‌ای که می‌خواهید کاربر را به آن هدایت کنید
 
