@@ -553,7 +553,8 @@ def buy_tour(request, tour_id):
     if tour_to_buy.capacity <= 0:
         # TODO: must rage a floating message to say this
         messages.error(request, "متأسفانه این تور پر شده است.")
-        return redirect('tour:profile_view')
+        # return redirect('tour:profile_view')
+        return render(request,"tour/full_tour_capatity.html")
 
     # خرید ثبت می‌شود
     Purchase.objects.create(user=request.user, tour=tour_to_buy)
