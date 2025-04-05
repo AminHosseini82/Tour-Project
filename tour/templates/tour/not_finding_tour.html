@@ -6,22 +6,31 @@
     <title>تور یافت نشد</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
+            box-sizing: border-box;
+        }
+
+        body, html {
             font-family: 'Vazirmatn', sans-serif;
-            background-image: url('https://placehold.co/1920x1080/ffffff/000000?text=[Image+of+Sad+Traveler]&font=vazirmatn'); /* تصویر مرتبط با "یافت نشد" */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
             padding: 0;
             direction: rtl;
+            height: 100vh;
+            width: 100vw;
         }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
+        body {
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.85);
             border-radius: 1rem;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             padding: 2rem;
@@ -35,7 +44,7 @@
             color: #dc2626;
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         p {
@@ -64,7 +73,7 @@
         }
 
         @media (max-width: 768px) {
-            .container {
+            .overlay {
                 width: 95%;
                 padding: 1.5rem;
             }
@@ -78,14 +87,10 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="overlay">
         <h1>تور یافت نشد</h1>
         <p>متأسفانه، توری که دنبال آن بودید پیدا نشد. احتمالاً تور مورد نظر حذف شده است یا دیگر در دسترس نیست.</p>
-{#        <a href= {{ url "tour:mainpage" }} class="button">بازگشت به لیست تورها</a>#}
-{#        <a href="{{ url 'tour:mainpage' }}" class="button">بازگشت به لیست تورها</a>#}
-{#        <a href= {{ url "tour:mainpage" }} class="button">بازگشت به لیست تورها</a>#}
-
-        <a href="{% url 'tour:homepage' %} " class="button">بازگشت به لیست تورها</a>
+        <a href="{% url 'tour:homepage' %}" class="button">بازگشت به لیست تورها</a>
     </div>
 </body>
 </html>
