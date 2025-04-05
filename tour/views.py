@@ -577,7 +577,6 @@ def buy_tour(request, tour_id):
 @login_required(login_url='accounts/signup/')
 def profile_view(request):
     user = request.user
-    # دریافت لیست تورهای کاربر از پروفایل
     profile, created = Profile.objects.get_or_create(user=user)
     tours = profile.tours.all()
     purchases = Purchase.objects.filter(user=user)  # خریدهای کاربر
