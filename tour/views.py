@@ -546,7 +546,8 @@ def buy_tour(request, tour_id):
         messages.error(request, "تور مورد نظر یافت نشد.")
         # TODO: must add a good page to say تور مورد نظر یافت نشد
         # TODO: in this page, should have button to say go back to tour list
-        return redirect('tour:profile_view')  # یا به هر صفحه دلخواه
+        # return redirect('tour:profile_view')  # یا به هر صفحه دلخواه
+        return render(request,"tour/not_finding_tour.html")
 
     # بررسی می‌کنیم که آیا ظرفیت بیشتر از صفر است
     if tour_to_buy.capacity <= 0:
