@@ -517,8 +517,16 @@ def edandde(request):
 
 def tour_detail(request, tour_id):
     # دریافت تور با id مشخص شده یا 404 در صورتی که تور پیدا نشود
-    tours = get_object_or_404(tour, id=tour_id)
-    return render(request, 'tour/tour_detail.html', {'tour': tours})
+
+    try:
+        tour_to_buy = tour.objects.get(id=tour_id)
+    except tour.DoesNotExist:
+        messages.error(request, "تور مورد نظر یافت نشد.")
+        # return redirect('tour:profile_view')  # یا به هر صفحه دلخواه
+        return render(request,"tour/not_finding_tour.html")
+
+    # tours = get_object_or_404(tour, id=tour_id)
+    return render(request, 'tour/tour_detail.html', {'tour': tour_to_buy})
 
 
 # --------------------------------------------------------------------------
