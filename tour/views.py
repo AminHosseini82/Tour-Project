@@ -90,7 +90,6 @@ def user_is_authorized(view_func):
     return wrapper
 
 
-
 # --------------------------------------------------------------------------
 
 
@@ -231,7 +230,6 @@ def edittour(request, pk):
     tour_item = get_object_or_404(tour, id=pk)
     today = now().date()  # دریافت تاریخ امروز
 
-
     # 'title': selected_tour.title,
     # 'idtour': selected_tour.idtour,
     # 'firstdistination': selected_tour.firstdistination,
@@ -296,7 +294,7 @@ def edittour(request, pk):
 
             messages.success(request, "تور با موفقیت به‌روزرسانی شد.")
 
-            edit_tour_massages("aminhosseini822003@gmail.com",old_tour_details, new_tour_details)
+            edit_tour_massages("aminhosseini822003@gmail.com", old_tour_details, new_tour_details)
 
             return redirect('tour:homepage')  # تغییر به صفحه اصلی تور
     else:
@@ -546,10 +544,13 @@ def buy_tour(request, tour_id):
         tour_to_buy = tour.objects.get(id=tour_id)
     except tour.DoesNotExist:
         messages.error(request, "تور مورد نظر یافت نشد.")
+        # TODO: must add a good page to say تور مورد نظر یافت نشد
+        # TODO: in this page, should have button to say go back to tour list
         return redirect('tour:profile_view')  # یا به هر صفحه دلخواه
 
     # بررسی می‌کنیم که آیا ظرفیت بیشتر از صفر است
     if tour_to_buy.capacity <= 0:
+        # TODO: must rage a floating message to say this
         messages.error(request, "متأسفانه این تور پر شده است.")
         return redirect('tour:profile_view')
 
@@ -559,14 +560,20 @@ def buy_tour(request, tour_id):
     # کاهش ظرفیت تور
     # TODO: نباید یک دونه ازش کم بشه باید بره توی صفحه تعداد بعدش تعداد رو وارد کرد بفرستیم تعداد رو این ور
     # TODO: بعدش تعداد رو اینجا کم بکنیم.
-    tour_to_buy.capacity -= 1
-    tour_to_buy.save()  # ذخیره تغییرات ظرفیت در پایگاه داده
+    # tour_to_buy.capacity -= 1
+    # tour_to_buy.save()  # ذخیره تغییرات ظرفیت در پایگاه داده
 
     # ارسال پیام تأیید به کاربر
     messages.success(request, f"{tour_to_buy.title} به درستی خریداری شد.")
+    # TODO: به این صفحه هم نباید فرستاده بشه قطعا!
+    # TODO: باید به این صفحه بفرستی بعدش باید حالش رو درست بکنی که tour باشه.
+    # TODO: add_to_cart
+    # return redirect('tour:profile_view')  #
+    # به صفحه‌ای که می‌خواهید کاربر را به آن هدایت کنید
 
-    return redirect('tour:profile_view')  # به صفحه‌ای که می‌خواهید کاربر را به آن هدایت کنید
-
+    # return redirect("cart:add_to_cart", kwargs={"item_type": "tour", "item_id": tour_to_buy.id})
+    # return redirect("cart:add_to_cart", args=["tour", "item_id"])
+    return redirect("cart:add_to_cart", item_type="tour", item_id=tour_id)
 
 # --------------------------------------------------------------------------
 
@@ -574,17 +581,42 @@ def buy_tour(request, tour_id):
 
 # --------------------------------------------------------------------------
 
+
+
+# tour/views.py
+# فقط این قسمت رو به ویو اضافه یا تغییر بده
 @login_required(login_url='accounts/signup/')
 def profile_view(request):
     user = request.user
     profile, created = Profile.objects.get_or_create(user=user)
     tours = profile.tours.all()
-    purchases = Purchase.objects.filter(user=user)  # خریدهای کاربر
-    available_tours = tour.objects.all()  # لیست تورهای موجود
+    tourisms = profile.tourisms.all()  # اضافه کردن گردشگری‌ها
+    purchases = Purchase.objects.filter(user=user)
+    available_tours = tour.objects.all()
 
     return render(request, 'tour/profile_view.html', {
         'user': user,
         'purchases': purchases,
-        'available_tours': available_tours,  # ارسال لیست تورهای موجود به قالب
-        'tours': tours  # ارسال لیست تورهای کاربر به قالب
+        'available_tours': available_tours,
+        'tours': tours,
+        'tourisms': tourisms  # ارسال گردشگری‌ها به قالب
     })
+
+
+
+
+# @login_required(login_url='accounts/signup/')
+# def profile_view(request):
+#     user = request.user
+#     # دریافت لیست تورهای کاربر از پروفایل
+#     profile, created = Profile.objects.get_or_create(user=user)
+#     tours = profile.tours.all()
+#     purchases = Purchase.objects.filter(user=user)  # خریدهای کاربر
+#     available_tours = tour.objects.all()  # لیست تورهای موجود
+#
+#     return render(request, 'tour/profile_view.html', {
+#         'user': user,
+#         'purchases': purchases,
+#         'available_tours': available_tours,  # ارسال لیست تورهای موجود به قالب
+#         'tours': tours  # ارسال لیست تورهای کاربر به قالب
+#     })
