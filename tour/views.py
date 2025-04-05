@@ -560,8 +560,6 @@ def buy_tour(request, tour_id):
     Purchase.objects.create(user=request.user, tour=tour_to_buy)
 
     # کاهش ظرفیت تور
-    # TODO: نباید یک دونه ازش کم بشه باید بره توی صفحه تعداد بعدش تعداد رو وارد کرد بفرستیم تعداد رو این ور
-    # TODO: بعدش تعداد رو اینجا کم بکنیم.
     # tour_to_buy.capacity -= 1
     # tour_to_buy.save()  # ذخیره تغییرات ظرفیت در پایگاه داده
 
