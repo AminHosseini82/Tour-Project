@@ -145,7 +145,7 @@ def admin_payment_review(request):
 def no_phone_number_error(request):
     # دریافت آدرس صفحه قبلی
     previous_page = request.META.get('HTTP_REFERER', '/')  # اگر صفحه قبلی وجود نداشت، به صفحه اصلی هدایت می‌کند
-    return render(request, 'cart/no_phone_number_error.html', {'previous_page': previous_page})
+    return render(request, "cart/errors/no_phone_number_error.html", {'previous_page': previous_page})
 
 # code for sending email and SMS to User uploding a Photo.
 # when someone is_verified  is false will return this code!
