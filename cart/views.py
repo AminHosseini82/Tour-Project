@@ -159,6 +159,7 @@ def reject_payment_message(request, payment_id):
         try:
             phone_number = user.userprofile.phone_number
         except UserProfile.DoesNotExist:
+            return render(request, "cart/no_phone_number_error.html")
             pass
             # TODO: اینجا باید یک صفحه HTNML بیاری بالا که بگی موبایل ای پیدا نشد لطفا از اول ثبت نام بکنید.
             # phone_number = "شماره موبایل ثبت نشده"
