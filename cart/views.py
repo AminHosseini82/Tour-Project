@@ -168,7 +168,7 @@ def reject_payment_message(request, payment_id):
         # TODO: ارسال SMS (اگه داری بعداً اضافه کن)
         message_sms = message + "لغو11."
 
-        sms_test(phone_number, message)
+        sms_test(phone_number, message_sms)
 
         # مثلاً: reject_message_sms(payment.order.buyer.phone_number, message)
 
