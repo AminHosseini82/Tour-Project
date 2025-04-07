@@ -12,5 +12,8 @@ urlpatterns = [
     path('payment-success/', views.payment_success, name='payment_success'),
     path('admin/review-payments/', views.admin_payment_review, name='admin_payment_review'),
     path('admin/reject-payment/<int:payment_id>/', views.reject_payment_message, name='reject_payment_message'),
+    # this is for erorer showwing in def reject_payment_message
+    path('no-phone-number/', no_phone_number_error, name='no_phone_number_error'),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
