@@ -142,7 +142,7 @@ def admin_payment_review(request):
 
 
 # code for sending email and SMS to User uploding a Photo.
-# when somone is_verified is false will return this code!
+# when someone is_verified  is false will return this code!
 @login_required
 @user_is_authorized  # دکوراتور خودت
 def reject_payment_message(request, payment_id):
