@@ -71,7 +71,7 @@ def admin_payment_review(request):
             payment.is_verified = True
             payment.verified_by = request.user
             payment.save()
-            # sending email
+            # sending email for approve
             email_user = payment.order.buyer.email
             confirmation_message_email(email_user)
             return redirect('cart:admin_payment_review')
