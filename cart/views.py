@@ -43,8 +43,7 @@ def admin_payment_review(request):
             order = payment.order
             cart_items = order.items.all()
             user_profile = Profile.objects.get(user=order.buyer)  # پروفایل کاربر
-            email_user = payment.order.buyer.email
-            confirmation_message_email(email_user)
+
 
 
             # TODO: must add a Gmail to say your Ticket is ready
@@ -75,6 +74,8 @@ def admin_payment_review(request):
             payment.is_verified = True
             payment.verified_by = request.user
             payment.save()
+            email_user = payment.order.buyer.email
+            confirmation_message_email(email_user)
             return redirect('cart:admin_payment_review')
 
         elif action == 'reject':
