@@ -31,7 +31,7 @@ def reject_message_email(to_email, description):
 
 def confirmation_message_email(to_email):
     subject = 'بلیط شما تایید شد💚✔'
-    html_message = render_to_string('cart/email_sending/reject_message_email.html')
+    html_message = render_to_string('cart/email_sending/confirmation_message_email.html')
     plain_message = strip_tags(html_message)
     from_email = "aminhosseini822003@gmail.com"
     to = to_email
