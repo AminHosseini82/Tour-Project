@@ -11,6 +11,8 @@ from django.utils.timezone import now
 from django.contrib import messages
 from email_sending.tour.create_tour_email import create_tour_massages
 from email_sending.tour.edit_tour_email import edit_tour_massages
+from email_sending.cart.sending_email import confirmation_message_email
+
 
 list = []
 form = tourform()
