@@ -82,8 +82,6 @@ def admin_payment_review(request):
                 return redirect("cart:no_phone_number_error")
             message_sms = "بلیط های شما تایید شدن، سرای سفر✔💚. لفو11"
             sms_test(phone_number, message_sms)
-
-
             return redirect('cart:admin_payment_review')
 
         elif action == 'reject':
