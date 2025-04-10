@@ -31,7 +31,18 @@ def reject_message_email(to_email, description):
 
 def confirmation_message_email(to_email):
     subject = 'بلیط شما تایید شد💚✔'
-    html_message = render_to_string('cart/email_sending/confirmation_message_email.html')
+    # دریافت زمان فعلی
+    current_time = datetime.now()
+    # فرمت‌دهی به ساعت و دقیقه
+    formatted_time = current_time.strftime('%H:%M')
+    # تبدیل تاریخ میلادی به شمسی
+    current_jdate = jdatetime.datetime.fromgregorian(datetime=current_time)
+    formatted_jdate = current_jdate.strftime('%Y-%m-%d')
+    context = {
+        "formatted_time": formatted_time,  # ساعت و دقیقه
+        "formatted_jdate": formatted_jdate,  # تاریخ شمسی
+    }
+    html_message = render_to_string('cart/email_sending/confirmation_message_email.html',context)
     plain_message = strip_tags(html_message)
     from_email = "aminhosseini822003@gmail.com"
     to = to_email
