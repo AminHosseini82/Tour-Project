@@ -43,6 +43,10 @@ def admin_payment_review(request):
             order = payment.order
             cart_items = order.items.all()
             user_profile = Profile.objects.get(user=order.buyer)  # پروفایل کاربر
+            email_user = payment.order.buyer.email
+            confirmation_message_email(email_user)
+
+
             # TODO: must add a Gmail to say your Ticket is ready
             # TODO: must say in gmail : میتونید بلیط های خریداری شده خودتون رو در پروفایل خود مشاهده بکنید.
             # TODO: and must say also : سفر خوبی تیم سرای سفر برای شما ارزو دارد.
