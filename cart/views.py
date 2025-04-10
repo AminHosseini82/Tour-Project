@@ -1,5 +1,4 @@
 from django.http import HttpResponseForbidden
-
 from accounts.models import UserProfile
 from sms_sending.source_code import sms_test
 from tour.models import tour, Profile
