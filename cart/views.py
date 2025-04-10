@@ -69,6 +69,9 @@ def admin_payment_review(request):
                     tourism_item.save()
                     user_profile.tourisms.add(tourism_item)  # اضافه کردن گردشگری به پروفایل
 
+                    # return redirect('templates/cart/email_sending/co')
+
+
             payment.is_verified = True
             payment.verified_by = request.user
             payment.save()
