@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Payment, CartItem, Order
 from tour.models import tour  # مدل تور رو وارد کن
 from tourism.models import tourism  # مدل گردشگری رو وارد کن (اگه اپ جدا داری)
+from email_sending.cart.sending_email import confirmation_message_email
 
 
 # Create your views here.
