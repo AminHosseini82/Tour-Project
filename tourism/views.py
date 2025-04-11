@@ -604,7 +604,7 @@ def buy_tourism(request, tourism_id):
     # کاهش ظرفیت تور
     # TODO: دیگه نباید ایتجا چیزی حذف بشه باید کامنت بشه!
     # TODO: باید حذف باشه برای مرحله اخر در cart
-    tour_to_buy.capacity_tourism -= 1  # به‌روزرسانی نام فیلد ظرفیت
+    # tour_to_buy.capacity_tourism -= 1  # به‌روزرسانی نام فیلد ظرفیت
     tour_to_buy.save()  # ذخیره تغییرات ظرفیت در پایگاه داده
 
     # ارسال پیام تأیید به کاربر
