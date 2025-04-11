@@ -1,11 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
-
 from tourism.models import tourism
-
-
-# from persian import PersianDateTime
 
 
 class tour(models.Model):
@@ -20,7 +16,7 @@ class tour(models.Model):
     clas = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
                              related_name='tour_clas')  # اضافه کردن related_name
     image = models.ImageField(upload_to='tourr/', null=True, blank=True)
-    price = models.PositiveIntegerField('قیمت',default=1000)  # برای محاسبه هزینه
+    price = models.PositiveIntegerField('قیمت', default=1000)  # برای محاسبه هزینه
     # اضافه کردن فیلد جدید برای نوع بلیط
     TICKET_TYPES = [
         ('bus', 'اتوبوس'),
@@ -33,9 +29,6 @@ class tour(models.Model):
         return self.title
 
 
-
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     tours = models.ManyToManyField(tour, blank=True, related_name='profiles')
@@ -43,18 +36,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"Profile of {self.user.username}"
-
-
-
-
-
-
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tour_profile')  # اضافه کردن related_name
-#     tours = models.ManyToManyField(tour, blank=True, related_name='tour_profiles')  # اضافه کردن related_name
-
-    def __str__(self):
-        return self.user.username
 
 
 class Purchase(models.Model):
