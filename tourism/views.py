@@ -1,12 +1,8 @@
 import os
-
 from django.conf import settings
-
 from .forms import tourism, tourismform
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import tourism
 from django.contrib.auth.decorators import login_required
-# from .forms import SearchForm
 from .forms import TourismSearchForm
 from django.http import HttpResponseForbidden
 from django.contrib import messages
