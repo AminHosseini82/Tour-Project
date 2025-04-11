@@ -614,7 +614,7 @@ def buy_tourism(request, tourism_id):
     messages.success(request, f"{tour_to_buy.title_tourism} به درستی خریداری شد.")
     # TODO: باید اینجا فقط به این قسمت فرستاده نشه
     # TODO:  و باید فرستاده بشه به cart
-    return redirect("cart:add_to_cart", item_type="tour", item_id=tourism_id)
+    return redirect("cart:add_to_cart", item_type="tourism", item_id=tourism_id)
     # return redirect('tourism:profile_view')  # به صفحه‌ای که می‌خواهید کاربر را به آن هدایت کنید
 
 
