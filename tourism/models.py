@@ -40,17 +40,18 @@ from django.core.validators import MinValueValidator
 #         return f"{self.user.username} bought {self.tourism.title} on {self.purchase_date}"
 
 
-
 class tourism(models.Model):
     title_tourism = models.CharField('Title', max_length=50, null=True, blank=True)
     description = models.CharField(max_length=50, null=True, blank=True)
     firstdistination_tourism = models.CharField(max_length=50, null=True, blank=True)
     lastDestination = models.CharField(max_length=50, null=True, blank=True)
     startdate_tourism = models.DateField(null=True, blank=True)
-    capacity_tourism = models.IntegerField(default=20000, null=True, blank=True, validators=[MinValueValidator(0)])  # جلوگیری از اعداد منفی
-    clas = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='tourism_clas')  # اضافه کردن related_name
+    capacity_tourism = models.IntegerField(default=20000, null=True, blank=True,
+                                           validators=[MinValueValidator(0)])  # جلوگیری از اعداد منفی
+    clas = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
+                             related_name='tourism_clas')  # اضافه کردن related_name
     image_tourism = models.ImageField(upload_to='tour/', null=True, blank=True)
-    price_tourism =models.IntegerField(null=True, blank=True)
+    price_tourism = models.IntegerField(null=True, blank=True)
     # اضافه کردن فیلد جدید برای نوع بلیط
     TICKET_TYPES = [
         ('bus', 'اتوبوس'),
@@ -62,16 +63,21 @@ class tourism(models.Model):
     def __str__(self):
         return self.title_tourism
 
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tourism_profile')  # اضافه کردن related_name
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+                                related_name='tourism_profile')  # اضافه کردن related_name
     tours = models.ManyToManyField(tourism, blank=True, related_name='tourism_profiles')  # اضافه کردن related_name
 
     def __str__(self):
         return self.user.username
 
+
 class Purchase(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tourism_purchases')  # اضافه کردن related_name
-    tour = models.ForeignKey(tourism, on_delete=models.CASCADE, related_name='tourism_purchases')  # اضافه کردن related_name
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name='tourism_purchases')  # اضافه کردن related_name
+    tour = models.ForeignKey(tourism, on_delete=models.CASCADE,
+                             related_name='tourism_purchases')  # اضافه کردن related_name
     purchase_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
