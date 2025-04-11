@@ -589,7 +589,9 @@ def buy_tourism(request, tourism_id):
         messages.error(request, "تور مورد نظر یافت نشد.")
         # TODO: باید یک صفحه html فرستاده بشه نه صفحه اصلی
         # TODO: که بگه تور مورد نظر پیدا نشد و دکمه ای باشه برای فرستادن دوباره به صفحه گردشگری ها
-        return redirect('tourism:profile_view')  # یا به هر صفحه دلخواه
+        return render(request,'tourism/tourism_not_found.html')
+        # return redirect('tourism:profile_view')  # یا به هر صفحه دلخواه
+
 
     # بررسی می‌کنیم که آیا ظرفیت بیشتر از صفر است
     if tour_to_buy.capacity_tourism <= 0:  # به‌روزرسانی نام فیلد ظرفیت
