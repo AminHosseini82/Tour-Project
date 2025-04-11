@@ -44,13 +44,6 @@ def admin_payment_review(request):
             cart_items = order.items.all()
             user_profile = Profile.objects.get(user=order.buyer)  # پروفایل کاربر
 
-
-
-            # TODO: must add a Gmail to say your Ticket is ready
-            # TODO: must say in gmail : میتونید بلیط های خریداری شده خودتون رو در پروفایل خود مشاهده بکنید.
-            # TODO: and must say also : سفر خوبی تیم سرای سفر برای شما ارزو دارد.
-            # TODO: must add SMS in this also like gmail.
-
             # کم کردن ظرفیت و اضافه کردن به پروفایل
             for item in cart_items:
                 if item.tourBuyed:
