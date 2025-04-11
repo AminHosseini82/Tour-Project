@@ -262,6 +262,9 @@ def add_to_cart(request, item_type, item_id):
     elif item_type == 'tourism':
         item = get_object_or_404(tourism, id=item_id)
     else:
+        # TODO: این چرا میفرسته به صفحه home?????
+        # TODO: باید یک html جدا برای این نوشته بشه که یفرسته این رو به یک صفحه ی دیگه ای
+        # TODO: بعدش توی اون صفحه باید بگه که درست انتخاب نشده چیزی که امتخاب کردین بعدش یک دکمه ای باشه بگه میخوای بری صفحه اصلی سایت؟
         return redirect('home')
 
     if request.method == 'POST':
