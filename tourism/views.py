@@ -598,7 +598,8 @@ def buy_tourism(request, tourism_id):
         messages.error(request, "متأسفانه این تور پر شده است.")
         # TODO: باید بفرستی به صقحه ای که توش بگه تور مورد نظر پیدا نشد.
         # TODO: که بعدش توی اون صفحه دکمه ای باشه که برگردونه اون رو به صفحه همه گردشگری ها
-        return redirect('tourism:profile_view')
+        return render(request,"tourism/tourism_full.html")
+        # return redirect('tourism:profile_view')
 
     # خرید ثبت می‌شود
     Purchase.objects.create(user=request.user, tour=tour_to_buy)
