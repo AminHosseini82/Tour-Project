@@ -587,8 +587,6 @@ def buy_tourism(request, tourism_id):
         tour_to_buy = tourism.objects.get(id=tourism_id)  # اطمینان از نام مدل
     except tourism.DoesNotExist:
         messages.error(request, "تور مورد نظر یافت نشد.")
-        # TODO: باید یک صفحه html فرستاده بشه نه صفحه اصلی
-        # TODO: که بگه تور مورد نظر پیدا نشد و دکمه ای باشه برای فرستادن دوباره به صفحه گردشگری ها
         return render(request, 'tourism/tourism_unavailable.html')
         # return redirect('tourism:profile_view')  # یا به هر صفحه دلخواه
 
@@ -596,8 +594,6 @@ def buy_tourism(request, tourism_id):
     # بررسی می‌کنیم که آیا ظرفیت بیشتر از صفر است
     if tour_to_buy.capacity_tourism <= 0:  # به‌روزرسانی نام فیلد ظرفیت
         messages.error(request, "متأسفانه این تور پر شده است.")
-        # TODO: باید بفرستی به صقحه ای که توش بگه تور مورد نظر پیدا نشد.
-        # TODO: که بعدش توی اون صفحه دکمه ای باشه که برگردونه اون رو به صفحه همه گردشگری ها
         return render(request,"tourism/tourism_full.html")
         # return redirect('tourism:profile_view')
 
@@ -605,15 +601,11 @@ def buy_tourism(request, tourism_id):
     Purchase.objects.create(user=request.user, tour=tour_to_buy)
 
     # کاهش ظرفیت تور
-    # TODO: دیگه نباید ایتجا چیزی حذف بشه باید کامنت بشه!
-    # TODO: باید حذف باشه برای مرحله اخر در cart
     # tour_to_buy.capacity_tourism -= 1  # به‌روزرسانی نام فیلد ظرفیت
     tour_to_buy.save()  # ذخیره تغییرات ظرفیت در پایگاه داده
 
     # ارسال پیام تأیید به کاربر
     messages.success(request, f"{tour_to_buy.title_tourism} به درستی خریداری شد.")
-    # TODO: باید اینجا فقط به این قسمت فرستاده نشه
-    # TODO:  و باید فرستاده بشه به cart
     return redirect("cart:add_to_cart", item_type="tourism", item_id=tourism_id)
     # return redirect('tourism:profile_view')  # به صفحه‌ای که می‌خواهید کاربر را به آن هدایت کنید
 
