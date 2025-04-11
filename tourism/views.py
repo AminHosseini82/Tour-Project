@@ -14,7 +14,6 @@ from email_sending.tourism.edit_touriam_email import edit_tourism_massages
 list = []
 form = tourismform()
 #
-
 # @login_required(login_url='/accounts/login')
 # def tourism_create(request):
 #     user = request.user
