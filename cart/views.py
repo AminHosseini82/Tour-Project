@@ -71,10 +71,11 @@ def admin_payment_review(request):
             payment.is_verified = True
             payment.verified_by = request.user
             payment.save()
-            # sending email for approve
+            # sending Email and SMS
+            # sending Email for approve
             email_user = payment.order.buyer.email
             confirmation_message_email(email_user)
-            # sending sms for approve
+            # sending SMS for approve
             user = payment.order.buyer
             try:
                 phone_number = user.userprofile.phone_number
