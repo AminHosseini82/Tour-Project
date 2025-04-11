@@ -11,12 +11,8 @@ from email_sending.tourism.create_tourism_email import create_tourism_massages
 from email_sending.tourism.delete_tourism_email import delete_tourism_massages
 from email_sending.tourism.edit_touriam_email import edit_tourism_massages
 
-# from djangoProject12 import user_is_authorized
-
 list = []
 form = tourismform()
-
-
 #
 # @login_required(login_url='/accounts/login')
 # def tourism_create(request):
@@ -578,14 +574,6 @@ def main_page(request):
     }
 
     return render(request, 'tour/main_page.html', context)
-
-
-# def main_page(request):
-#     tours = tour.objects.all()  # تمام تورها را از پایگاه‌داده بگیرید
-#     context = {
-#         'tours': tours  # ارسال تورها به قالب
-#     }
-#     return render(request, 'tour/main_page.html', context)  # از context استفاده کنید
 
 
 def buy_tourism(request, tourism_id):
