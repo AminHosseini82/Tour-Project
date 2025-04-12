@@ -750,15 +750,6 @@
             {% endif %}
 
         </li>
-        {#   <li> {% if request.user.is_authenticated %}#}
-        {#        <form action="{% url 'accounts:logout' %}" method="POST" style="display:inline;">#}
-        {#            {% csrf_token %}#}
-        {#           <a href='#'><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>خروج از حساب کاربری </a>#}
-        {##}
-        {#        </form>#}
-        {#    {% endif %}#}
-        {##}
-        {#    </li>#}
         <li>
             {% if request.user.is_authenticated %}
                 <form action="{% url 'accounts:logout' %}" method="POST" style="display:inline;">
@@ -791,15 +782,6 @@
         <div class="header__content">
             <p></p>
             <h1>تجربه یک گردشگری و تور متفاوت</h1>
-            {#          <div class="header__btns">#}
-            {#            <button class="btn" >همین حالا رزرو کن</button>#}
-            {#            <!-- <a href="#">#}
-            {#              <span><i class="ri-play-circle-fill"></i></span>#}
-            {#            </a> -->#}
-            {#          </div>#}
-            {#            <div class="header__btns">#}
-            {#    <a href="{% url 'accounts:signup' %}" class="btn">همین حالا ثبت نام کنید</a>#}
-            {#           </div>#}
             <div class="header__btns">
                 {% if request.user.is_authenticated %}
                     <button class="btn">خوش آمدید</button>
