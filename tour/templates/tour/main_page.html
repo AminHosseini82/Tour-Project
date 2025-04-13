@@ -739,6 +739,7 @@
                 <path d="M640-440v-80h160v80H640Zm48 280-128-96 48-64 128 96-48 64Zm-80-480-48-64 128-96 48 64-128 96ZM120-360v-240h160l200-200v640L280-360H120Zm280-246-86 86H200v80h114l86 86v-252ZM300-480Z"/>
             </svg>
             اخبار </a></li>
+
         <li>
             {% if request.user.is_authenticated %}
                 <a href="{% url 'tour:profile_view' %}">
@@ -748,8 +749,19 @@
                     </svg>
                     پروفایل کاربر </a>
             {% endif %}
-
         </li>
+
+        <li>
+            {% if request.user.is_authenticated and request.user.email == 'aminhosseini822003@gmail.com' %}
+                <a href="{% url 'cart:admin_payment_review' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                         fill="#5f6368">
+                        <path d="M360-80v-529q-91-24-145.5-100.5T160-880h80q0 83 53.5 141.5T430-680h100q30 0 56 11t47 32l181 181-56 56-158-158v478h-80v-240h-80v240h-80Zm120-640q-33 0-56.5-23.5T400-800q0-33 23.5-56.5T480-880q33 0 56.5 23.5T560-800q0 33-23.5 56.5T480-720Z"/>
+                    </svg>
+                    بخش کنترل پرداختی ها </a>
+            {% endif %}
+        </li>
+
         <li>
             {% if request.user.is_authenticated %}
                 <form action="{% url 'accounts:logout' %}" method="POST" style="display:inline;">
@@ -764,6 +776,7 @@
                 </form>
             {% endif %}
         </li>
+
     </ul>
     <ul>
 
