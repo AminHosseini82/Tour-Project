@@ -72,7 +72,11 @@ def signup_page(request):
                 UserProfile.objects.create(user=user, phone_number=phone_number)
                 messages.info(request, "کاربر با موفقیت ساخته شد.")
                 welcome_send_email(user.email)
-                return redirect('accounts:login')
+                # return redirect('accounts:login')
+                # Login to site
+                user = auth.authenticate(username=username, password=password1)
+                auth.login(request, user)
+                return redirect("main_page")
         else:
             messages.info(request, "رمزهای عبور مطابقت ندارند.")
             return redirect('accounts:signup')
@@ -86,6 +90,7 @@ def login_page(request):
         password = request.POST['password']
 
         user = auth.authenticate(username=username, password=password)
+
 
         if user is not None:
             auth.login(request, user)
