@@ -49,6 +49,7 @@ def auth_page_view(request):
 
 
 def signup_page(request):
+    form_data_initial = {}
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -56,20 +57,29 @@ def signup_page(request):
         password2 = request.POST['password2']
         phone_number = request.POST['phone_number']  # فیلد اجباری
 
+        form_data_to_repopulate = {'username': username, 'email': email, 'phone_number': phone_number}
         if not phone_number:  # چک کردن اینکه شماره تلفن وارد شده باشه
             messages.info(request, "شماره تلفن اجباری است.")
-            return redirect('accounts:signup')
+            # return redirect('accounts:signup')
+            context = {'form_to_show': 'signup', 'form_data': form_data_to_repopulate}
+            return render(request, 'accounts/auth_page.html', context)
 
         if password1 == password2:
             if User.objects.filter(username=username).exists():
                 messages.info(request, "نام کاربری قبلاً گرفته شده است.")
-                return redirect('accounts:signup')
+                # return redirect('accounts:signup')
+                context = {'form_to_show': 'signup', 'form_data': form_data_to_repopulate}
+                return render(request, 'accounts/auth_page.html', context)
             elif User.objects.filter(email=email).exists():
                 messages.info(request, "ایمیل قبلاً گرفته شده است.")
-                return redirect('accounts:signup')
+                # return redirect('accounts:signup')
+                context = {'form_to_show': 'signup', 'form_data': form_data_to_repopulate}
+                return render(request, 'accounts/auth_page.html', context)
             elif UserProfile.objects.filter(phone_number=phone_number).exists():
                 messages.info(request, "شماره تلفن قبلاً ثبت شده است.")
-                return redirect('accounts:signup')
+                # return redirect('accounts:signup')
+                context = {'form_to_show': 'signup', 'form_data': form_data_to_repopulate}
+                return render(request, 'accounts/auth_page.html', context)
             else:
                 user = User.objects.create_user(username=username, password=password1, email=email)
                 user.save()
@@ -104,9 +114,14 @@ def signup_page(request):
                 return redirect("main_page")
         else:
             messages.info(request, "رمزهای عبور مطابقت ندارند.")
-            return redirect('accounts:signup')
+            context = {'form_to_show': 'signup', 'form_data': form_data_to_repopulate}
+            return render(request, 'accounts/auth_page.html', context)
+            # return redirect('accounts:signup')
     else:
-        return render(request, 'accounts/signup.html')
+        # return render(request, 'accounts/signup.html')
+        context = {'form_to_show': 'signup',
+                   'form_data': form_data_initial}  # فرم ثبت‌نام به صورت پیش‌فرض نمایش داده شود
+        return render(request, 'accounts/auth_page.html', context)
 
 
 def login_page(request):
