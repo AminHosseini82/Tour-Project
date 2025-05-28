@@ -1,14 +1,16 @@
 {% load static %}
 {% load i18n %}
 {% load account %} {% load socialaccount %} <!DOCTYPE html>
-<html lang="fa"> <head>
+<html lang="fa">
+<head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script
             src="https://kit.fontawesome.com/64d58efce2.js"
             crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="{% static 'accounts/style.css' %}"/> <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
     <title>فرم ورود و ثبت‌نام</title>
     <style>
         /* استایل پایه برای پیام‌های جنگو - می‌توانید این بخش را به style.css اصلی خود منتقل کنید */
@@ -73,18 +75,21 @@
                 <h2 class="title">ورود</h2>
                 <div class="input-field">
                     <i class="fas fa-user"></i>
-                    <input type="text" name="username" placeholder="نام کاربری" required value="{{ form_data.username|default:'' }}"/>
+                    <input type="text" name="username" placeholder="نام کاربری" required
+                           value="{{ form_data.username|default:'' }}"/>
                 </div>
                 <div class="input-field">
                     <i class="fas fa-lock"></i>
                     <input type="password" name="password" placeholder="رمز عبور" required/>
                 </div>
                 <input type="submit" value="ورود" class="btn solid"/>
-                <p class="social-text">یا ورود با</p> <div class="social-media">
-                    <a href="{% provider_login_url 'google' %}?next={% url 'main_page' %}" class="social-icon" title="ورود با گوگل">
+                <p class="social-text">یا ورود با</p>
+                <div class="social-media">
+                    <a href="{% provider_login_url 'google' %}?next={% url 'main_page' %}" class="social-icon"
+                       title="ورود با گوگل">
                         <i class="fab fa-google"></i>
                     </a>
-                    </div>
+                </div>
             </form>
 
             <form method="POST" action="{% url 'accounts:signup' %}" class="sign-up-form">
@@ -92,11 +97,13 @@
                 <h2 class="title">ثبت‌نام</h2>
                 <div class="input-field">
                     <i class="fas fa-user"></i>
-                    <input type="text" name="username" placeholder="نام کاربری" required value="{{ form_data.username|default:'' }}"/>
+                    <input type="text" name="username" placeholder="نام کاربری" required
+                           value="{{ form_data.username|default:'' }}"/>
                 </div>
                 <div class="input-field">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" name="email" placeholder="ایمیل" required value="{{ form_data.email|default:'' }}"/>
+                    <input type="email" name="email" placeholder="ایمیل" required
+                           value="{{ form_data.email|default:'' }}"/>
                 </div>
                 <div class="input-field">
                     <i class="fas fa-lock"></i>
@@ -108,14 +115,17 @@
                 </div>
                 <div class="input-field">
                     <i class="fas fa-mobile-alt"></i>
-                    <input type="text" name="phone_number" placeholder="شماره همراه" required value="{{ form_data.phone_number|default:'' }}"/>
+                    <input type="text" name="phone_number" placeholder="شماره همراه" required
+                           value="{{ form_data.phone_number|default:'' }}"/>
                 </div>
                 <input type="submit" class="btn" value="ثبت‌نام"/>
-                <p class="social-text">یا ثبت‌نام با</p> <div class="social-media">
-                    <a href="{% provider_login_url 'google' %}?next={% url 'main_page' %}" class="social-icon" title="ثبت‌نام/ورود با گوگل">
+                <p class="social-text">یا ثبت‌نام با</p>
+                <div class="social-media">
+                    <a href="{% provider_login_url 'google' %}?next={% url 'main_page' %}" class="social-icon"
+                       title="ثبت‌نام/ورود با گوگل">
                         <i class="fab fa-google"></i>
                     </a>
-                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -149,296 +159,10 @@
 </div>
 
 <script>
-  // مقدار form_to_show از context جنگو به جاوااسکریپت پاس داده می‌شود.
-  // اگر form_to_show در context نباشد (مثلا در حالت عادی)، پیش‌فرض 'login' در نظر گرفته می‌شود.
-  const initialFormToShow = "{{ form_to_show|default:'login' }}";
+    // مقدار form_to_show از context جنگو به جاوااسکریپت پاس داده می‌شود.
+    // اگر form_to_show در context نباشد (مثلا در حالت عادی)، پیش‌فرض 'login' در نظر گرفته می‌شود.
+    const initialFormToShow = "{{ form_to_show|default:'login' }}";
 </script>
-<script src="{% static 'accounts/app.js' %}"></script> </body>
+<script src="{% static 'accounts/app.js' %}"></script>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{#{% load static %}#}
-{#{% load i18n %} {% load allauth account %} {% load allauth_socialaccount %} <!DOCTYPE html>#}
-{#<!DOCTYPE html>#}
-{#<html lang="fa">#}
-{#<head>#}
-{#    <meta charset="UTF-8"/>#}
-{#    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>#}
-{#    <script#}
-{#            src="https://kit.fontawesome.com/64d58efce2.js"#}
-{#            crossorigin="anonymous"#}
-{#    ></script>#}
-{#    <link rel="stylesheet" href="{% static 'accounts/style.css' %}"/>#}
-{#    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">#}
-{#    <title>فرم ورود و ثبت‌نام</title>#}
-{#    <style>#}
-{#        /* استایل پایه برای پیام‌های جنگو - می‌توانید به style.css منتقل کنید */#}
-{#        .messages {#}
-{#            list-style-type: none;#}
-{#            padding: 0;#}
-{#            margin: 10px 0;#}
-{#            width: 100%; /* یا عرض مشخصی که با فرم شما هماهنگ باشد */#}
-{#            text-align: center;#}
-{#        }#}
-{##}
-{#        .messages li {#}
-{#            padding: 10px;#}
-{#            margin-bottom: 10px;#}
-{#            border-radius: 4px;#}
-{#            font-family: 'Vazirmatn', sans-serif; /* استفاده از فونت وزیرمتن */#}
-{#        }#}
-{##}
-{#        .messages li.success {#}
-{#            background-color: #d4edda;#}
-{#            color: #155724;#}
-{#            border: 1px solid #c3e6cb;#}
-{#        }#}
-{##}
-{#        .messages li.error {#}
-{#            background-color: #f8d7da;#}
-{#            color: #721c24;#}
-{#            border: 1px solid #f5c6cb;#}
-{#        }#}
-{##}
-{#        .messages li.info {#}
-{#            background-color: #d1ecf1;#}
-{#            color: #0c5460;#}
-{#            border: 1px solid #bee5eb;#}
-{#        }#}
-{##}
-{#        .messages li.warning {#}
-{#            background-color: #fff3cd;#}
-{#            color: #856404;#}
-{#            border: 1px solid #ffeeba;#}
-{#        }#}
-{#    </style>#}
-{#</head>#}
-{#<body>#}
-{#<div class="container">#}
-{#    <div class="forms-container">#}
-{#        <div class="signin-signup">#}
-{##}
-{#            {% if messages %}#}
-{#                <ul class="messages">#}
-{#                    {% for message in messages %}#}
-{#                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#            {% endif %}#}
-{##}
-{#            <form method="POST" action="{% url 'accounts:login' %}" class="sign-in-form">#}
-{#                {% csrf_token %}#}
-{#                <h2 class="title">ورود</h2>#}
-{#                <div class="input-field">#}
-{#                    <i class="fas fa-user"></i>#}
-{#                    <input type="text" name="username" placeholder="نام کاربری" required/>#}
-{#                </div>#}
-{#                <div class="input-field">#}
-{#                    <i class="fas fa-lock"></i>#}
-{#                    <input type="password" name="password" placeholder="رمز عبور" required/>#}
-{#                </div>#}
-{#                <input type="submit" value="ورود" class="btn solid"/>#}
-{#                <p class="social-text">یا ورود با شبکه‌های اجتماعی</p>#}
-{#                <div class="social-media">#}
-{#                    <a href="#" class="social-icon">#}
-{#                        <i class="fab fa-facebook-f"></i>#}
-{#                    </a>#}
-{#                    <a href="#" class="social-icon">#}
-{#                        <i class="fab fa-twitter"></i>#}
-{#                    </a>#}
-{#                    <a href="#" class="social-icon">#}
-{#                        <i class="fab fa-google"></i>#}
-{#                    </a>#}
-{#                    <a href="#" class="social-icon">#}
-{#                        <i class="fab fa-linkedin-in"></i>#}
-{#                    </a>#}
-{#                </div>#}
-{#            </form>#}
-{##}
-{#            <form method="POST" action="{% url 'accounts:signup' %}" class="sign-up-form">#}
-{#                {% csrf_token %}#}
-{#                <h2 class="title">ثبت‌نام</h2>#}
-{#                <div class="input-field">#}
-{#                    <i class="fas fa-user"></i>#}
-{#                    <input type="text" name="username" placeholder="نام کاربری" required/>#}
-{#                </div>#}
-{#                <div class="input-field">#}
-{#                    <i class="fas fa-envelope"></i>#}
-{#                    <input type="email" name="email" placeholder="ایمیل" required/>#}
-{#                </div>#}
-{#                <div class="input-field">#}
-{#                    <i class="fas fa-lock"></i>#}
-{#                    <input type="password" name="password1" placeholder="رمز عبور" required/>#}
-{#                </div>#}
-{#                <div class="input-field">#}
-{#                    <i class="fas fa-lock"></i>#}
-{#                    <input type="password" name="password2" placeholder="تکرار رمز عبور" required/>#}
-{#                </div>#}
-{#                <div class="input-field">#}
-{#                    <i class="fas fa-mobile-alt"></i>#}
-{#                    <input type="text" name="phone_number" placeholder="شماره همراه" required/>#}
-{#                </div>#}
-{#                <input type="submit" class="btn" value="ثبت‌نام"/>#}
-{#                <p class="social-text">یا ثبت‌نام با شبکه‌های اجتماعی</p>#}
-{#                <div class="social-media">#}
-{#                    <a href="#" class="social-icon">#}
-{#                        <i class="fab fa-facebook-f"></i>#}
-{#                    </a>#}
-{#                    <a href="#" class="social-icon">#}
-{#                        <i class="fab fa-twitter"></i>#}
-{#                    </a>#}
-{#                    <a href="#" class="social-icon">#}
-{#                        <i class="fab fa-google"></i>#}
-{#                    </a>#}
-{#                    <a href="#" class="social-icon">#}
-{#                        <i class="fab fa-linkedin-in"></i>#}
-{#                    </a>#}
-{#                </div>#}
-{#            </form>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{#    <div class="panels-container">#}
-{#        <div class="panel left-panel">#}
-{#            <div class="content">#}
-{#                <h3>جدید هستید؟</h3>#}
-{#                <p>#}
-{#                    اگر تازه وارد هستید، همین حالا ثبت‌نام کنید و به جمع ما بپیوندید.#}
-{#                </p>#}
-{#                <button class="btn transparent" id="sign-up-btn">#}
-{#                    ثبت‌نام#}
-{#                </button>#}
-{#            </div>#}
-{#            <img src="{% static 'accounts/img/log.svg' %}" class="image" alt="تصویر ورود"/></div>#}
-{#        <div class="panel right-panel">#}
-{#            <div class="content">#}
-{#                <h3>عضو ما هستید؟</h3>#}
-{#                <p>#}
-{#                    اگر قبلاً ثبت‌نام کرده‌اید، وارد حساب کاربری خود شوید و از امکانات استفاده کنید.#}
-{#                </p>#}
-{#                <button class="btn transparent" id="sign-in-btn">#}
-{#                    ورود#}
-{#                </button>#}
-{#            </div>#}
-{#            <img src="{% static 'accounts/img/register.svg' %}" class="image" alt="تصویر ثبت‌نام"/></div>#}
-{#    </div>#}
-{#</div>#}
-{##}
-{#<script src="{% static 'accounts/app.js' %}"></script>#}
-{#</body>#}
-{#</html>#}
