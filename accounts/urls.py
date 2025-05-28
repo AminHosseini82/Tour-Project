@@ -8,6 +8,8 @@ from .views import review_password_sms_input, review_password_sms_inputPassword
 
 app_name = 'accounts'
 urlpatterns = [
+
+    path('auth/', views.auth_page_view, name='auth_page'),
     path("signup/", signup_page, name="signup"),
     path("login/", login_page, name="login"),
     path("logout/", logout_page, name="logout"),

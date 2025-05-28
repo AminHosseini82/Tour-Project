@@ -11,6 +11,10 @@ import random
 from sms_sending.source_code import sms_test
 
 
+def auth_page_view(request):
+    return render(request, 'accounts/auth_page.html')
+
+
 # این درست بوده👇
 
 # def signup_page(request):
@@ -95,8 +99,6 @@ def signup_page(request):
                 باید وقتی روی لینک میزنه محتوایی که میبینه یک پیام شناور باشه و اون پیام شنماور بگه ثبت نام شما با موفقیت انجامید.
                 """
 
-
-
                 user = auth.authenticate(username=username, password=password1)
                 auth.login(request, user)
                 return redirect("main_page")
@@ -113,7 +115,6 @@ def login_page(request):
         password = request.POST['password']
 
         user = auth.authenticate(username=username, password=password)
-
 
         if user is not None:
             auth.login(request, user)

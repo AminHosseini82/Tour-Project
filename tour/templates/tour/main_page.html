@@ -810,7 +810,7 @@
                 {% if request.user.is_authenticated %}
                     <button class="btn">خوش آمدید</button>
                 {% else %}
-                    <button class="btn"><a href="{% url 'accounts:signup' %}">ثبت نام در سایت</a></button>
+                    <button class="btn"><a href="{% url 'accounts:auth_page' %}">ثبت نام در سایت</a></button>
                 {% endif %}
             </div>
         </div>
