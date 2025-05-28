@@ -125,22 +125,29 @@ def signup_page(request):
 
 
 def login_page(request):
+    form_data_initial = {}
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
 
         user = auth.authenticate(username=username, password=password)
+        form_data_to_repopulate = {'username': username}
+
 
         if user is not None:
             auth.login(request, user)
             welcome_send_email(user.email)
             # sms_test()
+            messages.success(request, f"خوش آمدید {username}!")
             return redirect('tour:main_page')
         else:
             messages.info(request, 'نام کاربری یا رمز عبور اشتباه است.')
-            return redirect('accounts:login')
+            messages.error(request, 'نام کاربری یا رمز عبور اشتباه است.')
+            context = {'form_to_show': 'login', 'form_data': form_data_to_repopulate}
+            return render(request, 'accounts/auth_page.html', context)
     else:
-        return render(request, 'accounts/login.html')
+        context = {'form_to_show': 'login', 'form_data': form_data_initial}  # فرم ورود به صورت پیش‌فرض نمایش داده شود
+        return render(request, 'accounts/auth_page.html', context)
 
 
 # این درست بوده👇
