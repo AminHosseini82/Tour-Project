@@ -94,24 +94,24 @@ WSGI_APPLICATION = 'djangoProject12.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # the Postgres DataBase
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# Postcrest DATABASES👇
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # استفاده از پستگراس
-        'NAME': 'Paygah_Project_404',                # نام پایگاه داده‌ای که ایجاد کردید
-        'USER': 'postgres',                      # نام کاربری
-        'PASSWORD': 'AMho13822003',                  # رمز عبور
-        'HOST': 'localhost',                          # می‌توانید IP سرور را نیز استفاده کنید
-        'PORT': '5432',                              # پورتی که PostgreSQL در آن کار می‌کند (معمولاً 5432 است)
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Postcrest DATABASES👇
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',  # استفاده از پستگراس
+#         'NAME': 'Paygah_Project_404',                # نام پایگاه داده‌ای که ایجاد کردید
+#         'USER': 'postgres',                      # نام کاربری
+#         'PASSWORD': 'AMho13822003',                  # رمز عبور
+#         'HOST': 'localhost',                          # می‌توانید IP سرور را نیز استفاده کنید
+#         'PORT': '5432',                              # پورتی که PostgreSQL در آن کار می‌کند (معمولاً 5432 است)
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
