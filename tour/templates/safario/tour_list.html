@@ -11,62 +11,18 @@
              data-300-top="background-position: 0px -80px" data-top-bottom="background-position: 0 100px">
         <div class="container">
             <div class="hero-banner-sm-content">
-                <h1>پکیج‌های ویژه</h1>
+                <h1>پکیج‌های ویژه ما</h1>
                 <p>سفری خاطره‌انگیز با پکیج‌های متنوع و مقرون‌به‌صرفه سافاریو برای هر سلیقه‌ای.</p>
             </div>
         </div>
     </section>
-    <section class="section-margin">
-        <div class="container">
-            <div class="section-intro text-center pb-90px">
-                <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}"
-                     alt="آیکن بخش خدمات پکیج‌ها">
-                <h2>خدمات محبوب ما در پکیج‌ها</h2>
-                <p>ما در تمامی پکیج‌های خود، خدمات با کیفیتی را برای راحتی شما در نظر گرفته‌ایم.</p>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-                    <div class="service-card text-center">
-                        <div class="service-card-img">
-                            <img class="img-fluid" src="{% static 'safario/img/home/service1.png' %}"
-                                 alt="سرویس رزرو هتل">
-                        </div>
-                        <div class="service-card-body">
-                            <h3>رزرو هتل</h3>
-                            <p>اقامتی راحت در بهترین هتل‌های منتخب، متناسب با بودجه و سلیقه شما.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-                    <div class="service-card text-center">
-                        <div class="service-card-img">
-                            <img class="img-fluid" src="{% static 'safario/img/home/service2.png' %}"
-                                 alt="رزرو تور و هتل">
-                        </div>
-                        <div class="service-card-body">
-                            <h3>رزرو پرواز</h3>
-                            <p>پروازهای داخلی به تمام نقاط جهان با بهترین نرخ‌ها.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-                    <div class="service-card text-center">
-                        <div class="service-card-img">
-                            <img class="img-fluid" src="{% static 'safario/img/home/service3.png' %}" alt="رزرو مقصد">
-                        </div>
-                        <div class="service-card-body">
-                            <h3>انتخاب مقصد ویژه</h3>
-                            <p>معرفی و برنامه‌ریزی سفر به مقاصد خاص و کمتر شناخته شده.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    {# حذف بخش "خدمات محبوب ما در پکیج‌ها" اگر تکراری است و در صفحه اصلی وجود دارد، #}
+    {# یا اگر می‌خواهید بماند، محتوایش را متناسب با پکیج‌ها ویرایش کنید.        #}
+    {# فعلاً آن را حذف می‌کنم تا تمرکز روی نمایش تورها و جستجو باشد.          #}
+    {# اگر می‌خواهید بماند، به من بگویید تا آن را هم بررسی کنیم.                #}
 
 
-    <!--================Search Package section Start =================-->
     <section class="section-margin">
         <div class="container">
             <div class="row">
@@ -82,11 +38,11 @@
                 <div class="col-lg-6 col-xl-6 offset-xl-1">
                     <div class="search-wrapper">
                         <h3>جستجوی پکیج تور</h3>
-
-                        <form class="search-form" action="#">
+                        {# فرم جستجو از فایل قدیمی با نام‌های صحیح فیلدها #}
+                        <form class="search-form" action="{% url 'tour:homepage' %}" method="GET">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="نام مبدا">
+                                    <input type="text" name="firstdistination" class="form-control" placeholder="نام مبدا">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="ti-search"></i></span>
                                     </div>
@@ -94,7 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="نام مقصد">
+                                    <input type="text" name="lastDestination" class="form-control" placeholder="نام مقصد">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="ti-search"></i></span>
                                     </div>
@@ -102,7 +58,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="date" class="form-control">
+                                    <input type="date" name="startdate" class="form-control">
                                     <div class="input-group-append">
                                         <span class="input-group-text">تاریخ رفت</span>
                                     </div>
@@ -110,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="date" class="form-control">
+                                    <input type="date" name="finishdate" class="form-control">
                                     <div class="input-group-append">
                                         <span class="input-group-text">تاریخ برگشت</span>
                                     </div>
@@ -121,104 +77,69 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-    <!--================Search Package section End =================-->
-
-
-
     <section class="section-margin">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="tour-card">
-                        <img class="card-img rounded-0" src="{% static 'safario/img/home/tour1.png' %}"
-                             alt="پیشنهاد تور پاریس">
-                        <div class="tour-card-overlay">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4>تور پاریس، شهر عشاق</h4>
-                                    <small>پیشنهاد ۵ روزه</small>
-                                    <p>با راهنمایان مجرب ما، بهترین تجربه را در پاریس داشته باشید.</p>
-                                </div>
-                                <div class="media-price">
-                                    <h4 class="text-primary">۶۵ دلار/روز</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1">
-                            <div class="tour-content">
-                                <h2>ما اخیراً برنامه‌های تور جهانی ارائه می‌دهیم</h2>
-                                <p>جهان را با برنامه‌های سفر متنوع و هیجان‌انگیز سافاریو کاوش کنید.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tour-card">
-                        <img class="card-img rounded-0" src="{% static 'safario/img/home/tour2.png' %}"
-                             alt="پیشنهاد تور اروپا گردی">
-                        <div class="tour-card-overlay">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4>تور اروپاگردی کلاسیک</h4>
-                                    <small>پیشنهاد ۷ روزه</small>
-                                    <p>بازدید از پایتخت‌های فرهنگی اروپا با بهترین امکانات.</p>
-                                </div>
-                                <div class="media-price">
-                                    <h4 class="text-primary">۸۵ دلار/روز</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="section-intro text-center pb-90px">
+                 <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}" alt="آیکن بخش تورها">
+                 <h2>تورهای موجود ما</h2>
+                 <p>بهترین و جذاب‌ترین تورها را با ما تجربه کنید.</p>
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-lg-7">
-                    <div class="tour-card">
-                        <img class="card-img rounded-0" src="{% static 'safario/img/home/tour3.png' %}"
-                             alt="تور گروهی طبیعت‌گردی">
-                        <div class="tour-card-overlay">
+                {% for tour in tours %}
+                <div class="col-md-6 col-lg-4 mb-4"> {# اضافه کردن mb-4 برای فاصله بین کارت‌ها در حالت عمودی #}
+                    <div class="tour-card h-100"> {# اضافه کردن h-100 برای هم ارتفاع شدن کارت‌ها در صورت نیاز #}
+                        {% if tour.image %}
+                            <img class="card-img-top rounded-0" {# تغییر card-img به card-img-top برای ظاهر بهتر #}
+                                 src="{{ tour.image.url }}" alt="{{ tour.title }}">
+                        {% else %}
+                            <img class="card-img-top rounded-0"
+                                 src="{% static 'safario/img/default_tour_image.png' %}" {# یک تصویر پیش‌فرض مناسب قرار دهید #}
+                                 alt="تصویر پیش‌فرض تور">
+                        {% endif %}
+                        <div class="tour-card-overlay"> {# این بخش در فایل قدیمی شما نبود، در صورت عدم نیاز می‌توانید حذف یا استایلش را تغییر دهید #}
                             <div class="media">
                                 <div class="media-body">
-                                    <h4>تور طبیعت‌گردی جنگل‌های شمال</h4>
-                                    <small>پیشنهاد ۳ روزه</small>
-                                    <p>تجربه آرامش و زیبایی در دل طبیعت بکر شمال ایران.</p>
+                                    <h4><a href="{% url 'tour:tour_detail' tour.id %}" style="color: inherit;">{{ tour.title }}</a></h4>
+                                    <small>{{ tour.firstdistination }} به {{ tour.lastDestination }}</small>
+                                    <p>تاریخ: {{ tour.startdate }} تا {{ tour.finishdate }}</p>
+                                    <p>ظرفیت: {{ tour.capacity }} نفر</p>
                                 </div>
                                 <div class="media-price">
-                                    <h4 class="text-primary">۴۵ دلار/روز</h4>
+                                    {# قیمت تور اگر در مدل دارید، می‌توانید اینجا نمایش دهید. مثال: <h4 class="text-primary">{{ tour.price }} تومان</h4> #}
+                                    {# اگر قیمت در مدل نیست، این بخش را حذف کنید یا متن دیگری بگذارید #}
+                                    <h4 class="text-primary">تماس بگیرید</h4>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-5">
-                    <div class="tour-card">
-                        <img class="card-img rounded-0" src="{% static 'safario/img/home/tour4.png' %}"
-                             alt="پیشنهاد تور یک روزه کویر">
-                        <div class="tour-card-overlay">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4>تور یک روزه کویر مصر</h4>
-                                    <small>پیشنهاد ۱ روزه</small>
-                                    <p>هیجان سافاری و آرامش آسمان شب کویر را تجربه کنید.</p>
-                                </div>
-                                <div class="media-price">
-                                    <h4 class="text-primary">۵۵ دلار/روز</h4>
-                                </div>
+                        {# دکمه‌های ویرایش و حذف از فایل قدیمی، می‌توانند اینجا هم اضافه شوند اگر ظاهر کارت اجازه می‌دهد #}
+                        {% if user.is_authenticated and user.email == "aminhosseini822003@gmail.com" %}
+                            <div class="p-3 text-center">
+                                <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-sm btn-outline-primary mx-1">ویرایش</a>
+                                <a href="{% url 'tour:deletetour' tour.id %}" class="btn btn-sm btn-outline-danger mx-1">حذف</a>
                             </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
+                {% empty %}
+                <div class="col-12">
+                    <p class="text-center">متاسفانه در حال حاضر توری با مشخصات درخواستی شما موجود نیست.</p>
+                </div>
+                {% endfor %}
             </div>
+
+            {# دکمه‌های اضافه کردن تور و بازگشت از فایل قدیمی #}
+            <div class="text-center mt-5">
+                {% if user.is_authenticated and user.email == 'aminhosseini822003@gmail.com' %}
+                    <a class="button" href="{% url 'tour:add' %}">اضافه کردن تور</a>
+                {% endif %}
+                <a class="button" href="{% url 'tour:main_page' %}" style="margin-right: 10px;">بازگشت به صفحه اصلی</a>
+            </div>
+
         </div>
     </section>
-{% endblock %}
+    {% endblock %}
