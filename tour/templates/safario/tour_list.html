@@ -1,0 +1,224 @@
+{% extends 'safario/base.html' %}
+{% load static %}
+
+
+{% block title %}
+    سفر سافاریو - پکیج‌های ما
+{% endblock title %}
+
+{% block content %}
+    <section class="hero-banner-sm magic-ball magic-ball-banner" id="parallax-1" data-anchor-target="#parallax-1"
+             data-300-top="background-position: 0px -80px" data-top-bottom="background-position: 0 100px">
+        <div class="container">
+            <div class="hero-banner-sm-content">
+                <h1>پکیج‌های ویژه</h1>
+                <p>سفری خاطره‌انگیز با پکیج‌های متنوع و مقرون‌به‌صرفه سافاریو برای هر سلیقه‌ای.</p>
+            </div>
+        </div>
+    </section>
+    <section class="section-margin">
+        <div class="container">
+            <div class="section-intro text-center pb-90px">
+                <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}"
+                     alt="آیکن بخش خدمات پکیج‌ها">
+                <h2>خدمات محبوب ما در پکیج‌ها</h2>
+                <p>ما در تمامی پکیج‌های خود، خدمات با کیفیتی را برای راحتی شما در نظر گرفته‌ایم.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                    <div class="service-card text-center">
+                        <div class="service-card-img">
+                            <img class="img-fluid" src="{% static 'safario/img/home/service1.png' %}"
+                                 alt="سرویس رزرو هتل">
+                        </div>
+                        <div class="service-card-body">
+                            <h3>رزرو هتل</h3>
+                            <p>اقامتی راحت در بهترین هتل‌های منتخب، متناسب با بودجه و سلیقه شما.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                    <div class="service-card text-center">
+                        <div class="service-card-img">
+                            <img class="img-fluid" src="{% static 'safario/img/home/service2.png' %}"
+                                 alt="رزرو تور و هتل">
+                        </div>
+                        <div class="service-card-body">
+                            <h3>رزرو پرواز</h3>
+                            <p>پروازهای داخلی به تمام نقاط جهان با بهترین نرخ‌ها.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                    <div class="service-card text-center">
+                        <div class="service-card-img">
+                            <img class="img-fluid" src="{% static 'safario/img/home/service3.png' %}" alt="رزرو مقصد">
+                        </div>
+                        <div class="service-card-body">
+                            <h3>انتخاب مقصد ویژه</h3>
+                            <p>معرفی و برنامه‌ریزی سفر به مقاصد خاص و کمتر شناخته شده.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--================Search Package section Start =================-->
+    <section class="section-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xl-5 align-self-center mb-5 mb-lg-0">
+                    <div class="search-content">
+                        <h2>سفر رویایی شما، <br class="d-none d-xl-block"> با بهترین قیمت، <br
+                                class="d-none d-xl-block"> در دستان شماست!</h2>
+                        <p>جهان پر از مقاصد شگفت‌انگیز است که منتظرند تا کشف شوند. ما در سافاریو به شما کمک می‌کنیم تا
+                            با چند کلیک ساده، تور ایده‌آل خود را پیدا کنید و برای خلق خاطراتی بی‌نظیر آماده شوید.
+                            ماجراجویی از همین‌جا شروع می‌شود!</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-6 offset-xl-1">
+                    <div class="search-wrapper">
+                        <h3>جستجوی پکیج تور</h3>
+
+                        <form class="search-form" action="#">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="نام مبدا">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="ti-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="نام مقصد">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="ti-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="date" class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">تاریخ رفت</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="date" class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">تاریخ برگشت</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="button border-0 mt-3" type="submit">جستجوی پکیج</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================Search Package section End =================-->
+
+
+
+    <section class="section-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tour-card">
+                        <img class="card-img rounded-0" src="{% static 'safario/img/home/tour1.png' %}"
+                             alt="پیشنهاد تور پاریس">
+                        <div class="tour-card-overlay">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4>تور پاریس، شهر عشاق</h4>
+                                    <small>پیشنهاد ۵ روزه</small>
+                                    <p>با راهنمایان مجرب ما، بهترین تجربه را در پاریس داشته باشید.</p>
+                                </div>
+                                <div class="media-price">
+                                    <h4 class="text-primary">۶۵ دلار/روز</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div class="tour-content">
+                                <h2>ما اخیراً برنامه‌های تور جهانی ارائه می‌دهیم</h2>
+                                <p>جهان را با برنامه‌های سفر متنوع و هیجان‌انگیز سافاریو کاوش کنید.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tour-card">
+                        <img class="card-img rounded-0" src="{% static 'safario/img/home/tour2.png' %}"
+                             alt="پیشنهاد تور اروپا گردی">
+                        <div class="tour-card-overlay">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4>تور اروپاگردی کلاسیک</h4>
+                                    <small>پیشنهاد ۷ روزه</small>
+                                    <p>بازدید از پایتخت‌های فرهنگی اروپا با بهترین امکانات.</p>
+                                </div>
+                                <div class="media-price">
+                                    <h4 class="text-primary">۸۵ دلار/روز</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-lg-7">
+                    <div class="tour-card">
+                        <img class="card-img rounded-0" src="{% static 'safario/img/home/tour3.png' %}"
+                             alt="تور گروهی طبیعت‌گردی">
+                        <div class="tour-card-overlay">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4>تور طبیعت‌گردی جنگل‌های شمال</h4>
+                                    <small>پیشنهاد ۳ روزه</small>
+                                    <p>تجربه آرامش و زیبایی در دل طبیعت بکر شمال ایران.</p>
+                                </div>
+                                <div class="media-price">
+                                    <h4 class="text-primary">۴۵ دلار/روز</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-5">
+                    <div class="tour-card">
+                        <img class="card-img rounded-0" src="{% static 'safario/img/home/tour4.png' %}"
+                             alt="پیشنهاد تور یک روزه کویر">
+                        <div class="tour-card-overlay">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4>تور یک روزه کویر مصر</h4>
+                                    <small>پیشنهاد ۱ روزه</small>
+                                    <p>هیجان سافاری و آرامش آسمان شب کویر را تجربه کنید.</p>
+                                </div>
+                                <div class="media-price">
+                                    <h4 class="text-primary">۵۵ دلار/روز</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

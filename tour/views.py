@@ -422,7 +422,8 @@ def home_view(request):
         if finishdate:
             tours = tours.filter(finishdate__lte=finishdate)  # تاریخ برگشت باید کوچکتر یا مساوی تاریخ انتخابی باشد
 
-    return render(request, 'tour/home_page.html', {'tours': tours, 'form': form})
+    # return render(request, 'tour/home_page.html', {'tours': tours, 'form': form})
+    return render(request, 'safario/tour_list.html')
 
 
 # --------------------------------------------------------------------------
