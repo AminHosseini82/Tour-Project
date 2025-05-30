@@ -537,7 +537,8 @@ def main_page(request):
     context = {
         'tours': tours  # ارسال تورها به قالب
     }
-    return render(request, 'tour/main_page.html', context)  # از context استفاده کنید
+    # return render(request, 'tour/main_page.html', context)  # از context استفاده کنید
+    return render(request, 'safario/index.html', context)  # از context استفاده کنید
 
 
 # --------------------------------------------------------------------------
@@ -623,3 +624,18 @@ def profile_view(request):
 #         'available_tours': available_tours,  # ارسال لیست تورهای موجود به قالب
 #         'tours': tours  # ارسال لیست تورهای کاربر به قالب
 #     })
+
+# the safario all html 👇👇👇
+
+def amenities_page_view(request):
+    return render(request, 'safario/amentities.html')
+
+
+
+
+
+
+
+
+
+

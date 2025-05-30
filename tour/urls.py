@@ -16,6 +16,11 @@ urlpatterns = [
     path('buy/<int:tour_id>/', views.buy_tour, name='buy_tour'),  # URL برای خرید
     path('profile/', views.profile_view, name='profile_view'),  # URL برای پروفایل کاربر
 
+
+#     the all safario html
+
+    path('amenities/', views.amenities_page_view, name='amenities'),  # نام 'amenities' را برای این URL انتخاب کردیم
+
 ]
 
 
