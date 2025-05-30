@@ -42,7 +42,8 @@
                         <form class="search-form" action="{% url 'tour:homepage' %}" method="GET">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" name="firstdistination" class="form-control" placeholder="نام مبدا">
+                                    <input type="text" name="firstdistination" class="form-control"
+                                           placeholder="نام مبدا">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="ti-search"></i></span>
                                     </div>
@@ -50,7 +51,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" name="lastDestination" class="form-control" placeholder="نام مقصد">
+                                    <input type="text" name="lastDestination" class="form-control"
+                                           placeholder="نام مقصد">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="ti-search"></i></span>
                                     </div>
@@ -84,51 +86,54 @@
     <section class="section-margin">
         <div class="container">
             <div class="section-intro text-center pb-90px">
-                 <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}" alt="آیکن بخش تورها">
-                 <h2>تورهای موجود ما</h2>
-                 <p>بهترین و جذاب‌ترین تورها را با ما تجربه کنید.</p>
+                <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}"
+                     alt="آیکن بخش تورها">
+                <h2>تورهای موجود ما</h2>
+                <p>بهترین و جذاب‌ترین تورها را با ما تجربه کنید.</p>
             </div>
 
             <div class="row">
                 {% for tour in tours %}
-                <div class="col-md-6 col-lg-4 mb-4"> {# اضافه کردن mb-4 برای فاصله بین کارت‌ها در حالت عمودی #}
-                    <div class="tour-card h-100"> {# اضافه کردن h-100 برای هم ارتفاع شدن کارت‌ها در صورت نیاز #}
-                        {% if tour.image %}
-                            <img class="card-img-top rounded-0" {# تغییر card-img به card-img-top برای ظاهر بهتر #}
-                                 src="{{ tour.image.url }}" alt="{{ tour.title }}">
-                        {% else %}
-                            <img class="card-img-top rounded-0"
-                                 src="{% static 'safario/img/default_tour_image.png' %}" {# یک تصویر پیش‌فرض مناسب قرار دهید #}
-                                 alt="تصویر پیش‌فرض تور">
-                        {% endif %}
-                        <div class="tour-card-overlay"> {# این بخش در فایل قدیمی شما نبود، در صورت عدم نیاز می‌توانید حذف یا استایلش را تغییر دهید #}
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4><a href="{% url 'tour:tour_detail' tour.id %}" style="color: inherit;">{{ tour.title }}</a></h4>
-                                    <small>{{ tour.firstdistination }} به {{ tour.lastDestination }}</small>
-                                    <p>تاریخ: {{ tour.startdate }} تا {{ tour.finishdate }}</p>
-                                    <p>ظرفیت: {{ tour.capacity }} نفر</p>
-                                </div>
-                                <div class="media-price">
-                                    {# قیمت تور اگر در مدل دارید، می‌توانید اینجا نمایش دهید. مثال: <h4 class="text-primary">{{ tour.price }} تومان</h4> #}
-                                    {# اگر قیمت در مدل نیست، این بخش را حذف کنید یا متن دیگری بگذارید #}
-                                    <h4 class="text-primary">تماس بگیرید</h4>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tour-card h-100">
+                            {% if tour.image %}
+                                <img class="card-img-top rounded-0"
+                                     src="{{ tour.image.url }}" alt="{{ tour.title }}">
+                            {% else %}
+                                <img class="card-img-top rounded-0"
+                                     src="{% static 'safario/img/default_tour_image.png' %}"
+                                     alt="تصویر پیش‌فرض تور">
+                            {% endif %}
+
+                            <div class="tour-card-overlay">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4><a href="{% url 'tour:tour_detail' tour.id %}"
+                                               style="color: inherit;">{{ tour.title }}</a></h4>
+                                        <small>{{ tour.firstdistination }} <i
+                                                class="fas fa-arrow-left"></i> {{ tour.lastDestination }}</small>
+                                        {# اگر می‌خواهید تاریخ شروع را هم در هاور نشان دهید (به صورت خلاصه) #}
+                                        {# <p style="font-size: 0.8rem; margin-top: 5px; margin-bottom: 0;">شروع: {{ tour.startdate }}</p> #}
+                                    </div>
                                 </div>
                             </div>
+
+                            {% if user.is_authenticated and user.email == "aminhosseini822003@gmail.com" %}
+                                <div class="p-3 text-center"
+                                     style="background-color: #f8f9fa; border-top: 1px solid #dee2e6;">
+                                    {# اضافه کردن پس‌زمینه و خط جداکننده برای دکمه‌ها #}
+                                    <a href="{% url 'tour:edittour' tour.id %}"
+                                       class="btn btn-sm btn-outline-primary mx-1">ویرایش</a>
+                                    <a href="{% url 'tour:deletetour' tour.id %}"
+                                       class="btn btn-sm btn-outline-danger mx-1">حذف</a>
+                                </div>
+                            {% endif %}
                         </div>
-                        {# دکمه‌های ویرایش و حذف از فایل قدیمی، می‌توانند اینجا هم اضافه شوند اگر ظاهر کارت اجازه می‌دهد #}
-                        {% if user.is_authenticated and user.email == "aminhosseini822003@gmail.com" %}
-                            <div class="p-3 text-center">
-                                <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-sm btn-outline-primary mx-1">ویرایش</a>
-                                <a href="{% url 'tour:deletetour' tour.id %}" class="btn btn-sm btn-outline-danger mx-1">حذف</a>
-                            </div>
-                        {% endif %}
                     </div>
-                </div>
                 {% empty %}
-                <div class="col-12">
-                    <p class="text-center">متاسفانه در حال حاضر توری با مشخصات درخواستی شما موجود نیست.</p>
-                </div>
+                    <div class="col-12">
+                        <p class="text-center">متاسفانه در حال حاضر توری با مشخصات درخواستی شما موجود نیست.</p>
+                    </div>
                 {% endfor %}
             </div>
 
@@ -142,4 +147,4 @@
 
         </div>
     </section>
-    {% endblock %}
+{% endblock %}

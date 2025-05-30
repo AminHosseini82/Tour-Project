@@ -1051,6 +1051,13 @@ h3, .h3 {
   margin-bottom: 30px;
 }
 
+body[dir="rtl"] .tour-card .p-3.text-center { /* کلاسی که دکمه‌ها را در بر می‌گیرد */
+    position: relative; /* برای اینکه z-index کار کند */
+    z-index: 2; /* بالاتر از z-index: 1 مربوط به overlay */
+    /* می‌توانید برای اطمینان یک پس‌زمینه هم به این div بدهید تا کاملاً روی overlay را بپوشاند */
+    /* background-color: #f8f9fa;  این را قبلاً در HTML اضافه کرده بودیم که خوب است */
+}
+
 .tour-card .tour-card-overlay {
   position: absolute;
   bottom: 0;
