@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Safario Travel - Contact
+    تماس با ما
 {% endblock %}
 
 {% block content %}
@@ -10,15 +10,18 @@
     <section class="hero-banner-sm magic-ball magic-ball-banner" id="parallax-1" data-anchor-target="#parallax-1"
              data-300-top="background-position: 0px -80px" data-top-bottom="background-position: 0 100px">
         <div class="container">
-            <div class="hero-banner-sm-content">
-                <h1>Contact Us</h1>
-                <p>Air seed winged lights saw kind whales in sixth best a dont seas dron image so fish all tree on</p>
+            <div class="row align-items-center hero-banner-sm-row">
+                <div class="col-md-6 hero-banner-sm-content">
+                    <h1>تماس با ما</h1>
+                    <p>برای ارتباط با ما و دریافت خدمات، فرم زیر را تکمیل کنید یا با اطلاعات تماس ما در ارتباط باشید.</p>
+                </div>
+                <div class="col-md-6 hero-banner-sm-image text-center">
+                    <img src="{% static 'safario/img/home/hero-img.png' %}" alt="تماس با ما" class="img-fluid" style="max-height:300px;">
+                </div>
             </div>
         </div>
     </section>
     <!--================Hero Banner SM Area End =================-->
-
-
 
     <!-- ================ contact section start ================= -->
     <section class="section-margin">
@@ -45,16 +48,13 @@
                             scrollwheel: false
                         });
                     }
-
                 </script>
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap"></script>
-
             </div>
-
 
             <div class="row">
                 <div class="col-12">
-                    <h2 class="contact-title">Get in Touch</h2>
+                    <h2 class="contact-title">با ما در ارتباط باشید</h2>
                 </div>
                 <div class="col-lg-8">
                     <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm"
@@ -63,56 +63,54 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9"
-                                              placeholder="Enter Message"></textarea>
+                                              placeholder="پیام خود را وارد کنید"></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="form-control" name="name" id="name" type="text"
-                                           placeholder="Enter your name">
+                                           placeholder="نام شما">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="form-control" name="email" id="email" type="email"
-                                           placeholder="Enter email address">
+                                           placeholder="ایمیل شما">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <input class="form-control" name="subject" id="subject" type="text"
-                                           placeholder="Enter Subject">
+                                           placeholder="موضوع پیام">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <button type="submit" class="button button-contactForm">Send Message</button>
+                            <button type="submit" class="button button-contactForm">ارسال پیام</button>
                         </div>
                     </form>
-
-
                 </div>
 
                 <div class="col-lg-4">
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-home"></i></span>
                         <div class="media-body">
-                            <h3>Buttonwood, California.</h3>
-                            <p>Rosemead, CA 91770</p>
+                            <h3>تهران، ایران</h3>
+                            <p>خیابان ولیعصر، پلاک ۱۲۳</p>
                         </div>
                     </div>
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                         <div class="media-body">
-                            <h3><a href="tel:454545654">00 (440) 9865 562</a></h3>
-                            <p>Mon to Fri 9am to 6pm</p>
+                            <h3><a href="tel:02112345678">۰۲۱-۱۲۳۴۵۶۷۸</a></h3>
+                            <p>شنبه تا پنجشنبه ۹ صبح تا ۶ عصر</p>
                         </div>
                     </div>
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-email"></i></span>
                         <div class="media-body">
-                            <h3><a href="mailto:support@colorlib.com">support@colorlib.com</a></h3>
-                            <p>Send us your query anytime!</p>
+                            <h3><a href="mailto:info@safario.com">info@safario.com</a></h3>
+                            <p>در هر زمان پاسخگوی شما هستیم!</p>
                         </div>
                     </div>
                 </div>
