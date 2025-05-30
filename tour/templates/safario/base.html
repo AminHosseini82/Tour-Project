@@ -107,29 +107,12 @@
 
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav justify-content-start">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">خانه</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">درباره ما</a></li>
-                        <li class="nav-item"><a class="nav-link" href="package.html">پکیج‌ها</a>
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">صفحات</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link"
-                                                        href="{% url 'tour:amenities' %}">امکانات رفاهی</a>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">وبلاگ</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="blog.html">صفحه وبلاگ</a></li>
-                                <li class="nav-item"><a class="nav-link" href="blog-details.html">جزئیات وبلاگ</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">تماس با ما</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'tour:main_page' %}">خانه</a></li>
+{#                        <li class="nav-item"><a class="nav-link" href="about.html">درباره ما</a></li>#}
+                        <li class="nav-item"><a class="nav-link" href="package.html">تور های فعال</a>
+                        <li class="nav-item"><a class="nav-link" href="package.html">گردشگری های فعال</a>
+                        <li class="nav-item"><a class="nav-link" href="package.html">اخبار روز</a>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'tour:contact' %}">تماس با ما</a></li>
                     </ul>
 
                     <div class="nav-right text-center text-lg-left py-4 py-lg-0">
@@ -167,18 +150,10 @@
                     <div class="row">
                         <div class="col">
                             <ul>
-                                <li><a href="#">خانه</a></li>
-                                <li><a href="#">ویژگی‌ها</a></li>
-                                <li><a href="#">خدمات</a></li>
-                                <li><a href="#">نمونه کارها</a></li>
-                            </ul>
-                        </div>
-                        <div class="col">
-                            <ul>
-                                <li><a href="#">تیم ما</a></li>
-                                <li><a href="#">قیمت‌گذاری</a></li>
-                                <li><a href="#">وبلاگ</a></li>
-                                <li><a href="#">تماس با ما</a></li>
+                                <li><a href="{% url 'tour:main_page' %}">خانه</a></li>
+                                <li><a href="#">تور های فعال</a></li>
+                                <li><a href="#">گردشگری های فعال</a></li>
+                                <li><a href="#">اخرین خبرها </a></li>
                             </ul>
                         </div>
                     </div>
