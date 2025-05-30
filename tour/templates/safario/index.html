@@ -1,3 +1,4 @@
+{#{% extends 'safario/base.html' %} {# یا 'base.html' اگر در ریشه templates است #}
 {% load static %}
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -104,27 +105,11 @@
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav justify-content-start">
                         <li class="nav-item active"><a class="nav-link" href="index.html">خانه</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">درباره ما</a></li>
-                        <li class="nav-item"><a class="nav-link" href="package.html">پکیج‌ها</a>
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">صفحات</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link"
-                                                        href="{% url 'tour:amenities' %}">امکانات رفاهی</a>
-                            </ul>
-                        </li>
+{#                        <li class="nav-item"><a class="nav-link" href="about.html">درباره ما</a></li>#}
+                        <li class="nav-item"><a class="nav-link" href="package.html">تور های فعال</a>
+                        <li class="nav-item"><a class="nav-link" href="package.html">گردشگری های فعال</a>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'tour:homepage' %}">اخبار روز</a>
 
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">وبلاگ</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="blog.html">صفحه وبلاگ</a></li>
-                                <li class="nav-item"><a class="nav-link" href="blog-details.html">جزئیات وبلاگ</a></li>
-                            </ul>
-                        </li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">تماس با ما</a></li>
                     </ul>
 
