@@ -1479,58 +1479,6 @@
             <div class="container">
                 <p class="section-subtitle">سفرهایی به یادماندنی در نقطه نقطه ایران</p>
                 <h2 class="h2 section-title">تورهای موجود</h2>
-                {#        <p class="section-text">#}
-                {#            Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. Vestibulum cumque laudantium.#}
-                {#            Sit ornare mollitia tenetur, aptent.#}
-                {#        </p>#}
-
-                {#        <ul class="popular-list">#}
-                {#            {% for tour in tours %}#}
-                {#            <li>#}
-                {#                <div class="popular-card">#}
-                {#                    <figure class="card-img">#}
-                {#                        <img src="{{ tour.image.url }}" alt="{{ tour.title }}" loading="lazy">#}
-                {#                    </figure>#}
-                {#<figure class="card-img">#}
-                {#    {% if tour.image %}#}
-                {#        <img src="{{ tour.image.url }}" id="productImg" alt="{{ tour.title }}">#}
-                {#    {% else %}#}
-                {#        <img src="{% static 'path/to/default/image.jpg' %}" id="productImg" alt="Default Image"> <!-- تصویر پیش‌فرض -->#}
-                {#    {% endif %}#}
-                {#</figure>#}
-                {##}
-                {#                    <div class="card-content">#}
-                {#                        <div class="card-rating">  #}
-                {#                            {% for star in range(5) %}  #}
-                {#                                <ion-icon name="star" class="{% if star < tour.rating|floatformat:0 %}active{% endif %}"></ion-icon>  #}
-                {#                            {% endfor %}  #}
-                {#                        </div>  #}
-                {##}
-                {#                        <p class="card-subtitle">#}
-                {##}
-                {#                            <a href="#">{{ tour.firstdistination }} - {{ tour.lastDestination}}</a>  <!-- نمایش مبدا و مقصد -->#}
-                {#                        </p>#}
-                {##}
-                {#                        <h3 class="h3 card-title">#}
-                {#                            <a href="{% url 'tour:tour_detail' tour.id %}">{{ tour.title }}</a>#}
-                {#                        </h3>#}
-                {##}
-                {#                        <p class="card-text">#}
-                {#                             <a href="#">{{ tour.startdate }} - {{ tour.finishdate}}</a>#}
-                {#                        </p>#}
-                {#                        <div class="tour-actions">#}
-                {#                    <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>#}
-                {#                    <form action="{% url 'tour:deletetour' tour.id %}" method="POST" style="display:inline;">#}
-                {#                        {% csrf_token %}#}
-                {#                        <button type="submit" class="btn btn-delete">حذف</button>#}
-                {#                    </form>#}
-                {#                </div>#}
-                {##}
-                {#                    </div>#}
-                {#                </div>#}
-                {#            </li>#}
-                {#            {% endfor %}#}
-                {#        </ul>#}
                 <ul>
                     <div class="destination__grid">
                         {% for tour in tours %}
@@ -1575,39 +1523,12 @@
                         تور
                     </button>
                 {% endif %}
-                {#    <button class="btn btn-primary" onclick="window.location.href='{% url 'tour:add' %}'">اضافه کردن تور</button>#}
-                {#        <button class="btn btn-primary" onclick="window.location.href='{% url 'tour:edittour'  tour.id%}'">اضافه کردن تور</button>#}
-                {#                 <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>#}
-
-                {#{% if is_authorized %}  <!-- بررسی وضعیت دسترسی -->#}
-                {#    <form action="{% url 'tour:add' %}" method="POST">#}
-                {#        {% csrf_token %}#}
-                {#        <button type="submit" class="btn btn-primary">اضافه کردن تور</button>#}
-                {#    </form>#}
-                {#{% else %}#}
-                {#    <p>شما مجاز به اضافه کردن تور نیستید.</p>#}
-                {#{% endif %}#}
-
-                {#        {% if is_authorized %}  <!-- بررسی وضعیت دسترسی -->#}
-                {#            <button class="btn btn-primary" onclick="window.location.href='{% url 'tour:add' %}'">اضافه کردن تور</button>#}
-                {#              <a href="{% url 'tour:edittour' tour.id %}" class="btn btn-edit">ویرایش</a>  #}
-                {#        {% endif %}#}
-                {#        <button class="btn btn-primary">اضافه کردن تور </button>#}
-                {#        <div><button class="btn btn-primary">ویرایش تور </button></div>#}
-
                 <div class="addbtn">
                     <button class="btn btn-primary" onclick="location.href='{% url 'tour:main_page' %}'">بازگشت</button>
-
                 </div>
-
             </div>
         </section>
-
-
     </article>
 </main>
-
 </body>
-
-
 </html>
