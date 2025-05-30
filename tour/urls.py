@@ -20,6 +20,7 @@ urlpatterns = [
 #     the all safario html
 
     path('amenities/', views.amenities_page_view, name='amenities'),  # نام 'amenities' را برای این URL انتخاب کردیم
+    path('contact/', views.contact_view, name='contact'),  # نام 'amenities' را برای این URL انتخاب کردیم
 
 ]
 

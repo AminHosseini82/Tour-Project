@@ -631,6 +631,17 @@ def amenities_page_view(request):
     return render(request, 'safario/amentities.html')
 
 
+def contact_view(request):
+    return render(request, "safario/contact.html")
+
+
+
+
+
+
+
+
+
 
 
 
