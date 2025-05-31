@@ -534,7 +534,7 @@ def tour_detail(request, tour_id):
 # --------------------------------------------------------------------------
 
 def main_page(request):
-    tours = tour.objects.all()[:3]
+    tours = tour.objects.all()[:3] # ققط 3 تا رو نشون میده!
     context = {
         'tours': tours  # ارسال تورها به قالب
     }
