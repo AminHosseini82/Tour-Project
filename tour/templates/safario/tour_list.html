@@ -96,36 +96,35 @@
                 {% for tour in tours %}
                     <div class="col-md-6 col-lg-4 mb-4">
                         <div class="tour-card h-100">
-                            {% if tour.image %}
-                                <img class="card-img-top rounded-0"
-                                     src="{{ tour.image.url }}" alt="{{ tour.title }}">
-                            {% else %}
-                                <img class="card-img-top rounded-0"
-                                     src="{% static 'safario/img/default_tour_image.png' %}"
-                                     alt="تصویر پیش‌فرض تور">
-                            {% endif %}
+                            <div class="tour-image-container" style="position: relative;">
+                                {% if tour.image %}
+                                    <img class="card-img-top rounded-0"
+                                         src="{{ tour.image.url }}" alt="{{ tour.title }}">
+                                {% else %}
+                                    <img class="card-img-top rounded-0"
+                                         src="{% static 'safario/img/default_tour_image.png' %}"
+                                         alt="تصویر پیش‌فرض تور">
+                                {% endif %}
 
-                            <div class="tour-card-overlay">
-                                <div class="media">
-                                    <div class="media-body">
-                                        <h4><a href="{% url 'tour:tour_detail' tour.id %}"
-                                               style="color: inherit;">{{ tour.title }}</a></h4>
-                                        <small>{{ tour.firstdistination }} <i
-                                                class="fas fa-arrow-left"></i> {{ tour.lastDestination }}</small>
-                                        {# اگر می‌خواهید تاریخ شروع را هم در هاور نشان دهید (به صورت خلاصه) #}
-                                        {# <p style="font-size: 0.8rem; margin-top: 5px; margin-bottom: 0;">شروع: {{ tour.startdate }}</p> #}
+                                <div class="tour-card-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h4><a href="{% url 'tour:tour_detail' tour.id %}"
+                                                   style="color: inherit;">{{ tour.title }}</a></h4>
+                                            <small>{{ tour.firstdistination }} <i
+                                                    class="fas fa-arrow-left"></i> {{ tour.lastDestination }}</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             {% if user.is_authenticated and user.email == "aminhosseini822003@gmail.com" %}
-                                <div class="p-3 text-center"
-                                     style="background-color: #f8f9fa; border-top: 1px solid #dee2e6;">
-                                    {# اضافه کردن پس‌زمینه و خط جداکننده برای دکمه‌ها #}
+                                <div class="admin-actions p-3 text-center"
+                                     style="background-color: #f8f9fa; border-top: 1px solid #dee2e6; position: relative; z-index: 2;">
                                     <a href="{% url 'tour:edittour' tour.id %}"
-                                       class="btn btn-sm btn-outline-primary mx-1">ویرایش</a>
+                                       class="btn btn-sm btn-outline-primary mx-1" style="position: relative; z-index: 2;">ویرایش</a>
                                     <a href="{% url 'tour:deletetour' tour.id %}"
-                                       class="btn btn-sm btn-outline-danger mx-1">حذف</a>
+                                       class="btn btn-sm btn-outline-danger mx-1" style="position: relative; z-index: 2;">حذف</a>
                                 </div>
                             {% endif %}
                         </div>
