@@ -2,16 +2,187 @@
 {% load static %}
 
 {% block title %}
-    جزئیات مطلب وبلاگ - سفر سافاریو
+    {{ new.title_news|default:"جزئیات مطلب" }} - سفر سافاریو {# استفاده از آبجکت new #}
 {% endblock title %}
+
+{% block extra_css %}
+    {# اگر استایل‌های خاصی برای این صفحه نیاز دارید که در base.html یا style.css اصلی نیست، اینجا اضافه کنید #}
+    <style>
+        /* استایل‌های پیشنهادی برای تم بنفش و بهبود خوانایی */
+        /* این متغیرها باید در base.html یا فایل CSS سراسری تعریف شده باشند */
+        /* :root {
+            --primary-purple: #6A0DAD;
+            --text-color-dark: #2a2a2a;
+            --text-color-light: #777777;
+            --link-color-hover: var(--primary-purple);
+        } */
+
+        .single-post .feature-img img {
+            border-radius: 8px;
+            margin-bottom: 25px;
+            width: 100%; /* برای اینکه تصویر عرض کامل بخش محتوا را بگیرد */
+            height: auto; /* برای حفظ نسبت تصویر */
+            max-height: 450px; /* یک حداکثر ارتفاع برای تصاویر بزرگ (اختیاری) */
+            object-fit: cover; /* برای اینکه تصویر کادر را به خوبی پر کند */
+        }
+
+        .single-post .blog_details h2 {
+            color: var(--primary-purple, #6A0DAD); /* رنگ عنوان مطلب */
+            font-size: 2rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .blog-info-link {
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .blog-info-link li { /* برای نمایش در یک خط و با فاصله در RTL */
+            display: inline-block;
+            margin-left: 20px; /* فاصله بین آیتم‌ها */
+            margin-right: 0;
+        }
+
+        .blog-info-link li:last-child {
+            margin-left: 0;
+        }
+
+        .blog-info-link li a {
+            color: var(--text-color-light, #777777);
+            font-size: 0.9rem;
+        }
+
+        .blog-info-link li a:hover {
+            color: var(--link-color-hover, var(--primary-purple));
+        }
+
+        .blog-info-link li i {
+            color: var(--primary-purple, #6A0DAD);
+            margin-left: 5px;
+        }
+
+        .blog_details .excert {
+            font-size: 1.1rem;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .blog_details p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-color-dark, #2a2a2a);
+        }
+
+        .quote-wrapper {
+            border-right: 3px solid var(--primary-purple, #6A0DAD);
+            padding-right: 20px;
+            padding-left: 0;
+            margin: 30px 0;
+            background-color: #f9f9f9; /* پس زمینه ملایم برای نقل قول */
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .quotes {
+            font-style: italic;
+            color: #444;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* بخش نویسنده */
+        .blog-author {
+            background-color: var(--light-purple-bg, #f2e6ff);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+            border: 1px solid #e0cffc;
+        }
+
+        .blog-author img {
+            border-radius: 50%;
+            width: 80px; /* اندازه تصویر نویسنده */
+            height: 80px;
+            object-fit: cover;
+            margin-left: 20px; /* برای RTL */
+        }
+
+        .blog-author h4 {
+            color: var(--primary-purple, #6A0DAD);
+            margin-bottom: 5px;
+        }
+
+        .blog-author p {
+            font-size: 0.9rem;
+            color: #454545;
+            line-height: 1.6;
+        }
+
+        /* سایدبار */
+        .blog_right_sidebar .widget_title {
+            color: var(--primary-purple, #6A0DAD) !important;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-purple, #6A0DAD);
+            display: inline-block; /* برای اینکه border-bottom فقط زیر متن بیاید */
+        }
+
+        .blog_right_sidebar .single_sidebar_widget {
+            background: var(--light-purple-bg, #f9f9f9); /* یک پس زمینه خیلی ملایم */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #eee;
+        }
+
+        .popular_post_widget .media {
+            align-items: center; /* برای چینش بهتر تصویر و متن */
+        }
+
+        .popular_post_widget img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-left: 15px; /* برای RTL */
+        }
+
+        .popular_post_widget .media-body h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .popular_post_widget .media-body h3 a {
+            color: var(--text-color-dark, #2a2a2a);
+        }
+
+        .popular_post_widget .media-body h3 a:hover {
+            color: var(--link-color-hover, var(--primary-purple));
+        }
+
+        .popular_post_widget .media-body p {
+            font-size: 0.8rem;
+            color: var(--text-color-light, #777777);
+        }
+
+    </style>
+{% endblock extra_css %}
 
 {% block content %}
     <section class="hero-banner-sm magic-ball magic-ball-banner" id="parallax-1" data-anchor-target="#parallax-1"
              data-300-top="background-position: 0px -80px" data-top-bottom="background-position: 0 100px">
         <div class="container">
             <div class="hero-banner-sm-content">
-                <h1>جزئیات مطلب وبلاگ</h1>
-                <p>در اینجا می‌توانید مطلب کامل را مطالعه کرده و نظرات خود را با ما در میان بگذارید.</p>
+                {# عنوان صفحه از آبجکت خبر خوانده می‌شود #}
+                <h1>{{ new.title_news|default:"جزئیات مطلب" }}</h1>
+                {# خلاصه خبر از آبجکت خبر خوانده می‌شود #}
+                <p>{{ new.excerpt_news|default:"در اینجا می‌توانید مطلب کامل را مطالعه کنید."|truncatewords:25 }}</p>
             </div>
         </div>
     </section>
@@ -21,228 +192,132 @@
                 <div class="col-lg-8 posts-list">
                     <div class="single-post">
                         <div class="feature-img">
-
-                            <img class="img-fluid" src="{% static 'safario/img/blog/main-blog/m-blog-1.jpg' %}" alt="{{ post.title|default:'تصویر اصلی مطلب' }}">
-
+                            {% if new.image_news %}
+                                <img class="img-fluid" src="{{ new.image_news.url }}" alt="{{ new.title_news }}">
+                            {% else %}
+                                <img class="img-fluid"
+                                     src="{% static 'safario/img/blog/main-blog/m-blog-default.jpg' %}"
+                                     alt="تصویر پیش‌فرض مطلب">
+                            {% endif %}
                         </div>
                         <div class="blog_details">
-                            <h2>عنوان مطلب وبلاگ در اینجا قرار می‌گیرد، یک عنوان جذاب و کامل</h2>
+                            <h2>{{ new.title_news|default:"عنوان مطلب در اینجا قرار می‌گیرد" }}</h2>
 
                             <ul class="blog-info-link mt-3 mb-4">
-                                <li><a href="#"><i class="far fa-user"></i> سفر، سبک زندگی</a></li>
-                                <li><a href="#"><i class="far fa-comments"></i> ۰۳ نظر</a></li>
+                                {% if new.owner %}
+                                    <li><a href="#"><i
+                                            class="far fa-user"></i> {{ new.owner.get_full_name|default:new.owner.username }}
+                                    </a></li>
+                                {% endif %}
+                                {% if new.published_at %}
+                                    <li><a href="#"><i
+                                            class="far fa-calendar-alt"></i> {{ new.published_at|date:"j F Y" }}</a>
+                                    </li>
+                                {% endif %}
+                                {# برای تعداد نظرات، اگر بعداً اضافه کردید:
+                                <li><a href="#comments-area"><i class="far fa-comments"></i> {{ new.comments.count }}
+                                    نظر</a></li>
+                                #}
                             </ul>
-                            <p class="excert">
-                                این یک خلاصه یا چکیده از مطلب است. کمپ‌های آموزشی MCSE طرفداران و منتقدان خاص خود را دارند. برخی افراد درک نمی‌کنند که چرا باید برای کمپ آموزشی هزینه کرد در حالی که می‌توان مطالب آموزشی MCSE را با کسری از قیمت کمپ تهیه کرد.
-                            </p>
-                            <p>
-                                با این حال، چه کسی اراده کافی برای نشستن و گذراندن یک دوره آموزشی خودخوان MCSE را دارد؟ چه کسی اراده واقعی برای این کار را دارد؟ اینجاست که ارزش کمپ‌های آموزشی مشخص می‌شود، جایی که با برنامه‌ریزی و همراهی اساتید، مسیر یادگیری هموارتر می‌شود.
-                            </p>
+
+                            {% if new.excerpt_news %}
+                                <p class="excert">
+                                    {{ new.excerpt_news|linebreaksbr }}
+                                </p>
+                            {% endif %}
+
+                            {# متن کامل خبر #}
+                            {{ new.description_news|linebreaksbr }}
+
+                            {# مثال برای نقل قول اگر در مدل فیلد جداگانه‌ای دارید #}
+                             {% if new.quote_field %}
                             <div class="quote-wrapper">
                                 <div class="quotes">
-                                    نقل قولی الهام‌بخش یا مهم از متن مطلب در اینجا قرار می‌گیرد. این می‌تواند توجه خواننده را به نکته‌ای کلیدی جلب کند و به جذابیت بصری متن نیز کمک نماید.
+                                    {{ new.quote_field|linebreaksbr }}
                                 </div>
                             </div>
-
-                            <p>
-                                ادامه متن اصلی مطلب در اینجا می‌آید. توضیحات کامل‌تر، بررسی جزئیات و هر آنچه برای انتقال پیام لازم است. تلاش کنید متن روان، خوانا و برای مخاطب جذاب باشد. استفاده از پاراگراف‌های کوتاه‌تر به خوانایی کمک می‌کند.
-                            </p>
-                            <p>
-                                در نهایت، می‌توانید با یک جمع‌بندی یا نتیجه‌گیری، مطلب را به پایان برسانید و خوانندگان را به ارائه نظر یا اشتراک‌گذاری مطلب تشویق کنید. ارائه منابع یا لینک‌های مفید نیز می‌تواند ارزش افزوده خوبی برای مطلب شما باشد.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="navigation-top">
-                        <div class="d-sm-flex justify-content-between text-center">
-                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> لیلا و ۴ نفر دیگر این مطلب را پسندیده‌اند</p>
-                            <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> ۰۶ نظر</p>
-                            </div>
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                            </ul>
-                        </div>
-
-                        <div class="navigation-area">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="{% static 'safario/img/blog/prev.jpg' %}" alt="مطلب قبلی">
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white lnr-arrow-left"></span>
-                                        </a>
-                                    </div>
-                                    <div class="detials">
-                                        <p>مطلب قبلی</p>
-                                        <a href="#">
-                                            <h4>فضا، آخرین مرز ناشناخته</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                                    <div class="detials" style="text-align: left;">
-                                        <p>مطلب بعدی</p>
-                                        <a href="#">
-                                            <h4>آشنایی با تلسکوپ‌ها</h4>
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white lnr-arrow-right"></span>
-                                        </a>
-                                    </div>
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="{% static 'safario/img/blog/next.jpg' %}" alt="مطلب بعدی">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                        {% endif %}
                         </div>
                     </div>
 
-                    <div class="blog-author">
-                        <div class="media align-items-center">
-                            <img src="{% static 'safario/img/blog/author.png' %}" alt="تصویر نویسنده">
-                            <div class="media-body">
-                                <a href="#">
-                                    <h4>هاروارد میلان</h4>
-                                </a>
-                                <p>دومین تقسیم از فرم، جانور ماهی ساخته شده است. هر یک از دریاها همه ما را جمع آوری کردند و گفتند شما، او سلطه ما را دو برابر کرد.</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="comments-area">
-                        <h4>۰۵ نظر</h4>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="{% static 'safario/img/blog/c1.png' %}" alt="تصویر نظردهنده">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            متن نظر اول در اینجا قرار می‌گیرد. یک نظر مفید و مرتبط با محتوای مطلب.
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                    <a href="#">امیلی بلانت</a>
-                                                </h5>
-                                                <p class="date">۴ دسامبر ۲۰۱۷ ساعت ۳:۱۲ ب.ظ</p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">پاسخ</a>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                    {% if new.owner %}
+                        <div class="blog-author">
+                            <div class="media align-items-center">
+                                <img src="{% static 'safario/img/blog/author.png' %}" alt="تصویر نویسنده">
+                                <div class="media-body">
+                                    <a href="#">
+                                        <h4>{{ new.owner.get_full_name|default:new.owner.username }}</h4>
+                                    </a>
+                                    <p>{{ new.owner.userprofile.bio|default:"یکی از نویسندگان خوب ما در سفر سافاریو." }}</p>
                                 </div>
                             </div>
                         </div>
+                    {% endif %}
+                    {# بخش نظرات و فرم ارسال نظر حذف شده‌اند #}
 
-                         <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="{% static 'safario/img/blog/c2.png' %}" alt="تصویر نظردهنده">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                           یک نظر دیگر از یک کاربر دیگر. نظرات به تعامل بیشتر کاربران کمک می‌کنند.
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                    <a href="#">جان دوو</a>
-                                                </h5>
-                                                <p class="date">۵ دسامبر ۲۰۱۷ ساعت ۱۰:۰۰ ق.ظ </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">پاسخ</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="comment-form">
-                        <h4>نظر خود را بنویسید</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm" method="POST">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30"
-                                                  rows="9" placeholder="نظر خود را بنویسید..."></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text"
-                                               placeholder="نام شما">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="email" id="email" type="email"
-                                               placeholder="ایمیل شما">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input class="form-control" name="website" id="website" type="text"
-                                               placeholder="وبسایت (اختیاری)">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="button button-contactForm">ارسال نظر</button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
-
-                        <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title" style="color: var(--primary-purple);">آخرین مطالب</h3>
-                            <div class="media post_item">
-                                <img src="{% static 'safario/img/blog/popular-post/post1.jpg' %}" alt="تصویر مطلب محبوب">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>از زندگی، تو ماهی بودی...</h3>
-                                    </a>
-                                    <p>۱۲ ژانویه، ۲۰۱۹</p>
+                        {# ویجت جستجو (اگر لازم است action آن را به URL جستجوی وبلاگ خودتان تغییر دهید) #}
+                        <aside class="single_sidebar_widget search_widget">
+                            <form action="{% url 'news:news_list' %}">
+                                {# یا هر URLی که برای لیست اخبار با قابلیت جستجو دارید #}
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="q"
+                                               placeholder="کلمه کلیدی جستجو...">
+                                        <div class="input-group-append">
+                                            <button class="btn" type="submit"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            {# ... سایر مطالب محبوب ... #}
-                            <div class="media post_item">
-                                <img src="{% static 'safario/img/blog/popular-post/post2.jpg' %}" alt="تصویر مطلب محبوب">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>شگفتی‌های تلسکوپ هابل</h3>
-                                    </a>
-                                    <p>۲ ساعت پیش</p>
-                                </div>
-                            </div>
+                                <button class="button rounded-0 primary-bg text-white w-100" type="submit">جستجو
+                                </button>
+                            </form>
                         </aside>
 
+                        {# ویجت آخرین مطالب (این بخش نیاز به ارسال لیستی از آخرین مطالب از view دارد) #}
+                        <aside class="single_sidebar_widget popular_post_widget">
+                            <h3 class="widget_title">آخرین مطالب</h3>
+                            {% for recent_post in recent_posts %} {# recent_posts باید از view پاس داده شود #}
+                                <div class="media post_item">
+                                    {% if recent_post.image_news %}
+                                        <a href="{% url 'news:news_detail' recent_post.id %}">
+                                            <img src="{{ recent_post.image_news.url }}"
+                                                 alt="{{ recent_post.title_news }}">
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'news:news_detail' recent_post.id %}">
+                                            <img src="{% static 'safario/img/blog/post-thumb-default.jpg' %}"
+                                                 alt="تصویر پیش‌فرض مطلب">
+                                        </a>
+                                    {% endif %}
+                                    <div class="media-body">
+                                        <a href="{% url 'news:news_detail' recent_post.id %}">
+                                            <h3>{{ recent_post.title_news|truncatewords:6 }}</h3>
+                                        </a>
+                                        <p>{{ recent_post.published_at|date:"j F Y" }}</p>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p>مطلب جدیدی یافت نشد.</p>
+                            {% endfor %}
+                        </aside>
 
+                        {# سایر ویجت‌های سایدبار مثل دسته‌بندی‌ها، تگ‌ها و ... را می‌توانید به همین شکل داینامیک کنید #}
+                        {# یا اگر محتوای استاتیک دارند، متنشان را فارسی کنید #}
 
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    {% endblock content %}
+{% endblock content %}
+
+{% block extra_js %}
+    {{ block.super }}
+    {# اگر جاوااسکریپت خاصی برای این صفحه نیاز دارید، اینجا اضافه کنید #}
+{% endblock extra_js %}
