@@ -11,7 +11,9 @@ from tour.views import user_is_authorized
 @login_required
 def news_list(request):
     news_items = News.objects.all()
-    return render(request, 'news/news_list.html', {'news_items': news_items})
+    # return render(request, 'news/news_list.html', {'news_items': news_items})
+    return render(request, 'safario/blog.html', {'news_items': news_items})
+
 
 
 # def user_is_authorized(view_func):
