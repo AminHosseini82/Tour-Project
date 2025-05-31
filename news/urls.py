@@ -10,7 +10,7 @@ urlpatterns = [
     path('edit_news/<int:pk>/', views.edit_news, name='edit_news'),
     path('addnews/', views.news_create, name='addnews'),
     path('deletenews/<int:pk>/', views.delete_news, name='delete_news'),
-    # path('tour/<int:tour_id>/', views.tour_detail, name='tour_detail'),
+    path('newsdetile/<int:news_id>/', views.news_detail, name='news_detail'),
 
 ]
 if settings.DEBUG:

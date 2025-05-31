@@ -112,3 +112,9 @@ def delete_news(request, pk):
         return redirect('news:news_list')  # یا هر URL مربوط به لیست اخبار
 
 # ---------------------------------------------------------------------------------
+def news_detail(request, news_id):
+    new = News.objects.get(id=news_id)
+    return render(request,"safario/blog-details.html" , {'new': new})
+
+
+
