@@ -1,518 +1,322 @@
-<!DOCTYPE html>
+{% extends 'safario/base.html' %}
+{% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <!--<title>Registration Form in HTML CSS</title>-->
+{% block title %}
+    {% if tour_item %}ویرایش تور{% else %}اضافه کردن تور{% endif %} - سفر سافاریو
+{% endblock title %}
 
-    <style>
+{% block extra_css %}
+<style>
+    /* تعریف متغیرهای تم بنفش */
+    :root {
+        --primary-purple: #6A0DAD; /* بنفش اصلی */
+        --light-purple-bg: #f2e6ff; /* بنفش خیلی روشن برای پس‌زمینه فرم یا بخش‌ها */
+        --input-bg-purple: rgba(106, 13, 173, 0.1); /* پس‌زمینه نیمه‌شفاف بنفش برای فیلدها */
+        --input-focus-bg-purple: rgba(106, 13, 173, 0.2);
+        --button-text-color: #FFFFFF;
+        --text-on-purple-bg: #FFFFFF; /* رنگ متن روی پس‌زمینه‌های بنفش */
+        --form-text-color: #333; /* رنگ متن معمولی فرم روی پس‌زمینه روشن */
+        --form-header-color: var(--primary-purple);
+    }
 
-        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+    /* استایل‌های عمومی برای این صفحه با تم بنفش */
+    .add-tour-body-wrapper { /* یک کلاس جدید برای body این صفحه خاص اگر بخواهیم پس‌زمینه متفاوتی داشته باشد */
+        /* background: linear-gradient(to right, #a97bff, #5c2a9d); یا یک پس‌زمینه بنفش دیگر */
+        /* در اینجا از پس‌زمینه bg-shape قالب پایه استفاده می‌شود، مگر اینکه بخواهید تغییر دهید */
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+    .add-tour-wrapper { /* جایگزین .wrapper قبلی */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh; /* کاهش ارتفاع برای جا شدن در base.html */
+        padding: 20px 0; /* اضافه کردن پدینگ */
+        /* background: transparent; /* چون پس‌زمینه اصلی از body یا base.html می‌آید */
+    }
+
+    .add-tour-form-box { /* جایگزین .form-box */
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 700px; /* افزایش عرض برای فرم‌های دوتایی */
+        background: var(--light-purple-bg); /* پس‌زمینه فرم */
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        /* overflow: hidden; اگر لازم باشد */
+        z-index: 2;
+    }
+
+    .add-tour-form-container { /* جایگزین .login-container */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add-tour-header {
+        color: var(--form-header-color); /* استفاده از رنگ بنفش برای عنوان */
+        font-size: 28px; /* کمی کوچکتر از ۳۰px قبلی */
+        font-family: 'Vazirmatn', Tahoma, sans-serif !important; /* برای هماهنگی با فونت اصلی */
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 30px; /* افزایش فاصله از فرم */
+    }
+
+    .add-tour-two-forms {
+        display: flex;
+        gap: 20px; /* افزایش فاصله بین فیلدهای دوتایی */
+        margin-bottom: 15px; /* فاصله بین ردیف‌های فیلد */
+    }
+
+    .add-tour-input-box {
+        flex: 1; /* برای تقسیم مساوی فضا */
+        display: flex;
+        flex-direction: column; /* برای لیبل بالای فیلد */
+    }
+    
+    .add-tour-input-box label {
+        color: var(--form-text-color);
+        font-size: 14px;
+        margin-bottom: 5px;
+        text-align: right;
+        font-weight: 500;
+    }
+
+    .add-tour-input-field {
+        font-size: 15px;
+        background: var(--input-bg-purple);
+        color: var(--form-text-color); /* تغییر رنگ متن داخل فیلد */
+        height: 50px;
+        width: 100%;
+        padding: 10px 15px; /* تغییر پدینگ */
+        border: 1px solid transparent; /* حذف بردر قبلی و اضافه کردن بردر شفاف */
+        border-radius: 8px; /* گردی کمتر */
+        outline: none;
+        transition: .2s ease;
+        font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+    }
+
+    .add-tour-input-field:hover, .add-tour-input-field:focus {
+        background: var(--input-focus-bg-purple);
+        border-color: var(--primary-purple); /* بردر بنفش در فوکوس */
+    }
+
+    .add-tour-input-field::placeholder { /* برای placeholder */
+        color: #8a94a6; /* رنگ ملایم‌تر برای placeholder */
+    }
+    
+    /* استایل برای select */
+    .add-tour-input-field select, .add-tour-input-field {
+        appearance: none; /* حذف ظاهر پیش‌فرض select */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236A0DAD' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E"); /* آیکن فلش سفارشی بنفش */
+        background-repeat: no-repeat;
+        background-position: left 15px center; /* تغییر به left برای RTL */
+        padding-left: 35px; /* فضا برای آیکن فلش */
+    }
+
+    .add-tour-input-field option {
+        color: #000000; /* رنگ متن گزینه‌ها */
+        background-color: #FFFFFF;
+    }
+
+    /* استایل برای radio button ها */
+    .add-tour-radio-group {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+        align-items: center;
+    }
+    .add-tour-radio-group .add-tour-input-box {
+        flex-direction: row; /* رادیو باتن و لیبل در یک ردیف */
+        align-items: center;
+        gap: 8px;
+    }
+    .add-tour-radio-group input[type="radio"] {
+        accent-color: var(--primary-purple); /* رنگ رادیوباتن */
+        width: auto;
+        height: auto;
+    }
+     .add-tour-radio-group label {
+        margin-bottom: 0; /* حذف مارجین پایین لیبل رادیوباتن */
+        font-weight: normal;
+     }
+
+
+    .add-tour-submit-btn { /* جایگزین .submit */
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--button-text-color);
+        height: 50px;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        outline: none;
+        background: var(--primary-purple);
+        cursor: pointer;
+        transition: .3s ease-in-out;
+        margin-top: 30px;
+        font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+    }
+
+    .add-tour-submit-btn:hover {
+        background: var(--dark-purple, #4B0082); /* استفاده از بنفش تیره‌تر در هاور */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* برای اینکه فرم در موبایل بهتر نمایش داده شود */
+    @media only screen and (max-width: 768px) {
+        .add-tour-two-forms {
+            flex-direction: column; /* فیلدها زیر هم در موبایل */
+            gap: 15px;
         }
-
-        body {
-            direction: rtl;
-
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            overflow: hidden;
+        .add-tour-form-box {
+            padding: 20px;
         }
+    }
 
-        .wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 110vh;
-        {#background: rgba(40, 135, 255, 0.75);#} background: rgba(1, 70, 80, 0.4);
-        {#background: #737373;;#}
-        }
+</style>
+{% endblock extra_css %}
 
-        .nav {
-            position: fixed;
-            top: 0;
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            height: 100px;
-            line-height: 100px;
-            background: linear-gradient(rgba(39, 39, 39, 0.6), transparent);
-            z-index: 100;
-        }
+{% block content %}
+<div class="add-tour-body-wrapper"> {# اضافه کردن یک div دربرگیرنده برای استایل‌های خاص body این صفحه در صورت نیاز #}
+    <div class="add-tour-wrapper">
+        <div class="add-tour-form-box">
+            <div class="add-tour-form-container">
+                <header class="add-tour-header">{% if tour_item %}ویرایش اطلاعات تور{% else %}فرم اطلاعات تور{% endif %}</header>
 
-        .nav-logo p {
-            color: white;
-            font-size: 25px;
-            font-weight: 600;
-        }
+                <form action="{% if tour_item %}{% url 'tour:edittour' tour_item.id %}{% else %}{% url 'tour:add' %}{% endif %}"
+                      method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
 
-        .nav-menu ul {
-            display: flex;
-        }
-
-        .nav-menu ul li {
-            list-style-type: none;
-        }
-
-        .nav-menu ul li .link {
-            text-decoration: none;
-            font-weight: 500;
-            color: #fff;
-            padding-bottom: 15px;
-            margin: 0 25px;
-        }
-
-        .link:hover, .active {
-            border-bottom: 2px solid #fff;
-        }
-
-        .nav-button .btn {
-            width: 130px;
-            height: 40px;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.4);
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: .3s ease;
-        }
-
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        #registerBtn {
-            margin-left: 15px;
-        }
-
-        .btn.white-btn {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        .btn.btn.white-btn:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .nav-menu-btn {
-            display: none;
-        }
-
-        .form-box {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 512px;
-            height: 500px;
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        .login-container {
-            position: absolute;
-            left: 4px;
-            width: 500px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            transition: .5s ease-in-out;
-        }
-
-        .register-container {
-            position: absolute;
-            right: -520px;
-            width: 500px;
-            display: flex;
-            flex-direction: column;
-            transition: .5s ease-in-out;
-        }
-
-        .top span {
-            color: #fff;
-            font-size: small;
-            padding: 10px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .top span a {
-            font-weight: 500;
-            color: #fff;
-            margin-left: 5px;
-        }
-
-        header {
-            color: #fff;
-            font-size: 30px;
-            text-align: center;
-            padding: 10px 0 30px 0;
-        }
-
-        .two-forms {
-            display: flex;
-            gap: 10px;
-        }
-
-        .input-field {
-            font-size: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            height: 50px;
-            width: 100%;
-            padding: 10px 10px 0 45px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 50px;
-            border: none;
-            border-radius: 30px;
-            outline: none;
-            transition: .2s ease;
-        }
-
-        .input-field:hover, .input-field:focus {
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        ::-webkit-input-placeholder {
-            color: #fff;
-        }
-
-        .input-box i {
-            position: relative;
-            top: -35px;
-            left: 17px;
-            color: #fff;
-        }
-
-        .submit {
-            font-size: 15px;
-            font-weight: 500;
-            color: black;
-            height: 45px;
-            width: 100%;
-            border: none;
-            border-radius: 30px;
-            outline: none;
-            background: rgba(255, 255, 255, 0.7);
-            cursor: pointer;
-            transition: .3s ease-in-out;
-            margin-top: 30px;
-        }
-
-        .submit:hover {
-            background: rgba(255, 255, 255, 0.5);
-            box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
-        }
-
-        .two-col {
-            display: flex;
-            justify-content: space-between;
-            color: #fff;
-            font-size: small;
-            margin-top: 10px;
-        }
-
-        .two-col .one {
-            display: flex;
-            gap: 5px;
-        }
-
-        .two label a {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .two label a:hover {
-            text-decoration: underline;
-        }
-
-        @media only screen and (max-width: 786px) {
-            .nav-button {
-                display: none;
-            }
-
-            .nav-menu.responsive {
-                top: 100px;
-            }
-
-            .nav-menu {
-                position: absolute;
-                top: -800px;
-                display: flex;
-                justify-content: center;
-                background: rgba(255, 255, 255, 0.2);
-                width: 100%;
-                height: 90vh;
-                backdrop-filter: blur(20px);
-                transition: .3s;
-            }
-
-            .nav-menu ul {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .nav-menu-btn {
-                display: block;
-            }
-
-            .nav-menu-btn i {
-                font-size: 25px;
-                color: #fff;
-                padding: 10px;
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 50%;
-                cursor: pointer;
-                transition: .3s;
-            }
-
-            .nav-menu-btn i:hover {
-                background: rgba(255, 255, 255, 0.15);
-            }
-        }
-
-        @media only screen and (max-width: 540px) {
-            .wrapper {
-                min-height: 100vh;
-            }
-
-            .form-box {
-                width: 100%;
-                height: 500px;
-            }
-
-            .register-container, .login-container {
-                width: 100%;
-                padding: 0 20px;
-            }
-
-            .register-container .two-forms {
-                flex-direction: column;
-                gap: 0;
-            }
-        }
-
-        h1 {
-            color: white;
-        }
-
-        .input-field {
-            color: black; /* رنگ متن تمامی گزینه‌ها را سیاه می‌کند */
-        }
-
-        .input-field option {
-            color: black; /* رنگ متن گزینه‌ها را سیاه می‌کند */
-        }
-
-        label {
-            color: white;
-        }
-    </style>
-</head>
-
-
-{#این درست بوده Body👇#}
-
-<body>
-<div class="wrapper">
-    <nav class="nav">
-
-        <div class="nav-menu" id="navMenu">
-            <h1>فرم اطلاعات تور </h1>
-        </div>
-    </nav>
-
-    <div class="form-box">
-
-        <div class="login-container" id="login">
-            <form action="#" method="post" class="form" enctype="multipart/form-data">
-                <form action="
-                    {% if tour_item %}{% url 'tour:edittour' tour_item.id %}{% else %}{% url 'tour:add' %}{% endif %}"
-                      method="post" class="form" enctype="multipart/form-data">
-                    {% csrf_token %} <!-- این خط برای امنیت و جلوگیری از حملات CSRF ضروری است -->
-
-                    <div class="two-forms">
-                        <div class="input-box">
-                            <input type="text" class="input-field" name="title"
-                                   value="{% if tour_item %}{{ form.title.value }}{% endif %}" placeholder="نام تور"
+                    <div class="add-tour-two-forms">
+                        <div class="add-tour-input-box">
+                            <label for="title">نام تور</label>
+                            <input type="text" class="add-tour-input-field" id="title" name="title"
+                                   value="{{ tour_item.title|default_if_none:form.title.value|default_if_none:'' }}" placeholder="مثال: تور کویر مصر"
                                    required>
                         </div>
-                        <div class="input-box">
-                            <input type="number" class="input-field" name="idtour"
-                                   value="{% if tour_item %}{{ form.idtour.value }}{% endif %}" placeholder="هزینه تور"
-                                   required>
-                        </div>
-                        <div class="input-box">
-                            <input type="number" class="input-field" name="capacity"
-                                   value="{% if tour_item %}{{ form.capacity.value }}{% endif %}"
-                                   placeholder="ظرفیت تور"
+                        <div class="add-tour-input-box">
+                            <label for="idtour">هزینه تور (تومان)</label> {# تغییر placeholder به label #}
+                            <input type="number" class="add-tour-input-field" id="idtour" name="idtour"
+                                   value="{{ tour_item.idtour|default_if_none:form.idtour.value|default_if_none:'' }}" placeholder="مثال: 1500000"
                                    required>
                         </div>
                     </div>
 
-                    <div class="two-forms">
-                        <div class="input-box">
-                            <select name="firstdistination" class="input-field" required>
-                                <option hidden>مبدا تور</option>
-                                <option value="Kerman" {% if tour_item.firstdistination == "Kerman" %}selected{% endif %}>
-                                    Kerman
-                                </option>
-                                <option value="Shiraz" {% if tour_item.firstdistination == "Shiraz" %}selected{% endif %}>
-                                    Shiraz
-                                </option>
-                                <option value="Isfahan"
-                                        {% if tour_item.firstdistination == "Isfahan" %}selected{% endif %}>
-                                    Isfahan
-                                </option>
-                                <option value="Tehran" {% if tour_item.firstdistination == "Tehran" %}selected{% endif %}>
-                                    Tehran
-                                </option>
-                                <option value="Gilan" {% if tour_item.firstdistination == "Gilan" %}selected{% endif %}>
-                                    Gilan
-                                </option>
-                                <option value="Yazd" {% if tour_item.firstdistination == "Yazd" %}selected{% endif %}>Yazd
-                                </option>
-                                <option value="Hamedan" {% if tour_item.firstdistination == "Hamedan" %}selected{% endif %}>
-                                    Hamedan
-                                </option>
-                                <option value="Mashhad" {% if tour_item.firstdistination == "Mashhad" %}selected{% endif %}>
-                                    Mashhad
-                                </option>
-                                <option value="Hormozgan"
-                                        {% if tour_item.firstdistination == "Hormozgan" %}selected{% endif %}>
-                                    Hormozgan
-                                </option>
+                    <div class="add-tour-two-forms">
+                        <div class="add-tour-input-box">
+                             <label for="capacity">ظرفیت تور (نفر)</label>
+                            <input type="number" class="add-tour-input-field" id="capacity" name="capacity"
+                                   value="{{ tour_item.capacity|default_if_none:form.capacity.value|default_if_none:'' }}"
+                                   placeholder="مثال: 25"
+                                   required>
+                        </div>
+                        <div class="add-tour-input-box">
+                            <label for="firstdistination">مبدا تور</label>
+                            <select name="firstdistination" id="firstdistination" class="add-tour-input-field" required>
+                                <option value="" disabled {% if not tour_item.firstdistination and not form.firstdistination.value %}selected{% endif %}>مبدا را انتخاب کنید</option>
+                                {% with current_value=tour_item.firstdistination|default_if_none:form.firstdistination.value|default_if_none:'' %}
+                                <option value="Kerman" {% if current_value == "Kerman" %}selected{% endif %}>کرمان</option>
+                                <option value="Shiraz" {% if current_value == "Shiraz" %}selected{% endif %}>شیراز</option>
+                                <option value="Isfahan" {% if current_value == "Isfahan" %}selected{% endif %}>اصفهان</option>
+                                <option value="Tehran" {% if current_value == "Tehran" %}selected{% endif %}>تهران</option>
+                                <option value="Gilan" {% if current_value == "Gilan" %}selected{% endif %}>گیلان</option>
+                                <option value="Yazd" {% if current_value == "Yazd" %}selected{% endif %}>یزد</option>
+                                <option value="Hamedan" {% if current_value == "Hamedan" %}selected{% endif %}>همدان</option>
+                                <option value="Mashhad" {% if current_value == "Mashhad" %}selected{% endif %}>مشهد</option>
+                                <option value="Hormozgan" {% if current_value == "Hormozgan" %}selected{% endif %}>هرمزگان</option>
+                                {% endwith %}
                             </select>
                         </div>
-                        <div class="input-box">
-                            <select name="lastDestination" class="input-field" required>
-                                <option hidden>مقصد تور</option>
-                                <option value="Kerman" {% if tour_item.lastDestination == "Kerman" %}selected{% endif %}>
-                                    Kerman
-                                </option>
-                                <option value="Shiraz" {% if tour_item.lastDestination == "Shiraz" %}selected{% endif %}>
-                                    Shiraz
-                                </option>
-                                <option value="Isfahan"
-                                        {% if tour_item.lastDestination == "Isfahan" %}selected{% endif %}>
-                                    Isfahan
-                                </option>
-                                <option value="Tehran" {% if tour_item.lastDestination == "Tehran" %}selected{% endif %}>
-                                    Tehran
-                                </option>
-                                <option value="Gilan" {% if tour_item.lastDestination == "Gilan" %}selected{% endif %}>
-                                    Gilan
-                                </option>
-                                <option value="Yazd" {% if tour_item.lastDestination == "Yazd" %}selected{% endif %}>Yazd
-                                </option>
-                                <option value="Hamedan" {% if tour_item.lastDestination == "Hamedan" %}selected{% endif %}>
-                                    Hamedan
-                                </option>
-                                <option value="Mashhad" {% if tour_item.lastDestination == "Mashhad" %}selected{% endif %}>
-                                    مشهد
-                                </option>
-                                <option value="Hormozgan"
-                                        {% if tour_item.lastDestination == "Hormozgan" %}selected{% endif %}>
-                                    Hormozgan
-                                </option>
+                    </div>
+                    
+                    <div class="add-tour-two-forms">
+                        <div class="add-tour-input-box">
+                            <label for="lastDestination">مقصد تور</label>
+                            <select name="lastDestination" id="lastDestination" class="add-tour-input-field" required>
+                                <option value="" disabled {% if not tour_item.lastDestination and not form.lastDestination.value %}selected{% endif %}>مقصد را انتخاب کنید</option>
+                                {% with current_value=tour_item.lastDestination|default_if_none:form.lastDestination.value|default_if_none:'' %}
+                                <option value="Kerman" {% if current_value == "Kerman" %}selected{% endif %}>کرمان</option>
+                                <option value="Shiraz" {% if current_value == "Shiraz" %}selected{% endif %}>شیراز</option>
+                                <option value="Isfahan" {% if current_value == "Isfahan" %}selected{% endif %}>اصفهان</option>
+                                <option value="Tehran" {% if current_value == "Tehran" %}selected{% endif %}>تهران</option>
+                                <option value="Gilan" {% if current_value == "Gilan" %}selected{% endif %}>گیلان</option>
+                                <option value="Yazd" {% if current_value == "Yazd" %}selected{% endif %}>یزد</option>
+                                <option value="Hamedan" {% if current_value == "Hamedan" %}selected{% endif %}>همدان</option>
+                                <option value="Mashhad" {% if current_value == "Mashhad" %}selected{% endif %}>مشهد</option>
+                                <option value="Hormozgan" {% if current_value == "Hormozgan" %}selected{% endif %}>هرمزگان</option>
+                                {% endwith %}
                             </select>
                         </div>
-
-
-                        {#                                                        این درست بود👇#}
-                        <div class="input-box">
-                            <input
-                                    type="file"
-                                    class="input-field"
-                                    name="image"
-                                    required
-                                    placeholder="تصویر">
-                        </div>
-                    </div>
-                    {#                                                        این درست بوده👆#}
-
-
-{#                    <div class="input-box">#}
-{#                        <label>تصویر (اختیاری):</label>#}
-{#                        <input#}
-{#                                type="file"#}
-{#                                class="input-field"#}
-{#                                name="image_news"#}
-{#                                placeholder="تصویر (اختیاری)">#}
-{#                        {% if form.image_news.errors %}#}
-{#                            <div class="error">{{ form.image_news.errors }}</div>#}
-{#                        {% endif %}#}
-{#                        {% if news_item.image_news %}  <!-- بررسی وجود تصویر -->#}
-{#                            <p>تصویر بارگذاری شده: {{ news_item.image_news.name }}</p> <!-- نمایش نام فایل -->#}
-{#                            <img src="{{ news_item.image_news.url }}" alt="تصویر خبر"#}
-{#                                 style="max-width: 200px; max-height: 200px;"/> <!-- نمایش تصویر -->#}
-{#                        {% endif %}#}
-{#                    </div>#}
-
-
-                    <div class="input-box">
-                        <label>تاریخ حرکت:</label>
-                        <input
-                                type="date"
-                                class="input-field"
-                                name="startdate"
-                                value="
-
-
-                                        {% if tour_item and form.startdate.value %}{{ form.startdate.value|date:'Y-m-d' }}{% endif %}"
-                                required placeholder="تاریخ حرکت ">
-                    </div>
-                    <div class="input-box">
-                        <label>تاریخ برگشت:</label>
-                        <input
-                                type="date"
-                                class="input-field"
-                                name="finishdate"
-                                value="
-
-                                        {% if tour_item and form.finishdate.value %}{{ form.finishdate.value|date:'Y-m-d' }}{% endif %}"
-                                required placeholder="تاریخ حرکت ">
-                    </div>
-
-                    <label>بلیط</label>
-                    <div class="two-forms">
-                        <div class="input-box">
-                            <input type="radio" id="check-bus" name="ticket_type" value="bus"
-                                   {% if tour_item.ticket_type == "bus" %}checked{% endif %}/>
-                            <label for="check-bus">اتوبوس</label>
-                        </div>
-                        <div class="input-box">
-                            <input type="radio" id="check-train" name="ticket_type" value="train"
-                                   {% if tour_item.ticket_type == "train" %}checked{% endif %}/>
-                            <label for="check-train">قطار</label>
+                        <div class="add-tour-input-box">
+                            <label for="image">تصویر تور</label>
+                            <input type="file" class="add-tour-input-field" id="image" name="image" 
+                                   {% if not tour_item %}required{% endif %}> {# فقط برای تور جدید اجباری باشد #}
+                            {% if tour_item.image %}
+                                <small style="margin-top: 5px; text-align:right;">تصویر فعلی: <a href="{{ tour_item.image.url }}" target="_blank">{{ tour_item.image.name|cut:"tour_images/" }}</a></small>
+                                <input type="checkbox" name="image-clear" id="image-clear"> <label for="image-clear" style="font-size:0.8rem; font-weight:normal;">حذف تصویر فعلی</label>
+                            {% endif %}
                         </div>
                     </div>
 
-                    <div class="input-box">
-                        <input type="submit" class="submit"
+                    <div class="add-tour-two-forms">
+                        <div class="add-tour-input-box">
+                            <label for="startdate">تاریخ حرکت:</label>
+                            <input type="date" class="add-tour-input-field" id="startdate" name="startdate"
+                                   value="{{ tour_item.startdate|default_if_none:form.startdate.value|default_if_none:''|date:'Y-m-d' }}" required>
+                        </div>
+                        <div class="add-tour-input-box">
+                            <label for="finishdate">تاریخ برگشت:</label>
+                            <input type="date" class="add-tour-input-field" id="finishdate" name="finishdate"
+                                   value="{{ tour_item.finishdate|default_if_none:form.finishdate.value|default_if_none:''|date:'Y-m-d' }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="add-tour-input-box" style="margin-bottom: 20px;">
+                        <label>نوع بلیط</label>
+                        <div class="add-tour-radio-group">
+                             <div class="add-tour-input-box">
+                                <input type="radio" id="check-bus" name="ticket_type" value="bus"
+                                       {% if tour_item.ticket_type == "bus" or not tour_item %}checked{% endif %}>
+                                <label for="check-bus">اتوبوس</label>
+                            </div>
+                            <div class="add-tour-input-box">
+                                <input type="radio" id="check-train" name="ticket_type" value="train"
+                                       {% if tour_item.ticket_type == "train" %}checked{% endif %}>
+                                <label for="check-train">قطار</label>
+                            </div>
+                           {# می‌توانید گزینه‌های دیگر مثل هواپیما را هم اضافه کنید #}
+                        </div>
+                    </div>
+
+                    <div class="add-tour-input-box">
+                        <input type="submit" class="add-tour-submit-btn"
                                value="{% if tour_item %}ویرایش تور{% else %}اضافه کردن تور{% endif %}">
                     </div>
                 </form>
+            </div>
         </div>
+    </div>
+</div>
+{% endblock content %}
 
-</body>
-
-{#این درست بوده Body👆#}
-
-
-</html>
-
-
-
-
-
-
-
+{% block extra_js %}
+<script>
+    // برای اینکه اگر مقدار اولیه برای تاریخ وجود داشت، input type="date" آن را درست نمایش دهد
+    // این کد دیگر لازم نیست چون فیلتر |date:'Y-m-d' در value اعمال شده است.
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const startDateInput = document.getElementById('startdate');
+    //     if (startDateInput && startDateInput.dataset.initial) {
+    //         startDateInput.value = startDateInput.dataset.initial;
+    //     }
+    //     const finishDateInput = document.getElementById('finishdate');
+    //     if (finishDateInput && finishDateInput.dataset.initial) {
+    //         finishDateInput.value = finishDateInput.dataset.initial;
+    //     }
+    // });
+</script>
+{% endblock extra_js %}
