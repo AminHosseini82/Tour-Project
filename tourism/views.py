@@ -303,7 +303,9 @@ def tourism_view(request):
         # if finishdate:
         #     tourisms = tourisms.filter(finishdate__lte=finishdate)  # تاریخ برگشت باید کوچکتر یا مساوی تاریخ انتخابی باشد
 
-    return render(request, 'tourism/tourism_page.html', {'tourisms': tourisms, 'form': form})
+    # return render(request, 'tourism/tourism_page.html', {'tourisms': tourisms, 'form': form})
+    return render(request, 'safario/tourism_list.html', {'tourisms': tourisms, 'form': form})
+
 
 
 @login_required

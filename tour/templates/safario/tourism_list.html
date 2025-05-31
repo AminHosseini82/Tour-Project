@@ -1,0 +1,123 @@
+{% extends 'safario/base.html' %} {# یا مسیر صحیح base.html شما #}
+{% load static %}
+
+
+{% block title %}
+    سفر سافاریو - مقاصد گردشگری ما
+{% endblock title %}
+
+{% block content %}
+    {# بنر کوچک بالای صفحه، مشابه صفحه تورها #}
+    <section class="hero-banner-sm magic-ball magic-ball-banner" id="parallax-1" data-anchor-target="#parallax-1"
+             data-300-top="background-position: 0px -80px" data-top-bottom="background-position: 0 100px">
+        <div class="container">
+            <div class="hero-banner-sm-content">
+                <h1>جاذبه‌های گردشگری</h1>
+                <p>زیبایی‌های ایران و جهان را با پیشنهادات گردشگری متنوع سافاریو کشف کنید.</p>
+            </div>
+        </div>
+    </section>
+
+    {# فرم جستجوی گردشگری #}
+    <section class="section-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xl-5 align-self-center mb-5 mb-lg-0">
+                    <div class="search-content">
+                        <h2>مقصد بعدی شما، <br class="d-none d-xl-block"> یک کلیک تا ماجراجویی!</h2>
+                        <p>بهترین مکان‌های دیدنی و فعالیت‌های گردشگری را جستجو کنید و برای یک تجربه فراموش‌نشدنی برنامه‌ریزی نمایید.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-6 offset-xl-1">
+                    <div class="search-wrapper">
+                        <h3>جستجوی مقصد گردشگری</h3>
+                        {# فرم جستجو باید با فیلدهای مربوط به گردشگری و URL صحیح تکمیل شود #}
+                        {# این بخش از HTML قدیمی شما گرفته شده و کمی تطبیق داده شده #}
+                        <form class="search-form" action="{% url 'tourism:tourismpage' %}" method="GET"> {# URL جستجوی گردشگری #}
+                            <div class="form-group">
+                                <div class="input-group">
+                                     {# در HTML قدیمی شما یک فیلد جستجوی کلی با name="query" بود، می‌توانید از آن استفاده کنید #}
+                                    <input type="text" name="query" class="form-control"
+                                           placeholder="نام مقصد، شهر یا فعالیت...">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="ti-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="button border-0 mt-3" type="submit">جستجوی گردشگری</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# بخش نمایش لیست آیتم‌های گردشگری #}
+    <section class="section-margin">
+        <div class="container">
+            <div class="section-intro text-center pb-90px">
+                <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}"
+                     alt="آیکن بخش گردشگری">
+                <h2>مقاصد و فعالیت‌های گردشگری ما</h2>
+                <p>بهترین و جذاب‌ترین گزینه‌های گردشگری را با ما تجربه کنید.</p>
+            </div>
+
+            <div class="row">
+                {% for tourism_item in tourisms %} {# استفاده از نام متغیر tourisms از HTML قدیمی #}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tour-card h-100"> {# می‌توانید از همین کلاس tour-card استفاده کنید یا یک کلاس جدید مثل tourism-card بسازید #}
+                            <div class="tour-image-container" style="position: relative;">
+                                {% if tourism_item.image_tourism %} {# استفاده از نام فیلد تصویر از HTML قدیمی #}
+                                    <img class="card-img-top rounded-0"
+                                         src="{{ tourism_item.image_tourism.url }}" alt="{{ tourism_item.title_tourism }}">
+                                {% else %}
+                                    <img class="card-img-top rounded-0"
+                                         src="{% static 'safario/img/default_tour_image.png' %}" {# تصویر پیش‌فرض برای گردشگری #}
+                                         alt="تصویر پیش‌فرض گردشگری">
+                                {% endif %}
+
+                                <div class="tour-card-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h4><a href="{% url 'tourism:tourism_detail' tourism_item.id %}" {# URL جزئیات گردشگری #}
+                                                   style="color: inherit;">{{ tourism_item.title_tourism }}</a></h4> {# عنوان از HTML قدیمی #}
+
+                                            {# سایر اطلاعاتی که می‌خواهید در هاور نمایش دهید، مثلاً مقصد یا نوع فعالیت #}
+                                            {% if tourism_item.lastDestination_tourism %}
+                                            <small>{{ tourism_item.lastDestination_tourism }}</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if user.is_authenticated and user.email == "aminhosseini822003@gmail.com" %}
+                                <div class="admin-actions p-3 text-center"
+                                     style="background-color: #f8f9fa; border-top: 1px solid #dee2e6; position: relative; z-index: 2;">
+                                    <a href="{% url 'tourism:edittourism' tourism_item.id %}" {# URL ویرایش گردشگری #}
+                                       class="btn btn-sm btn-outline-primary mx-1" style="position: relative; z-index: 2;">ویرایش</a>
+                                    <a href="{% url 'tourism:deletetourism' tourism_item.id %}" {# URL حذف گردشگری #}
+                                       class="btn btn-sm btn-outline-danger mx-1" style="position: relative; z-index: 2;">حذف</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-12">
+                        <p class="text-center">متاسفانه در حال حاضر هیچ آیتم گردشگری با مشخصات درخواستی شما موجود نیست.</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="text-center mt-5">
+                {% if user.is_authenticated and user.email == 'aminhosseini822003@gmail.com' %}
+                    <a class="button" href="{% url 'tourism:addtourism' %}">اضافه کردن آیتم گردشگری</a> {# URL اضافه کردن گردشگری #}
+                {% endif %}
+                <a class="button" href="{% url 'tour:main_page' %}" style="margin-right: 10px;">بازگشت به صفحه اصلی</a>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
