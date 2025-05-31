@@ -534,7 +534,7 @@ def tour_detail(request, tour_id):
 # --------------------------------------------------------------------------
 
 def main_page(request):
-    tours = tour.objects.all()  # تمام تورها را از پایگاه‌داده بگیرید
+    tours = tour.objects.all()[:3]
     context = {
         'tours': tours  # ارسال تورها به قالب
     }
