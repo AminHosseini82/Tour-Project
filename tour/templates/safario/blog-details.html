@@ -261,25 +261,7 @@
 
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
-                        {# ویجت جستجو (اگر لازم است action آن را به URL جستجوی وبلاگ خودتان تغییر دهید) #}
-                        <aside class="single_sidebar_widget search_widget">
-                            <form action="{% url 'news:news_list' %}">
-                                {# یا هر URLی که برای لیست اخبار با قابلیت جستجو دارید #}
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="q"
-                                               placeholder="کلمه کلیدی جستجو...">
-                                        <div class="input-group-append">
-                                            <button class="btn" type="submit"><i class="ti-search"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="button rounded-0 primary-bg text-white w-100" type="submit">جستجو
-                                </button>
-                            </form>
-                        </aside>
 
-                        {# ویجت آخرین مطالب (این بخش نیاز به ارسال لیستی از آخرین مطالب از view دارد) #}
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">آخرین مطالب</h3>
                             {% for recent_post in recent_posts %} {# recent_posts باید از view پاس داده شود #}

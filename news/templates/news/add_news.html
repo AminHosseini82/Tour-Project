@@ -1,968 +1,311 @@
-{#<!DOCTYPE html>#}
-{#<html lang="fa">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
-{#    <title>ایجاد خبر جدید</title>#}
-{#</head>#}
-{#<body>#}
-{##}
-{#<h1>ایجاد خبر جدید</h1>#}
-{##}
-{#<!-- نمایش فرم -->#}
-{#<form method="POST" enctype="multipart/form-data">#}
-{#    {% csrf_token %} <!-- توکن CSRF برای امنیت -->#}
-{##}
-{#    <div>#}
-{#        <label for="id_title_news">عنوان خبر:</label>#}
-{#        {{ form.title_news }} <!-- فیلد عنوان خبر -->#}
-{#        {{ form.title_news.errors }} <!-- نمایش خطاهای فیلد -->#}
-{#    </div>#}
-{##}
-{#    <div>#}
-{#        <label for="id_description_news">توضیحات:</label>#}
-{#        {{ form.description_news }} <!-- فیلد توضیحات -->#}
-{#        {{ form.description_news.errors }} <!-- نمایش خطاهای فیلد -->#}
-{#    </div>#}
-{##}
-{#    <div>#}
-{#        <label for="id_image_news">تصویر خبر:</label>#}
-{#        {{ form.image_news }} <!-- فیلد تصویر -->#}
-{#        {{ form.image_news.errors }} <!-- نمایش خطاهای فیلد -->#}
-{#    </div>#}
-{##}
-{#    <button type="submit">ایجاد خبر</button> <!-- دکمه ارسال فرم -->#}
-{#</form>#}
-{##}
-{#<a href="{% url 'news:news_list' %}">برگشت به لیست اخبار</a> <!-- لینک بازگشت به لیست اخبار -->#}
-{##}
-{#</body>#}
-{#</html>#}
+{% extends 'safario/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if news_item %}ویرایش خبر{% else %}افزودن خبر جدید{% endif %} - سفر سافاریو
+{% endblock title %}
+
+{% block extra_css %}
+<style>
+    /* متغیرهای تم بنفش باید در base.html یا فایل CSS سراسری تعریف شده باشند */
+    /* اینها برای یادآوری است */
+    /* :root {
+        --primary-purple: #6A0DAD;
+        --light-purple-bg: #f2e6ff;
+        --input-bg-purple: rgba(106, 13, 173, 0.1);
+        --input-focus-bg-purple: rgba(106, 13, 173, 0.2);
+        --button-text-color: #FFFFFF;
+        --form-text-color: #333;
+        --form-header-color: var(--primary-purple);
+        --error-text-color: #D32F2F;
+        --error-bg-color: #FFEBEE;
+    } */
+
+    .add-item-body-wrapper {
+        /* اگر می‌خواهید پس‌زمینه خاصی برای این صفحه داشته باشید، اینجا اعمال کنید */
+        /* مثال: background: #f9f5ff; */
+    }
+
+    .add-item-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        padding: 50px 15px; /* کمی پدینگ برای فاصله از لبه‌ها */
+    }
+
+    .add-item-form-box {
+        width: 100%;
+        max-width: 650px; /* عرض مناسب برای فرم */
+        background: var(--light-purple-bg, #f8f4ff); /* پس‌زمینه بنفش خیلی روشن */
+        padding: 30px 35px; /* افزایش پدینگ داخلی */
+        border-radius: 12px; /* گردی بیشتر گوشه‌ها */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* سایه ملایم‌تر */
+        z-index: 2;
+    }
+
+    .add-item-form-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add-item-header {
+        color: var(--form-header-color, #5A2A75); /* رنگ بنفش تیره‌تر برای عنوان */
+        font-size: 2rem; /* اندازه فونت مناسب برای عنوان فرم */
+        font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 35px; /* فاصله بیشتر */
+    }
+
+    .add-item-input-box {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 22px; /* فاصله بیشتر بین فیلدها */
+    }
+
+    .add-item-input-box label {
+        color: var(--form-text-color, #495057); /* رنگ تیره‌تر و خواناتر برای لیبل */
+        font-size: 15px; /* اندازه فونت مناسب برای لیبل */
+        margin-bottom: 8px; /* فاصله از فیلد ورودی */
+        text-align: right;
+        font-weight: 600; /* کمی ضخیم‌تر */
+    }
+
+    .add-item-input-field,
+    .add-item-textarea-field {
+        font-size: 15px;
+        background: #FFFFFF; /* پس‌زمینه سفید برای کنتراست بهتر */
+        color: var(--form-text-color, #333);
+        width: 100%;
+        padding: 12px 18px;
+        border: 1px solid #ced4da; /* بردر استاندارد */
+        border-radius: 8px;
+        outline: none;
+        transition: border-color .2s ease, box-shadow .2s ease;
+        font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+    }
+    .add-item-textarea-field {
+        min-height: 130px;
+        resize: vertical;
+    }
+
+    .add-item-input-field:focus,
+    .add-item-textarea-field:focus {
+        border-color: var(--primary-purple, #8a59a5); /* بردر بنفش در فوکوس */
+        box-shadow: 0 0 0 0.2rem rgba(106, 13, 173, 0.15); /* سایه ملایم بنفش در فوکوس */
+    }
+
+    .add-item-input-field::placeholder,
+    .add-item-textarea-field::placeholder {
+        color: #868e96; /* رنگ استانداردتر برای placeholder */
+    }
+     .add-item-input-field[type="file"] {
+        padding: 8px 12px; /* پدینگ کمتر برای فایل چون دکمه خودش فضا دارد */
+    }
+    .add-item-input-field[type="file"]::-webkit-file-upload-button { /* استایل دکمه انتخاب فایل */
+        background-color: var(--primary-purple, #6A0DAD);
+        color: var(--button-text-color, #FFFFFF);
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px; /* برای RTL */
+    }
+     .add-item-input-field[type="file"]::-moz-file-upload-button { /* برای فایرفاکس */
+        background-color: var(--primary-purple, #6A0DAD);
+        color: var(--button-text-color, #FFFFFF);
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
 
 
-{#--------------------------#}
-{#{% load static %}#}
-{#  <STYLE>#}
-{##}
-{#        :root {#}
-{#            /*========== Colors ==========*/#}
-{#            /*Color mode HSL(hue, saturation, lightness)*/#}
-{#            --first-color: hsl(208, 92%, 54%);#}
-{#            --first-color-alt: hsl(208, 88%, 50%);#}
-{#            --title-color: hsl(220, 68%, 4%);#}
-{#            --white-color: hsl(0, 0%, 100%);#}
-{#            --text-color: hsl(220, 15%, 66%);#}
-{#            --body-color: hsl(0, 0%, 100%);#}
-{#            --container-color: hsl(220, 50%, 97%);#}
-{##}
-{#            /*========== Font and typography ==========*/#}
-{#            /*.5rem = 8px | 1rem = 16px ...*/#}
-{#            --body-font: "Montserrat", system-ui;#}
-{#            --big-font-size: 1.5rem;#}
-{#            --normal-font-size: .938rem;#}
-{#            --small-font-size: .813rem;#}
-{#            --tiny-font-size: .688rem;#}
-{##}
-{#            /*========== Font weight ==========*/#}
-{#            --font-regular: 400;#}
-{#            --font-medium: 500;#}
-{#            --font-semi-bold: 600;#}
-{##}
-{#            /*========== z index ==========*/#}
-{#            --z-tooltip: 10;#}
-{#            --z-fixed: 100;#}
-{#        }#}
-{##}
-{#        /*========== Responsive typography ==========*/#}
-{#        @media screen and (min-width: 1150px) {#}
-{#            :root {#}
-{#                --big-font-size: 3rem;#}
-{#                --normal-font-size: 1rem;#}
-{#                --small-font-size: .875rem;#}
-{#                --tiny-font-size: .75rem;#}
-{#            }#}
-{#        }#}
-{##}
-{#        /*=============== BASE ===============*/#}
-{#        * {#}
-{##}
-{#            box-sizing: border-box;#}
-{#            padding: 0;#}
-{#            margin: 0;#}
-{#        }#}
-{##}
-{#        body,#}
-{#        input,#}
-{#        button {#}
-{#             font-family: "Gulzar", serif;#}
-{#            font-size: var(--normal-font-size);#}
-{#        }#}
-{##}
-{#        body {#}
-{#            background-color: var(--body-color);#}
-{#            color: var(--text-color);#}
-{#        }#}
-{##}
-{#        input,#}
-{#        button {#}
-{#            border: none;#}
-{#            outline: none;#}
-{#        }#}
-{##}
-{#        a {#}
-{#            text-decoration: none;#}
-{#        }#}
-{##}
-{#        img {#}
-{#            display: block;#}
-{#            max-width: 100%;#}
-{#            height: auto;#}
-{#        }#}
-{##}
-{#        /*=============== REUSABLE CSS CLASSES ===============*/#}
-{#        .container {#}
-{#            max-width: 1120px;#}
-{#            margin-inline: 1.5rem;#}
-{#        }#}
-{##}
-{#        .grid {#}
-{#            display: grid;#}
-{#            gap: 1rem;#}
-{#        }#}
-{##}
-{#        /*=============== LOGIN  ===============*/#}
-{#        .login {#}
-{#            position: relative;#}
-{#            height: 100vh;#}
-{#            align-items: center;#}
-{#            overflow: hidden;#}
-{#        }#}
-{##}
-{#        .login__blob {#}
-{#            display: none;#}
-{#        }#}
-{##}
-{#        .login__title {#}
-{#            font-size: var(--big-font-size);#}
-{#            color: var(--title-color);#}
-{#            text-align: center;#}
-{#            margin-bottom: 2rem;#}
-{#        }#}
-{##}
-{#        .login__box {#}
-{#            position: relative;#}
-{#            display: flex;#}
-{#            align-items: center;#}
-{#            background-color: var(--container-color);#}
-{#            border-radius: 1rem;#}
-{#        }#}
-{##}
-{#        .login__input {#}
-{#            background: none;#}
-{#            width: 100%;#}
-{#            padding: 1.5rem 2.5rem 1.5rem 1.25rem;#}
-{#            font-weight: var(--font-semi-bold);#}
-{#            border: 3px solid transparent;#}
-{#            border-radius: 1rem;#}
-{#            z-index: 1;#}
-{#            transition: border-color .4s;#}
-{#        }#}
-{##}
-{#        .login__input:autofill {#}
-{#            transition: background-color 6000s, color 6000s;#}
-{#        }#}
-{##}
-{#        .login__label {#}
-{#            position: absolute;#}
-{#            left: 1.25rem;#}
-{#            font-weight: var(--font-semi-bold);#}
-{#            transition: transform .4s, font-size .4s, color .4s;#}
-{#        }#}
-{##}
-{#        .login__icon {#}
-{#            position: absolute;#}
-{#            right: 1rem;#}
-{#            font-size: 1.25rem;#}
-{#            transition: color .4s;#}
-{#        }#}
-{##}
-{#        .login__password {#}
-{#            cursor: pointer;#}
-{#            z-index: 10;#}
-{#        }#}
-{##}
-{#        .login__forgot {#}
-{#            display: block;#}
-{#            width: max-content;#}
-{#            margin: 1rem 0 0 auto;#}
-{#            font-size: var(--small-font-size);#}
-{#            font-weight: var(--font-semi-bold);#}
-{#            color: var(--text-color);#}
-{#            transition: color .4s;#}
-{#        }#}
-{##}
-{#        .login__forgot:hover {#}
-{#            color: var(--first-color);#}
-{#        }#}
-{##}
-{#        .login__button {#}
-{#            width: 100%;#}
-{#            display: inline-flex;#}
-{#            justify-content: center;#}
-{#            background-color: var(--first-color);#}
-{#            color: var(--white-color);#}
-{#            font-weight: var(--font-semi-bold);#}
-{#            padding-block: 1.5rem;#}
-{#            border-radius: 4rem;#}
-{#            margin-block: 2rem;#}
-{#            cursor: pointer;#}
-{#            transition: background-color .4s, box-shadow .4s;#}
-{#        }#}
-{##}
-{#        .login__button:hover {#}
-{#            background-color: var(--first-color-alt);#}
-{#            box-shadow: 0 8px 24px hsla(208, 92%, 32%, .3);#}
-{#        }#}
-{##}
-{#        .login__social {#}
-{#            margin-bottom: 2rem;#}
-{#        }#}
-{##}
-{#        .login__social-title {#}
-{#            text-align: center;#}
-{#            font-size: var(--small-font-size);#}
-{#            font-weight: var(--font-semi-bold);#}
-{#            color: var(--title-color);#}
-{#            margin-bottom: 1rem;#}
-{#        }#}
-{##}
-{#        .login__social-img {#}
-{#            width: 1rem;#}
-{#        }#}
-{##}
-{#        .login__social-links {#}
-{#            display: flex;#}
-{#            justify-content: center;#}
-{#            column-gap: 1.5rem;#}
-{#        }#}
-{##}
-{#        .login__social-link {#}
-{#            width: 32px;#}
-{#            height: 32px;#}
-{#            background-color: var(--body-color);#}
-{#            box-shadow: 0 4px 8px hsla(0, 0%, 0%, .1);#}
-{#            border-radius: .5rem;#}
-{#            display: grid;#}
-{#            place-items: center;#}
-{#            transition: transform .4s;#}
-{#        }#}
-{##}
-{#        .login__social-link:hover {#}
-{#            transform: translateY(-.25rem);#}
-{#        }#}
-{##}
-{#        .login__switch {#}
-{#            text-align: center;#}
-{#            font-size: var(--small-font-size);#}
-{#        }#}
-{##}
-{#        .login__switch button {#}
-{#            background: none;#}
-{#            color: var(--first-color);#}
-{#            font-size: var(--small-font-size);#}
-{#            font-weight: var(--font-semi-bold);#}
-{#            cursor: pointer;#}
-{#            transition: color .4s;#}
-{#        }#}
-{##}
-{#        .login__switch button:hover {#}
-{#            color: var(--first-color-alt);#}
-{#        }#}
-{##}
-{#        .login__access,#}
-{#        .login__register {#}
-{#            position: absolute;#}
-{#            left: 0;#}
-{#            right: 0;#}
-{#            width: 100%;#}
-{#            transition: transform .4s, opacity .4s .1s;#}
-{#        }#}
-{##}
-{#        .login__register {#}
-{#            transform: translateX(15rem);#}
-{#            opacity: 0;#}
-{#            pointer-events: none;#}
-{#        }#}
-{##}
-{#        /* Input focus move up label */#}
-{#        .login__input:focus ~ .login__label {#}
-{#            transform: translateY(-12px);#}
-{#            font-size: var(--tiny-font-size);#}
-{#        }#}
-{##}
-{#        .login__input:focus {#}
-{#            padding-block: 2rem 1rem;#}
-{#        }#}
-{##}
-{#        /* Input focus sticky top label */#}
-{#        .login__input:not(:placeholder-shown).login__input:not(:focus) ~ .login__label {#}
-{#            transform: translateY(-12px);#}
-{#            font-size: var(--tiny-font-size);#}
-{#        }#}
-{##}
-{#        .login__input:not(:placeholder-shown).login__input:not(:focus) {#}
-{#            padding-block: 2rem 1rem;#}
-{#        }#}
-{##}
-{#        /* Input focus color */#}
-{#        .login__input:focus {#}
-{#            border-color: var(--first-color);#}
-{#        }#}
-{##}
-{#        .login__input:focus ~ .login__label,#}
-{#        .login__input:focus ~ .login__icon {#}
-{#            color: var(--first-color);#}
-{#        }#}
-{##}
-{#        /* Show hide login & create account */#}
-{#        .active .login__access {#}
-{#            transform: translateX(15rem);#}
-{#            opacity: 0;#}
-{#            pointer-events: none;#}
-{#        }#}
-{##}
-{#        .active .login__register {#}
-{#            transform: translateX(0);#}
-{#            opacity: 1;#}
-{#            pointer-events: initial;#}
-{#        }#}
-{##}
-{#        /*=============== BREAKPOINTS ===============*/#}
-{#        /* For small devices */#}
-{#        @media screen and (max-width: 320px) {#}
-{#            .container {#}
-{#                margin-inline: 1rem;#}
-{#            }#}
-{#        }#}
-{##}
-{#        /* For medium devices */#}
-{#        @media screen and (min-width: 540px) {#}
-{#            .login__area {#}
-{#                width: 380px;#}
-{#                margin-inline: auto;#}
-{#            }#}
-{#        }#}
-{##}
-{#        @media screen and (min-width: 350px) and (max-height: 600px) {#}
-{#            .login {#}
-{#                height: 760px;#}
-{#            }#}
-{#        }#}
-{##}
-{#        /* For large devices */#}
-{#        @media screen and (min-width: 1150px) {#}
-{#            .container {#}
-{#                margin-inline: auto;#}
-{#            }#}
-{##}
-{#            .login__area {#}
-{#                width: 460px;#}
-{#                margin: initial;#}
-{#            }#}
-{##}
-{#            .login__access,#}
-{#            .login__register {#}
-{#                width: 600px;#}
-{#            }#}
-{##}
-{#            .login__title {#}
-{#                margin-left: 130px;#}
-{#                text-align: initial;#}
-{#                margin-bottom: 3rem;#}
-{#            }#}
-{##}
-{#            .login__button {#}
-{#                margin-bottom: 3rem;#}
-{#            }#}
-{##}
-{#            .login__group {#}
-{#                grid-template-columns: repeat(2, 1fr);#}
-{#            }#}
-{##}
-{#            .login__blob {#}
-{#                display: block;#}
-{#                height: 100vh;#}
-{#                position: absolute;#}
-{#                top: 0;#}
-{#                right: 0;#}
-{#            }#}
-{##}
-{#            .login__img {#}
-{#                transform: translate(0rem, 0rem);#}
-{#            }#}
-{#        }#}
-{#        .messages {#}
-{#    list-style-type: none;#}
-{#    padding: 0;#}
-{#    margin: 20px 0;#}
-{#}#}
-{##}
-{#.messages li {#}
-{#    padding: 10px;#}
-{#    margin-bottom: 10px;#}
-{#    border-radius: 5px;#}
-{#}#}
-{##}
-{#.messages .info {#}
-{#    background-color: #f0f8ff;#}
-{#    color: #31708f;#}
-{#    border: 1px solid #bce8f1;#}
-{#}#}
-{##}
-{#.messages .error {#}
-{#    background-color: #fbc2c4;#}
-{#    color: #a94442;#}
-{#    border: 1px solid #ebccd1;#}
-{#}#}
-{##}
-{#/* اضافه کردن استایل‌های دیگر به میلـه‌ها بر حسب نیاز */#}
-{#    </STYLE>#}
-{#</head>#}
-{#<body>#}
-{#<!--=============== LOGIN IMAGE ===============-->#}
-{##}
-{#<svg class="login__blob " viewBox="0 0 566 840" xmlns="http://www.w3.org/2000/svg">#}
-{#    <mask id="mask0" mask-type="alpha">#}
-{#        <path d="M342.407 73.6315C388.53 56.4007 394.378 17.3643 391.538#}
-{#            0H566V840H0C14.5385 834.991 100.266 804.436 77.2046 707.263C49.6393#}
-{#            591.11 115.306 518.927 176.468 488.873C363.385 397.026 156.98 302.824#}
-{#            167.945 179.32C173.46 117.209 284.755 95.1699 342.407 73.6315Z"/>#}
-{#    </mask>#}
-{##}
-{#    <g mask="url(#mask0)">#}
-{#        <path d="M342.407 73.6315C388.53 56.4007 394.378 17.3643 391.538#}
-{#            0H566V840H0C14.5385 834.991 100.266 804.436 77.2046 707.263C49.6393#}
-{#            591.11 115.306 518.927 176.468 488.873C363.385 397.026 156.98 302.824#}
-{#            167.945 179.32C173.46 117.209 284.755 95.1699 342.407 73.6315Z"/>#}
-{##}
-{#        <!-- Insert your image (recommended size: 1000 x 1200) -->#}
-{#       <image class="login__img" xlink:href="{% static 'images/bg-img.jpg' %}" />#}
-{#    </g>#}
-{#</svg>#}
-{##}
-{#<div class="login container grid" id="loginAccessRegister">#}
-{#    <div class="login__access">#}
-{#        <h1 class="login__title">ایجاد خبر </h1>#}
-{##}
-{#        <div class="login__area">#}
-{##}
-{#            <!-- کد نمایش پیام‌ها -->#}
-{#            {% if messages %}#}
-{#                <ul class="messages">#}
-{#                    {% for message in messages %}#}
-{#                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#            {% endif %}#}
-{##}
-{##}
-{#            <form method="POST" action="{% url 'news:addnews' %}" class="login__form" enctype="multipart/form-data">#}
-{#                {% csrf_token %}#}
-{#                <div class="login__content grid">#}
-{##}
-{#<div class="login__box">#}
-{#    <input type="text" id="title_news" name="title_news" required placeholder=" " class="login__input">#}
-{#    <label for="title_news" class="login__label">عنوان خبر</label>#}
-{#    <i class="ri-user-fill login__icon"></i>#}
-{#</div>#}
-{#<div class="login__box">#}
-{#    <input type="text" id="description_news" name="description_news" required placeholder=" " class="login__input">#}
-{#    <label for="description_news" class="login__label">توضیحات</label>#}
-{#    <i class="ri-mail-fill login__icon"></i>#}
-{#</div>#}
-{#<div class="login__box">#}
-{#    <input type="file" id="image_news" name="image_news" required placeholder=" " class="login__input">#}
-{#    <label for="image_news" class="login__label">تصویر</label>#}
-{#    <i class="ri-eye-off-fill login__icon login__password" id="loginPasswordCreate"></i>#}
-{#</div>#}
-{##}
-{#                <button type="submit" class="login__button">ایجاد خبر</button>#}
-{#            </form>#}
-{##}
-{#            <p class="login__switch" dir="rtl">#}
-{#                قبلا ثبت نام کردید؟#}
-{#                <button id="loginButtonRegister">ورود</button>#}
-{#                <a href="{% url 'accounts:login' %}" id="loginButtonRegister" class="btn">ورود</a>#}
-{#            </p>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-{##}
-{#</body>#}
-{#</html>#}
+    .add-item-submit-btn {
+        font-size: 17px; /* کمی بزرگتر */
+        font-weight: 600;
+        color: var(--button-text-color, #FFFFFF);
+        height: 50px;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        outline: none;
+        background: var(--primary-purple, #6A0DAD);
+        cursor: pointer;
+        transition: background-color .3s ease-in-out, box-shadow .3s ease-in-out;
+        margin-top: 25px;
+        font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+    }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <!--<title>Registration Form in HTML CSS</title>-->
+    .add-item-submit-btn:hover {
+        background: var(--dark-purple, #540a82); /* بنفش تیره‌تر */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
 
-    <style>
+    .form-errors-container {
+        color: var(--error-text-color, #D32F2F);
+        padding: 12px 15px;
+        background-color: var(--error-bg-color, #FFEBEE);
+        border-radius: 8px;
+        margin-bottom: 25px;
+        border: 1px solid var(--error-text-color, #D32F2F);
+    }
+    .form-errors-container p {
+        margin-bottom: 5px;
+        font-size: 0.9em;
+    }
+    .field-error-message {
+        color: var(--error-text-color, #D32F2F);
+        font-size: 0.85em;
+        margin-top: 5px; /* فاصله از فیلد */
+        display: block;
+    }
 
-        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+    .image-preview-container small {
+        font-size: 0.85rem;
+        color: #555;
+    }
+    .image-preview-container img {
+        max-width: 150px; /* اندازه مناسب برای پیش‌نمایش */
+        max-height: 150px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-top: 5px;
+    }
+     .image-clear-label { /* استایل برای لیبل حذف تصویر */
+        font-size:0.8rem !important;
+        font-weight:normal !important;
+        margin-bottom:0 !important;
+        margin-right: 5px; /* فاصله از چک‌باکس در RTL */
+     }
+     .image-clear-checkbox { /* استایل برای خود چک‌باکس */
+        width:auto !important;
+        height:auto !important;
+        margin-left:3px !important; /* فاصله از لیبل در RTL */
+        vertical-align: middle;
+     }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+
+    @media only screen and (max-width: 768px) {
+        .add-item-form-box {
+            padding: 20px;
+            margin: 20px 15px; /* برای اینکه در موبایل به لبه‌ها نچسبد */
         }
-
-        body {
-            direction: rtl;
-
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            overflow: hidden;
+        .add-item-header {
+            font-size: 24px; /* کوچکتر کردن عنوان در موبایل */
         }
+    }
 
-        .wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 110vh;
-        {#background: #a8dadc;#} background: rgba(40, 135, 255, 0.85);
-        {#background: rgba(1, 70, 80, 0.4);#}
-        }
+</style>
+{% endblock extra_css %}
 
-        .nav {
-            position: fixed;
-            top: 0;
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            height: 100px;
-            line-height: 100px;
-            background: linear-gradient(rgba(39, 39, 39, 0.6), transparent);
-            z-index: 100;
-        }
+{% block content %}
+<div class="add-item-body-wrapper">
+    <div class="add-item-wrapper">
+        <div class="add-item-form-box">
+            <div class="add-item-form-container">
+                <header class="add-item-header">{% if news_item %}ویرایش خبر{% else %}افزودن خبر جدید{% endif %}</header>
 
-        .nav-logo p {
-            color: white;
-            font-size: 25px;
-            font-weight: 600;
-        }
+                {% if form.errors %}
+                    <div class="form-errors-container">
+                        <p>لطفاً خطاهای زیر را اصلاح کنید:</p>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <p><strong>{{ field|capfirst }}:</strong> {{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
-        .nav-menu ul {
-            display: flex;
-        }
+                <form action="{% if news_item %}{% url 'news:edit_news' news_item.id %}{% else %}{% url 'news:addnews' %}{% endif %}"
+                      method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
 
-        .nav-menu ul li {
-            list-style-type: none;
-        }
+                    <div class="add-item-input-box">
+                        <label for="{{ form.title_news.id_for_label }}">عنوان خبر</label>
+                        {{ form.title_news }} {# رندر کردن فیلد با ویجت و کلاس‌های تعریف شده در forms.py یا استایل‌های بالا #}
+                        {% if form.title_news.errors %}<span class="field-error-message">{{ form.title_news.errors|join:", " }}</span>{% endif %}
+                    </div>
 
-        .nav-menu ul li .link {
-            text-decoration: none;
-            font-weight: 500;
-            color: #fff;
-            padding-bottom: 15px;
-            margin: 0 25px;
-        }
+                    <div class="add-item-input-box">
+                        <label for="{{ form.description_news.id_for_label }}">توضیحات خبر</label>
+                        {{ form.description_news }}
+                        {% if form.description_news.errors %}<span class="field-error-message">{{ form.description_news.errors|join:", " }}</span>{% endif %}
+                    </div>
 
-        .link:hover, .active {
-            border-bottom: 2px solid #fff;
-        }
-
-        .nav-button .btn {
-            width: 130px;
-            height: 40px;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.4);
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: .3s ease;
-        }
-
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        #registerBtn {
-            margin-left: 15px;
-        }
-
-        .btn.white-btn {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        .btn.btn.white-btn:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .nav-menu-btn {
-            display: none;
-        }
-
-        .form-box {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 512px;
-            height: 390px;
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        .login-container {
-            position: absolute;
-            left: 4px;
-            width: 500px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            transition: .5s ease-in-out;
-        }
-
-        .register-container {
-            position: absolute;
-            right: -520px;
-            width: 500px;
-            display: flex;
-            flex-direction: column;
-            transition: .5s ease-in-out;
-        }
-
-        .top span {
-            color: #fff;
-            font-size: small;
-            padding: 10px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .top span a {
-            font-weight: 500;
-            color: #fff;
-            margin-left: 5px;
-        }
-
-        header {
-            color: #fff;
-            font-size: 30px;
-            text-align: center;
-            padding: 10px 0 30px 0;
-        }
-
-        .two-forms {
-            display: flex;
-            gap: 10px;
-        }
-
-        .input-field {
-            font-size: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            height: 50px;
-            width: 100%;
-            padding: 10px 10px 0 45px;
-
-            margin-top: 20px;
-            margin-bottom: 20px;
-            margin-left: 50px;
-            border: none;
-            border-radius: 30px;
-            outline: none;
-            transition: .2s ease;
-        }
-
-        .input-field:hover, .input-field:focus {
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        ::-webkit-input-placeholder {
-            color: #fff;
-        }
-
-        .input-box i {
-            position: relative;
-            top: -35px;
-            left: 17px;
-            color: #fff;
-        }
-
-        .submit {
-            font-size: 15px;
-            font-weight: 500;
-            color: black;
-            height: 45px;
-            width: 100%;
-            border: none;
-            border-radius: 30px;
-            outline: none;
-            background: rgba(255, 255, 255, 0.7);
-            cursor: pointer;
-            transition: .3s ease-in-out;
-            margin-top: 30px;
-        }
-
-        .submit:hover {
-            background: rgba(255, 255, 255, 0.5);
-            box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
-        }
-
-        .two-col {
-            display: flex;
-            justify-content: space-between;
-            color: #fff;
-            font-size: small;
-            margin-top: 10px;
-        }
-
-        .two-col .one {
-            display: flex;
-            gap: 5px;
-        }
-
-        .two label a {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .two label a:hover {
-            text-decoration: underline;
-        }
-
-        @media only screen and (max-width: 786px) {
-            .nav-button {
-                display: none;
-            }
-
-            .nav-menu.responsive {
-                top: 100px;
-            }
-
-            .nav-menu {
-                position: absolute;
-                top: -800px;
-                display: flex;
-                justify-content: center;
-                background: rgba(255, 255, 255, 0.2);
-                width: 100%;
-                height: 90vh;
-                backdrop-filter: blur(20px);
-                transition: .3s;
-            }
-
-            .nav-menu ul {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .nav-menu-btn {
-                display: block;
-            }
-
-            .nav-menu-btn i {
-                font-size: 25px;
-                color: #fff;
-                padding: 10px;
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 50%;
-                cursor: pointer;
-                transition: .3s;
-            }
-
-            .nav-menu-btn i:hover {
-                background: rgba(255, 255, 255, 0.15);
-            }
-        }
-
-        @media only screen and (max-width: 540px) {
-            .wrapper {
-                min-height: 100vh;
-            }
-
-            .form-box {
-                width: 100%;
-                height: 500px;
-            }
-
-            .register-container, .login-container {
-                width: 100%;
-                padding: 0 20px;
-            }
-
-            .register-container .two-forms {
-                flex-direction: column;
-                gap: 0;
-            }
-        }
-
-        h1 {
-            color: white;
-        }
-    </style>
-</head>
-<body>
-{#  <div class="wrapper">#}
-{#    <nav class="nav">#}
-{##}
-{#        <div class="nav-menu" id="navMenu">#}
-{#            <h1>فرم اطلاعات اخبار </h1>#}
-{#        </div>#}
-{#    </nav>#}
-{##}
-{#    <div class="form-box">#}
-{##}
-{#        <div class="login-container" id="login">#}
-{#    <form action="#" method="post" class="form" enctype="multipart/form-data">#}
-{#        {% csrf_token %} <!-- این خط برای امنیت و جلوگیری از حملات CSRF ضروری است -->#}
-{##}
-{#                <div class="input-box">#}
-{#                <input type="text" class="input-field" name="title_news" required placeholder="عنوان خبر">#}
-{#            </div>#}
-{##}
-{#            <div class="input-box">#}
-{#                <input type="text" class="input-field" name="description_news" required placeholder="توضیحات خبر">#}
-{#            </div>#}
-{##}
-{##}
-{#        <div class="input-box">#}
-{##}
-{#            <input type="file" class="input-field" name="image_news" required placeholder="تاریخ حرکت">#}
-{#        </div>#}
-{##}
-{#        <div class="input-box">#}
-{#            <input type="submit" class="submit" value="ارسال">#}
-{#        </div>#}
-{#    </form>#}
-{#</div>#}
-
-
-<div class="wrapper">
-    <nav class="nav">
-        <div class="nav-menu" id="navMenu">
-            <h1>فرم اطلاعات اخبار </h1>
-        </div>
-    </nav>
-
-    <div class="form-box">
-        <div class="login-container" id="login">
-            <form action="
-                    {% if news_item %}{% url 'news:edit_news' news_item.id %}{% else %}{% url 'news:addnews' %}{% endif %}"
-                  method="post" class="form" enctype="multipart/form-data">
-                {% csrf_token %}
-
-                <div class="input-box">
-                    <input
-                            type="text"
-                            class="input-field"
-                            name="title_news"
-                            value="{% if news_item %}{{ form.title_news.value }}{% endif %}"
-                            required placeholder="عنوان خبر ">
-                    {% if form.title_news.errors %}
-                        <div class="error">{{ form.title_news.errors }}</div>
+                    {# اگر فیلد خلاصه خبر (excerpt_news) را در فرم تعریف کرده‌اید: #}
+                    {% if form.excerpt_news %}
+                    <div class="add-item-input-box">
+                        <label for="{{ form.excerpt_news.id_for_label }}">خلاصه خبر (اختیاری)</label>
+                        {{ form.excerpt_news }}
+                        {% if form.excerpt_news.errors %}<span class="field-error-message">{{ form.excerpt_news.errors|join:", " }}</span>{% endif %}
+                    </div>
                     {% endif %}
-                </div>
 
-                <div class="input-box">
-                    <input
-                            type="text"
-                            class="input-field"
-                            name="description_news"
-                            value="{% if news_item %}{{ form.description_news.value }}{% endif %}"
-                            required placeholder="توضیحات خبر ">
-                    {% if form.description_news.errors %}
-                        <div class="error">{{ form.description_news.errors }}</div>
+                    <div class="add-item-input-box">
+                        <label for="{{ form.image_news.id_for_label }}">تصویر شاخص خبر</label>
+                        {{ form.image_news }}
+                        {% if news_item.image_news %}
+                            <div class="image-preview-container mt-2 text-right">
+                                <small>تصویر فعلی:</small><br>
+                                <a href="{{ news_item.image_news.url }}" target="_blank">
+                                    <img src="{{ news_item.image_news.url }}" alt="تصویر فعلی {{ news_item.title_news }}">
+                                </a>
+                                <br>
+                                {# برای حذف تصویر در ModelForm، جنگو به صورت پیش‌فرض چک‌باکس را با نام فیلد + "-clear" می‌سازد #}
+                                {# اگر از form.image_news.label_tag و فیلد استفاده می‌کنید، این بخش توسط جنگو هندل می‌شود #}
+                                {# اگر دستی می‌سازید، باید چک‌باکس با نام image_news-clear داشته باشید #}
+                                {% if form.image_news.field.widget.template_name == 'django/forms/widgets/clearable_file_input.html' %}
+                                     {# اگر از ClearableFileInput استفاده می‌کنید، جنگو خودش بخش حذف را رندر می‌کند #}
+                                {% else %}
+                                     {# اگر نه، می‌توانید دستی اضافه کنید، اما معمولاً نیازی نیست اگر فرم درست تنظیم شده باشد #}
+                                     <input type="checkbox" name="image_news-clear" id="id_image_news-clear" class="image-clear-checkbox">
+                                     <label for="id_image_news-clear" class="image-clear-label">حذف تصویر فعلی</label>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if form.image_news.errors %}<span class="field-error-message">{{ form.image_news.errors|join:", " }}</span>{% endif %}
+                    </div>
+
+                    {# اگر فیلدهای is_published و published_at را در فرم دارید: #}
+                    {% if form.published_at %}
+                    <div class="add-item-input-box">
+                        <label for="{{ form.published_at.id_for_label }}">تاریخ انتشار</label>
+                        {{ form.published_at }}
+                         {% if form.published_at.errors %}<span class="field-error-message">{{ form.published_at.errors|join:", " }}</span>{% endif %}
+                    </div>
                     {% endif %}
-                </div>
-
-                <div class="input-box">
-                    <input
-                            type="file"
-                            class="input-field"
-                            name="image_news"
-                            placeholder="تصویر (اختیاری)">
-                    {% if form.image_news.errors %}
-                        <div class="error">{{ form.image_news.errors }}</div>
+                    {% if form.is_published %}
+                    <div class="add-item-input-box form-check" style="flex-direction: row; align-items: center;">
+                        {{ form.is_published }}
+                        <label for="{{ form.is_published.id_for_label }}" class="form-check-label" style="margin-right: 10px; margin-bottom: 0;">آیا منتشر شود؟</label>
+                         {% if form.is_published.errors %}<span class="field-error-message">{{ form.is_published.errors|join:", " }}</span>{% endif %}
+                    </div>
                     {% endif %}
-                </div>
 
-                <div class="input-box">
-                    <input type="submit" class="submit" value="ارسال">
+
+                    <div class="add-item-input-box">
+                        <input type="submit" class="add-item-submit-btn"
+                               value="{% if news_item %}ویرایش خبر{% else %}افزودن خبر{% endif %}">
+                    </div>
+                </form>
+                 <div class="text-center mt-3">
+                    <a href="{% url 'news:news_list' %}" class="button button-outline" style="background-color: #777; border-color: #777; color:white; padding: 10px 20px; text-decoration: none; border-radius: 8px;">بازگشت به لیست اخبار</a>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
+{% endblock content %}
 
-
-{#-----------------------------------------------------این درسته، این اخرین تغییرات هست👇--------------------------------#}
-{#<div class="wrapper">#}
-{#    <nav class="nav">#}
-{#        <div class="nav-menu" id="navMenu">#}
-{#            <h1>فرم اطلاعات اخبار </h1>#}
-{#        </div>#}
-{#    </nav>#}
-{##}
-{#    <div class="form-box">#}
-{#        <div class="login-container" id="login">#}
-{#            <form action="#}
-{#                    {% if news_item %}{% url 'news:edit_news' news_item.id %}{% else %}{% url 'news:addnews' %}{% endif %}"#}
-{#                  method="post" class="form" enctype="multipart/form-data">#}
-{#            <form action="{% url 'news:addnews' %}" method="post" class="form" enctype="multipart/form-data">#}
-{#                {% csrf_token %}#}
-{##}
-{#                <div class="input-box">#}
-{#                    <input#}
-{#                            type="text"#}
-{#                            class="input-field"#}
-{#                            name="title_news"#}
-{#                            value="{% if news_item %}{{ form.title_news.value }}{% endif %}"#}
-{#                            required placeholder="عنوان خبر ">#}
-{#                        value="{{ form.title_news.value }}"#}
-{##}
-{##}
-{#                </div>#}
-{##}
-{#                <div class="input-box">#}
-{#                    <input#}
-{#                            type="text"#}
-{#                            class="input-field"#}
-{#                            name="description_news"#}
-{#                            value="{% if news_item %}{{ form.description_news.value }}{% endif %}"#}
-{#                            required placeholder="توضیحات خبر ">#}
-{##}
-{##}
-{#                </div>#}
-{##}
-{#                <div class="input-box">#}
-{#                    <input#}
-{#                            type="file"#}
-{#                            class="input-field"#}
-{#                            name="image_news"#}
-{##}
-{#                            placeholder="تصویر (اختیاری)">#}
-{#                </div>#}
-{##}
-{#                <div class="input-box">#}
-{#                    <input type="submit" class="submit" value="ارسال">#}
-{#                </div>#}
-{#            </form>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-</body>
-</html>
-
-
-
-
-
-
-
+{% block extra_js %}
+<script>
+    // جاوااسکریپت خاصی برای این فرم در حال حاضر نیاز نیست
+</script>
+{% endblock extra_js %}
