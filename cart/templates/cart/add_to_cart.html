@@ -1,53 +1,264 @@
+{% load static %} {# اگر از تگ static برای فاوآیکن یا تصاویر دیگر استفاده می‌کنید #}
 <!DOCTYPE html>
-<html>
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اضافه کردن به سبد خرید</title>
+    <title>افزودن به سبد خرید</title>
+    <link rel="icon" href="{% static 'safario/img/Fevicon.png' %}" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background-color: #f4f4f9; color: #333; line-height: 1.6; }
-        h1 { text-align: center; color: #2c3e50; margin: 20px 0; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin-bottom: 20px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="number"] { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; }
-        button { background-color: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
-        button:hover { background-color: #2980b9; }
-        p { text-align: center; font-size: 1.1em; }
+        :root {
+            --primary-purple: #6A0DAD; /* بنفش اصلی */
+            --dark-purple: #4B0082;    /* بنفش تیره‌تر */
+            --light-purple-accent: #f4e8fc; /* پس‌زمینه خیلی روشن بنفش */
+            --button-text-color: #FFFFFF;
+            --text-primary: #333333;
+            --text-secondary: #5c5c5c;
+            --border-color: #d1c4e9; /* بنفش خیلی ملایم برای بردرها */
+            --card-bg: #FFFFFF;
+            --card-shadow: rgba(106, 13, 173, 0.1);
+            --error-color: #c0392b; /* قرمز تیره‌تر برای خطا */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            direction: rtl;
+            font-family: 'Vazirmatn', Arial, sans-serif;
+            background-color: var(--light-purple-accent);
+            color: var(--text-primary);
+            line-height: 1.7;
+            display: flex; /* برای وسط‌چین کردن کانتینر در صفحه */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* برای اینکه همیشه تمام ارتفاع صفحه را بگیرد */
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .page-header { /* یک هدر ساده برای این صفحه مستقل */
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .page-header img {
+            max-height: 45px;
+        }
+
+        .add-to-cart-panel { /* جایگزین .container قبلی */
+            width: 100%;
+            max-width: 480px; /* عرض مناسب برای فرم تک ستونی */
+            background: var(--card-bg);
+            padding: 30px 35px; /* پدینگ داخلی */
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            text-align: center;
+            border-top: 5px solid var(--primary-purple); /* یک نوار بنفش در بالا */
+        }
+
+        .add-to-cart-panel h1 {
+            color: var(--dark-purple);
+            font-size: 1.8rem; /* اندازه فونت عنوان */
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .item-details { /* برای نمایش اطلاعات محصول */
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f9f3ff; /* پس زمینه بنفش خیلی خیلی روشن */
+            border-radius: 8px;
+            border: 1px solid var(--light-purple-accent);
+        }
+        .item-details strong {
+            color: var(--primary-purple);
+            font-weight: 600;
+        }
+        .item-details .item-name {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .item-details .item-capacity {
+            font-size: 0.9rem;
+            display: block;
+            color: #777;
+        }
+
+
+        .add-to-cart-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+            text-align: right;
+        }
+
+        .add-to-cart-form input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 25px; /* فاصله بیشتر از دکمه */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center; /* برای اینکه عدد وسط‌چین باشد */
+            font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+            transition: border-color .2s ease, box-shadow .2s ease;
+        }
+
+        .add-to-cart-form input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 0.2rem rgba(106, 13, 173, 0.2);
+        }
+
+        .submit-button { /* کلاس جدید برای دکمه */
+            background-color: var(--primary-purple);
+            color: var(--button-text-color);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(106, 13, 173, 0.25);
+        }
+
+        .submit-button:hover {
+            background-color: var(--dark-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(106, 13, 173, 0.35);
+        }
+
+        /* استایل برای دکمه‌های SweetAlert با تم بنفش */
+        .swal2-popup {
+            font-family: 'Vazirmatn', Tahoma, Arial, sans-serif !important;
+            border-radius: 10px !important;
+        }
+        .swal2-title {
+            color: var(--dark-purple, #4B0082) !important;
+            font-weight: 600 !important;
+        }
+        .swal2-html-container {
+            color: var(--text-primary, #333) !important;
+            font-size: 1rem !important;
+        }
+        .swal2-confirm {
+            background-color: var(--primary-purple, #6A0DAD) !important;
+            border-radius: 6px !important;
+            padding: 10px 25px !important;
+            font-size: 0.95rem !important;
+        }
+        .swal2-confirm:hover {
+            background-color: var(--dark-purple, #4B0082) !important;
+        }
+        .swal2-icon.swal2-error {
+            border-color: var(--error-color, #c0392b) !important;
+            color: var(--error-color, #c0392b) !important;
+        }
+        .swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+            background-color: var(--error-color, #c0392b) !important;
+        }
+
+
         @media (max-width: 600px) {
-            .container { padding: 10px; }
-            button { width: 100%; }
+            .add-to-cart-panel {
+                padding: 20px;
+                margin: 15px; /* برای اینکه در موبایل به لبه‌ها نچسبد */
+            }
+            .add-to-cart-panel h1 {
+                font-size: 1.6rem;
+            }
+            .item-details {
+                font-size: 1rem;
+                padding: 10px;
+            }
+            .item-details .item-name {
+                font-size: 1.1rem;
+            }
+            .submit-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            .page-header {
+                position: static; /* در موبایل هدر از حالت ثابت خارج شود */
+                transform: none;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>اضافه کردن به سبد خرید</h1>
-        <p>
+    {# هدر ساده و مستقل برای این صفحه #}
+    <header class="page-header">
+        <a href="{% url 'tour:main_page' %}"> {# لینک به صفحه اصلی سایت شما #}
+            <img src="{% static 'safario/img/logo.png' %}" alt="لوگو سفر سافاریو">
+        </a>
+    </header>
+
+    <div class="add-to-cart-panel">
+        <h1>افزودن به سبد خرید</h1>
+        <div class="item-details">
+            <span class="item-name">
             {% if item_type == 'tour' %}
                 {{ item.title }}
             {% elif item_type == 'tourism' %}
                 {{ item.title_tourism }}
+            {% else %}
+                {{ item.name|default:"محصول انتخاب شده" }}
             {% endif %}
-            {% if item_capacity %} - ظرفیت: {{ item_capacity }}{% endif %}
-        </p>
-        <form method="POST">
+            </span>
+            {% if item_capacity %}
+                <span class="item-capacity">(ظرفیت موجود: {{ item_capacity }} نفر)</span>
+            {% endif %}
+        </div>
+        <form method="POST" class="add-to-cart-form">
             {% csrf_token %}
-            <label for="quantity">تعداد:</label>
-            <input type="number" name="quantity" value="1" min="1">
-            <button type="submit">اضافه کردن به سبد</button>
+            <label for="id_quantity">تعداد / تعداد نفرات:</label> {# استفاده از id_for_label اگر از فرم جنگو استفاده می‌کنید #}
+            <input type="number" id="id_quantity" name="quantity" value="1" min="1"
+                   {% if item_capacity %}max="{{ item_capacity }}"{% endif %} required>
+
+            {# نمایش خطاهای مربوط به فیلد quantity اگر از فرم جنگو استفاده می‌کنید #}
+            {% if form.quantity.errors %}
+                {% for error in form.quantity.errors %}
+                    <p style="color: var(--error-color, #c0392b); font-size: 0.85em; text-align: right; margin-top: -15px; margin-bottom: 10px;">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            {# نمایش خطاهای کلی فرم اگر از فرم جنگو استفاده می‌کنید #}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                     <p style="color: var(--error-color, #c0392b); font-size: 0.85em; text-align: right; margin-bottom: 10px;">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <button type="submit" class="submit-button">افزودن به سبد</button>
         </form>
     </div>
 
     {% if capacity_error %}
     <script>
-        Swal.fire({
-            title: "خطا!",
-            text: "{{ capacity_error }}",
-            icon: "error",
-            confirmButtonText: "باشه"
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                title: "خطا در ظرفیت!",
+                html: "{{ capacity_error|escapejs }}",
+                icon: "error",
+                confirmButtonText: "متوجه شدم"
+                // customClass برای استایل‌دهی بیشتر به SweetAlert از طریق CSS بالا
+            });
         });
     </script>
     {% endif %}
