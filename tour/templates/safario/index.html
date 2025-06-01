@@ -95,20 +95,17 @@
 
     <section class="section-margin pb-xl-5">
         <div class="container">
-            <div class="section-intro text-center pb-90px">
+            <div class="section-intro text-center pb-90px" style="text-align: right;">
                 <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}"
                      alt="آیکن بخش تورهای ویژه">
-                <h2>تورهای ویژه ما</h2>
-                <p>چند نمونه از بهترین تورهایی که برای شما آماده کرده‌ایم.</p>
+                <h2 style="text-align: right;">تورهای ویژه ما</h2>
+                <p style="text-align: right;">چند نمونه از بهترین تورهایی که برای شما آماده کرده‌ایم.</p>
             </div>
 
-            <div class="row">
-                {# فرض می‌کنیم view شما متغیری به نام 'featured_tours' یا 'tours' به این template پاس می‌دهد #}
-                {# که حاوی لیستی از تورهای منتخب برای نمایش در صفحه اصلی است. #}
-                {# اگر نام متغیر متفاوت است، آن را در حلقه جایگزین کنید. #}
-                {% for tour in tours %} {# یا tours اگر نام متغیر در context همین است #}
+            <div class="row" style="text-align: right; direction: rtl;">
+                {% for tour in tours %}
                     <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="tour-card h-100">
+                        <div class="tour-card h-100" style="text-align: right;">
                             <div class="tour-image-container" style="position: relative;">
                                 {% if tour.image %}
                                     <img class="card-img-top rounded-0"
@@ -119,18 +116,17 @@
                                          alt="تصویر پیش‌فرض تور">
                                 {% endif %}
 
-                                <div class="tour-card-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: flex-end; background: rgba(0,0,0,0.0); transition: background 0.3s ease;"> {# استایل اولیه overlay #}
-                                    <div class="media" style="background: rgba(255,255,255,0.9); padding: 10px; width: 100%; opacity: 0; transition: opacity 0.3s ease;"> {# محتوای overlay که در هاور ظاهر می‌شود #}
-                                        <div class="media-body">
-                                            <h4><a href="{% url 'tour:tour_detail' tour.id %}"
-                                                   style="color: #333;">{{ tour.title }}</a></h4>
-                                            <small>{{ tour.firstdistination }} <i
+                                <div class="tour-card-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: flex-end; background: rgba(0,0,0,0.0); transition: background 0.3s ease; text-align: right;">
+                                    <div class="media" style="background: rgba(255,255,255,0.9); padding: 10px; width: 100%; opacity: 0; transition: opacity 0.3s ease; text-align: right;">
+                                        <div class="media-body" style="text-align: right;">
+                                            <h4 style="text-align: right;"><a href="{% url 'tour:tour_detail' tour.id %}"
+                                                   style="color: #333; text-align: right;">{{ tour.title }}</a></h4>
+                                            <small style="text-align: right;">{{ tour.firstdistination }} <i
                                                     class="fas fa-arrow-left"></i> {{ tour.lastDestination }}</small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {# در صفحه اصلی، دکمه‌های ویرایش و حذف نمایش داده نمی‌شوند #}
                         </div>
                     </div>
                 {% empty %}

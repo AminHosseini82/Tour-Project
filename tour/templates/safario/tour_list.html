@@ -27,23 +27,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-xl-5 align-self-center mb-5 mb-lg-0">
-                    <div class="search-content">
-                        <h2>سفر رویایی شما، <br class="d-none d-xl-block"> با بهترین قیمت، <br
+                    <div class="search-content" style="text-align: right;">
+                        <h2 style="text-align: right;">سفر رویایی شما، <br class="d-none d-xl-block"> با بهترین قیمت، <br
                                 class="d-none d-xl-block"> در دستان شماست!</h2>
-                        <p>جهان پر از مقاصد شگفت‌انگیز است که منتظرند تا کشف شوند. ما در سافاریو به شما کمک می‌کنیم تا
+                        <p style="text-align: right;">جهان پر از مقاصد شگفت‌انگیز است که منتظرند تا کشف شوند. ما در سافاریو به شما کمک می‌کنیم تا
                             با چند کلیک ساده، تور ایده‌آل خود را پیدا کنید و برای خلق خاطراتی بی‌نظیر آماده شوید.
                             ماجراجویی از همین‌جا شروع می‌شود!</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-xl-6 offset-xl-1">
-                    <div class="search-wrapper">
-                        <h3>جستجوی پکیج تور</h3>
+                    <div class="search-wrapper" style="text-align: right;">
+                        <h3 style="text-align: right;">جستجوی پکیج تور</h3>
                         {# فرم جستجو از فایل قدیمی با نام‌های صحیح فیلدها #}
-                        <form class="search-form" action="{% url 'tour:homepage' %}" method="GET">
+                        <form class="search-form" action="{% url 'tour:homepage' %}" method="GET" style="text-align: right; direction: rtl;">
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" name="firstdistination" class="form-control"
-                                           placeholder="نام مبدا">
+                                           placeholder="نام مبدا" style="text-align: right;">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="ti-search"></i></span>
                                     </div>
@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" name="lastDestination" class="form-control"
-                                           placeholder="نام مقصد">
+                                           placeholder="نام مقصد" style="text-align: right;">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="ti-search"></i></span>
                                     </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="date" name="startdate" class="form-control">
+                                    <input type="date" name="startdate" class="form-control" style="text-align: right;">
                                     <div class="input-group-append">
                                         <span class="input-group-text">تاریخ رفت</span>
                                     </div>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="date" name="finishdate" class="form-control">
+                                    <input type="date" name="finishdate" class="form-control" style="text-align: right;">
                                     <div class="input-group-append">
                                         <span class="input-group-text">تاریخ برگشت</span>
                                     </div>
