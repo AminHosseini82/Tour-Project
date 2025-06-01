@@ -23,22 +23,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-xl-5 align-self-center mb-5 mb-lg-0">
-                    <div class="search-content">
-                        <h2>مقصد بعدی شما، <br class="d-none d-xl-block"> یک کلیک تا ماجراجویی!</h2>
-                        <p>بهترین مکان‌های دیدنی و فعالیت‌های گردشگری را جستجو کنید و برای یک تجربه فراموش‌نشدنی برنامه‌ریزی نمایید.</p>
+                    <div class="search-content" style="text-align: right;">
+                        <h2 style="text-align: right;">مقصد بعدی شما، <br class="d-none d-xl-block"> یک کلیک تا ماجراجویی!</h2>
+                        <p style="text-align: right;">بهترین مکان‌های دیدنی و فعالیت‌های گردشگری را جستجو کنید و برای یک تجربه فراموش‌نشدنی برنامه‌ریزی نمایید.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-xl-6 offset-xl-1">
-                    <div class="search-wrapper">
-                        <h3>جستجوی مقصد گردشگری</h3>
+                    <div class="search-wrapper" style="text-align: right;">
+                        <h3 style="text-align: right;">جستجوی مقصد گردشگری</h3>
                         {# فرم جستجو باید با فیلدهای مربوط به گردشگری و URL صحیح تکمیل شود #}
                         {# این بخش از HTML قدیمی شما گرفته شده و کمی تطبیق داده شده #}
-                        <form class="search-form" action="{% url 'tourism:tourismpage' %}" method="GET"> {# URL جستجوی گردشگری #}
+                        <form class="search-form" action="{% url 'tourism:tourismpage' %}" method="GET" style="text-align: right; direction: rtl;"> {# URL جستجوی گردشگری #}
                             <div class="form-group">
                                 <div class="input-group">
                                      {# در HTML قدیمی شما یک فیلد جستجوی کلی با name="query" بود، می‌توانید از آن استفاده کنید #}
                                     <input type="text" name="query" class="form-control"
-                                           placeholder="نام مقصد، شهر یا فعالیت...">
+                                           placeholder="نام مقصد، شهر یا فعالیت..." style="text-align: right;">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="ti-search"></i></span>
                                     </div>
