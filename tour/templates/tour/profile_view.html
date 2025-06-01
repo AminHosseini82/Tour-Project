@@ -187,10 +187,11 @@
                 </card>
                 {% endfor %}
 
-                {% for purchase in purchases %}
-                <card data-image="{{ purchase.tour.image.url|default_if_none:'' }}">
-                    <h1 slot="header">{{ purchase.tour.title }}</h1>
-                    <p slot="content">تاریخ خرید: {{ purchase.purchase_date|date:"Y/m/d" }}</p>
+                {# نمایش خریدهای گروه‌بندی‌شده #}
+                {% for item in grouped_purchases %}
+                <card data-image="{{ item.tour.image.url|default_if_none:'' }}">
+                    <h1 slot="header">{{ item.tour.title }}</h1>
+                    <p slot="content">تعداد خرید: {{ item.quantity }}</p>
                 </card>
                 {% endfor %}
             {% else %}
