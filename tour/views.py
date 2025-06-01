@@ -1,3 +1,4 @@
+from news.models import News
 from .forms import tour, tourform
 from django.shortcuts import render, redirect, get_object_or_404
 # from .forms import SearchForm
@@ -535,8 +536,10 @@ def tour_detail(request, tour_id):
 
 def main_page(request):
     tours = tour.objects.all()[:3] # ققط 3 تا رو نشون میده!
+    # news = News.objects.all()[:3]
     context = {
-        'tours': tours  # ارسال تورها به قالب
+        'tours': tours,  # ارسال تورها به قالب
+        # "news_items" : news
     }
     # return render(request, 'tour/main_page.html', context)  # از context استفاده کنید
     return render(request, 'safario/index.html', context)  # از context استفاده کنید

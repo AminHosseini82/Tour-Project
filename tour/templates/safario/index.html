@@ -93,6 +93,174 @@
         </div>
     </section>
 
+
+
+{#    <section class="section-margin pb-xl-5">#}
+{#        <div class="container">#}
+{#            <div class="section-intro text-center pb-90px" style="text-align: right;">#}
+{#                <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}"#}
+{#                     alt="آیکن بخش تورهای ویژه">#}
+{#                <h2 style="text-align: right;">تورهای ویژه ما</h2>#}
+{#                <p style="text-align: right;">چند نمونه از بهترین تورهایی که برای شما آماده کرده‌ایم.</p>#}
+{#            </div>#}
+{##}
+{#            <div class="row" style="text-align: right; direction: rtl;">#}
+{#                {% for tour in tours %}#}
+{#                    <div class="col-md-6 col-lg-4 mb-4">#}
+{#                        <div class="tour-card h-100" style="text-align: right;">#}
+{#                            <div class="tour-image-container" style="position: relative;">#}
+{#                                {% if tour.image %}#}
+{#                                    <img class="card-img-top rounded-0"#}
+{#                                         src="{{ tour.image.url }}" alt="{{ tour.title }}">#}
+{#                                {% else %}#}
+{#                                    <img class="card-img-top rounded-0"#}
+{#                                         src="{% static 'safario/img/default_tour_image.png' %}"#}
+{#                                         alt="تصویر پیش‌فرض تور">#}
+{#                                {% endif %}#}
+{##}
+{#                                <div class="tour-card-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: flex-end; background: rgba(0,0,0,0.0); transition: background 0.3s ease; text-align: right;">#}
+{#                                    <div class="media" style="background: rgba(255,255,255,0.9); padding: 10px; width: 100%; opacity: 0; transition: opacity 0.3s ease; text-align: right;">#}
+{#                                        <div class="media-body" style="text-align: right;">#}
+{#                                            <h4 style="text-align: right;"><a href="{% url 'tour:tour_detail' tour.id %}"#}
+{#                                                   style="color: #333; text-align: right;">{{ tour.title }}</a></h4>#}
+{#                                            <small style="text-align: right;">{{ tour.firstdistination }} <i#}
+{#                                                    class="fas fa-arrow-left"></i> {{ tour.lastDestination }}</small>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% empty %}#}
+{#                    <div class="col-12">#}
+{#                        <p class="text-center">در حال حاضر تور ویژه‌ای برای نمایش موجود نیست.</p>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{##}
+{#            <div class="text-center mt-5">#}
+{#                <a class="button" href="{% url 'tour:homepage' %}">مشاهده همه تورها</a>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+    
+
+
+
+
+    <section class="bg-gray section-padding magic-ball magic-ball-testimonial pb-xl-5">
+        <div class="container">
+            <div class="section-intro text-center pb-90px">
+                <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}"
+                     alt="آیکن بخش نظرات مشتریان">
+                <h2>مشتریان ما چه می‌گویند</h2>
+                <p>نظرات و تجربیات مشتریان ما از خدمات سافاریو.</p>
+            </div>
+            <div class="owl-carousel owl-theme testimonial pb-xl-5">
+                <div class="testimonial__item">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-2 align-self-center">
+                            <div class="testimonial__img">
+                                <img class="card-img rounded-0" src="{% static 'safario/img/testimonial/t-slider1.png' %}"
+                                     alt="تصویر مشتری - Daniel heart">
+                            </div>
+                        </div>
+                        <div class="col-md-9 col-lg-10">
+                            <div class="testimonial__content mt-3 mt-sm-0">
+                                <h3>Daniel heart</h3>
+                                <p>Nestle</p>
+                                <p class="testimonial__i">"سفر با سافاریو فراتر از انتظارم بود! از همان لحظه اول، حرفه‌ای
+                                    بودن تیم و توجهشان به جزئیات شگفت‌زده‌ام کرد. مناظری که دیدم و تجربیاتی که کسب کردم، تا
+                                    همیشه در خاطرم خواهد ماند. بدون شک، سافاریو انتخاب اول من برای سفرهای بعدی است و با
+                                    اطمینان به همه دوستانم پیشنهادش می‌کنم."</p>
+                                <span class="testimonial__icon"><i class="ti-quote-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {# ... سایر آیتم‌های testimonial ... #}
+            </div>
+        </div>
+    </section>
+
+{#    از وبلاگ ما#}
+
+
+
+
+{#    <section class="section-padding bg-gray">#}
+{#        <div class="container">#}
+{#            <div class="section-intro text-center pb-90px">#}
+{#                <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}" alt="آیکن بخش وبلاگ">#}
+{#                <h2>از وبلاگ ما</h2>#}
+{#                <p>آخرین مقالات، نکات سفر و اخبار گردشگری را در وبلاگ ما بخوانید.</p>#}
+{#            </div>#}
+{##}
+{#            <div class="row">#}
+{#                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">#}
+{#                    <div class="card-blog">#}
+{#                        <img class="card-img rounded-0" src="{% static 'safario/img/blog/blog-1.png' %}"#}
+{#                             alt="تصویر مطلب وبلاگ: نکاتی برای سفر به جنگل">#}
+{#                        <div class="card-blog-body">#}
+{#                            <a href="#">#}
+{#                                <h4>نکاتی برای سفر به مناطق جنگلی و کمپینگ</h4>#}
+{#                            </a>#}
+{#                            <ul class="card-blog-info">#}
+{#                                <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>ژانویه 03, 2018</a>#}
+{#                                </li>#}
+{#                                <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>03#}
+{#                                    نظر</a></li>#}
+{#                            </ul>#}
+{#                            <p>در این مطلب، به بررسی نکات مهم برای یک سفر ایمن و لذت‌بخش به جنگل می‌پردازیم.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">#}
+{#                    <div class="card-blog">#}
+{#                        <img class="card-img rounded-0" src="{% static 'safario/img/blog/blog-2.png' %}"#}
+{#                             alt="تصویر مطلب وبلاگ: معرفی مقاصد ارزان">#}
+{#                        <div class="card-blog-body">#}
+{#                            <a href="#">#}
+{#                                <h4>معرفی بهترین مقاصد گردشگری ارزان در تابستان</h4>#}
+{#                            </a>#}
+{#                            <ul class="card-blog-info">#}
+{#                                <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>فوریه 15,#}
+{#                                    2018</a>#}
+{#                                </li>#}
+{#                                <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>05#}
+{#                                    نظر</a></li>#}
+{#                            </ul>#}
+{#                            <p>اگر به دنبال سفری اقتصادی هستید، این مقاصد تابستانی را از دست ندهید.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">#}
+{#                    <div class="card-blog">#}
+{#                        <img class="card-img rounded-0" src="{% static 'safario/img/blog/blog-3.png' %}"#}
+{#                             alt="تصویر مطلب وبلاگ: عکاسی در سفر">#}
+{#                        <div class="card-blog-body">#}
+{#                            <a href="#">#}
+{#                                <h4>چگونه در سفر عکس‌های حرفه‌ای بگیریم؟</h4>#}
+{#                            </a>#}
+{#                            <ul class="card-blog-info">#}
+{#                                <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>مارس 22,#}
+{#                                    2018</a>#}
+{#                                </li>#}
+{#                                <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>12#}
+{#                                    نظر</a></li>#}
+{#                            </ul>#}
+{#                            <p>نکات و ترفندهای عکاسی در سفر برای ثبت بهترین خاطرات شما.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+
+    {# حذف بخش تکراری تورها از انتهای کد قبلی شما، چون بالاتر اضافه شد #}
+
     <section class="section-margin pb-xl-5">
         <div class="container">
             <div class="section-intro text-center pb-90px" style="text-align: right;">
@@ -141,113 +309,10 @@
             </div>
         </div>
     </section>
-    <section class="bg-gray section-padding magic-ball magic-ball-testimonial pb-xl-5">
-        <div class="container">
-            <div class="section-intro text-center pb-90px">
-                <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}"
-                     alt="آیکن بخش نظرات مشتریان">
-                <h2>مشتریان ما چه می‌گویند</h2>
-                <p>نظرات و تجربیات مشتریان ما از خدمات سافاریو.</p>
-            </div>
-            <div class="owl-carousel owl-theme testimonial pb-xl-5">
-                <div class="testimonial__item">
-                    <div class="row">
-                        <div class="col-md-3 col-lg-2 align-self-center">
-                            <div class="testimonial__img">
-                                <img class="card-img rounded-0" src="{% static 'safario/img/testimonial/t-slider1.png' %}"
-                                     alt="تصویر مشتری - Daniel heart">
-                            </div>
-                        </div>
-                        <div class="col-md-9 col-lg-10">
-                            <div class="testimonial__content mt-3 mt-sm-0">
-                                <h3>Daniel heart</h3>
-                                <p>Nestle</p>
-                                <p class="testimonial__i">"سفر با سافاریو فراتر از انتظارم بود! از همان لحظه اول، حرفه‌ای
-                                    بودن تیم و توجهشان به جزئیات شگفت‌زده‌ام کرد. مناظری که دیدم و تجربیاتی که کسب کردم، تا
-                                    همیشه در خاطرم خواهد ماند. بدون شک، سافاریو انتخاب اول من برای سفرهای بعدی است و با
-                                    اطمینان به همه دوستانم پیشنهادش می‌کنم."</p>
-                                <span class="testimonial__icon"><i class="ti-quote-right"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {# ... سایر آیتم‌های testimonial ... #}
-            </div>
-        </div>
-    </section>
 
-    <section class="section-padding bg-gray">
-        <div class="container">
-            <div class="section-intro text-center pb-90px">
-                <img class="section-intro-img" src="{% static 'safario/img/home/section-icon.png' %}" alt="آیکن بخش وبلاگ">
-                <h2>از وبلاگ ما</h2>
-                <p>آخرین مقالات، نکات سفر و اخبار گردشگری را در وبلاگ ما بخوانید.</p>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-                    <div class="card-blog">
-                        <img class="card-img rounded-0" src="{% static 'safario/img/blog/blog-1.png' %}"
-                             alt="تصویر مطلب وبلاگ: نکاتی برای سفر به جنگل">
-                        <div class="card-blog-body">
-                            <a href="#">
-                                <h4>نکاتی برای سفر به مناطق جنگلی و کمپینگ</h4>
-                            </a>
-                            <ul class="card-blog-info">
-                                <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>ژانویه 03, 2018</a>
-                                </li>
-                                <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>03
-                                    نظر</a></li>
-                            </ul>
-                            <p>در این مطلب، به بررسی نکات مهم برای یک سفر ایمن و لذت‌بخش به جنگل می‌پردازیم.</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-                    <div class="card-blog">
-                        <img class="card-img rounded-0" src="{% static 'safario/img/blog/blog-2.png' %}"
-                             alt="تصویر مطلب وبلاگ: معرفی مقاصد ارزان">
-                        <div class="card-blog-body">
-                            <a href="#">
-                                <h4>معرفی بهترین مقاصد گردشگری ارزان در تابستان</h4>
-                            </a>
-                            <ul class="card-blog-info">
-                                <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>فوریه 15,
-                                    2018</a>
-                                </li>
-                                <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>05
-                                    نظر</a></li>
-                            </ul>
-                            <p>اگر به دنبال سفری اقتصادی هستید، این مقاصد تابستانی را از دست ندهید.</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-                    <div class="card-blog">
-                        <img class="card-img rounded-0" src="{% static 'safario/img/blog/blog-3.png' %}"
-                             alt="تصویر مطلب وبلاگ: عکاسی در سفر">
-                        <div class="card-blog-body">
-                            <a href="#">
-                                <h4>چگونه در سفر عکس‌های حرفه‌ای بگیریم؟</h4>
-                            </a>
-                            <ul class="card-blog-info">
-                                <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>مارس 22,
-                                    2018</a>
-                                </li>
-                                <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>12
-                                    نظر</a></li>
-                            </ul>
-                            <p>نکات و ترفندهای عکاسی در سفر برای ثبت بهترین خاطرات شما.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {# حذف بخش تکراری تورها از انتهای کد قبلی شما، چون بالاتر اضافه شد #}
 
 {% endblock content %}
 
