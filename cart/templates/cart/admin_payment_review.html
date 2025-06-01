@@ -1,141 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بررسی پرداخت‌ها</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-purple: #6A0DAD;
+            --dark-purple: #4B0082;
+            --light-purple-accent: #f4e8fc;
+            --button-text-color: #FFFFFF;
+            --success-green: #27ae60;
+            --error-red: #e74c3c;
+            --card-bg: #FFFFFF;
+            --card-shadow: rgba(106, 13, 173, 0.10);
+        }
         * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Vazirmatn', Arial, sans-serif;
+            background-color: var(--light-purple-accent);
+            color: var(--primary-purple);
+            min-height: 100vh;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
-
-        body {
-            background-color: #f4f4f9;
-            color: #333;
-            line-height: 1.6;
-        }
-
         h1 {
             text-align: center;
-            color: #2c3e50;
-            margin: 20px 0;
+            color: var(--dark-purple);
+            margin: 32px 0 28px 0;
+            font-size: 1.7rem;
+            font-weight: 700;
         }
-
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 1100px;
+            margin: 0 auto 40px auto;
+            padding: 0 12px;
         }
-
         ul {
             list-style: none;
+            padding: 0;
         }
-
         li {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+            padding: 24px 18px;
+            margin-bottom: 22px;
+            border-radius: 16px;
+            box-shadow: 0 6px 24px var(--card-shadow);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
+            transition: box-shadow 0.2s;
         }
-
+        li:hover {
+            box-shadow: 0 12px 32px rgba(106,13,173,0.16);
+        }
         .details {
             flex: 1;
             min-width: 250px;
+            color: var(--dark-purple);
         }
-
         .details span {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            font-size: 1.08rem;
         }
-
         .items-list {
             margin-top: 5px;
             padding-left: 20px;
         }
-
         .items-list li {
             background: none;
             box-shadow: none;
             padding: 5px 0;
             display: block;
+            color: var(--primary-purple);
+            font-size: 0.98rem;
         }
-
         img {
             max-width: 120px;
-            border-radius: 5px;
-            margin: 0 20px;
+            border-radius: 10px;
+            margin: 0 24px;
+            box-shadow: 0 2px 8px #6A0DAD22;
+            background: #f9f3ff;
+            border: 1px solid #e0d7f7;
         }
-
         .actions {
             min-width: 200px;
             text-align: right;
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            justify-content: flex-start;
+            align-items: center;
         }
-
-        button {
-            background-color: #3498db;
-            color: #fff;
-            padding: 10px 20px;
+        .actions button, .actions .button {
+            background-color: var(--primary-purple);
+            color: var(--button-text-color);
+            padding: 10px 32px;
+            border-radius: 8px;
             border: none;
-            border-radius: 5px;
+            font-size: 1.05rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
-            margin-left: 10px;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        a.reject {
-            background-color: #e74c3c;
-            color: #fff;
-            padding: 10px 20px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #6A0DAD22;
             text-decoration: none;
-            border-radius: 5px;
             display: inline-block;
-            transition: background-color 0.3s;
+            min-width: 100px;
         }
-
-        a.reject:hover {
+        .actions button:hover, .actions .button:hover {
+            background-color: var(--dark-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(106, 13, 173, 0.18);
+        }
+        .actions a.reject {
+            background-color: var(--error-red);
+            color: #fff;
+            padding: 10px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: none;
+            box-shadow: 0 2px 8px #e74c3c22;
+            transition: background-color 0.3s, transform 0.2s;
+            min-width: 100px;
+            text-align: center;
+            display: inline-block;
+        }
+        .actions a.reject:hover {
             background-color: #c0392b;
+            transform: translateY(-2px);
         }
-
         .verified {
-            color: #27ae60;
+            color: var(--success-green);
             font-weight: bold;
+            font-size: 1.08rem;
         }
-
+        .rejected {
+            color: var(--error-red);
+            font-weight: bold;
+            font-size: 1.08rem;
+        }
+        @media (max-width: 800px) {
+            li { flex-direction: column; text-align: center; }
+            img { margin: 18px 0; }
+            .actions, .details { min-width: 100%; margin: 10px 0; }
+        }
         @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-
-            li {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .details, .actions {
-                min-width: 100%;
-                margin: 10px 0;
-            }
-
-            img {
-                margin: 10px 0;
-            }
-
-            button, a.reject {
-                width: 100%;
-                margin: 5px 0;
-            }
+            .container { padding: 0 2px; }
+            li { padding: 14px 4px; }
+            img { max-width: 90px; }
+            button, .actions .button, a.reject { width: 100%; margin: 7px 0; }
         }
     </style>
 </head>
@@ -169,7 +188,7 @@
                     {% if payment.is_verified %}
                         <span class="verified">تأیید شده توسط {{ payment.verified_by.username }}</span>
                     {% elif payment.is_verified == False %}
-                        <span style="color: #e74c3c; font-weight: bold;">رد شده توسط {{ payment.verified_by.username|default:"ادمین" }}</span>
+                        <span class="rejected">رد شده توسط {{ payment.verified_by.username|default:"ادمین" }}</span>
                     {% else %}
                         <form method="POST" style="display: inline;">
                             {% csrf_token %}
@@ -179,22 +198,6 @@
                         <a href="{% url 'cart:reject_payment_message' payment.id %}" class="reject">رد</a>
                     {% endif %}
                 </div>
-
-
-                {#                <div class="actions">#}
-                {#                    {% if payment.is_verified %}#}
-                {#                        <span class="verified">تأیید شده توسط {{ payment.verified_by.username }}</span>#}
-                {#                    {% elif payment.is_verified == False %}#}
-                {#                        <span style="color: #e74c3c; font-weight: bold;">رد شده توسط {{ payment.verified_by.username|default:"ادمین" }}</span>#}
-                {#                    {% else %}#}
-                {#                        <form method="POST" style="display: inline;">#}
-                {#                            {% csrf_token %}#}
-                {#                            <input type="hidden" name="payment_id" value="{{ payment.id }}">#}
-                {#                            <button type="submit" name="action" value="approve">تأیید</button>#}
-                {#                        </form>#}
-                {#                        <a href="{% url 'cart:reject_payment_message' payment.id %}" class="reject">رد</a>#}
-                {#                    {% endif %}#}
-                {#                </div>#}
             </li>
         {% endfor %}
     </ul>
