@@ -1,28 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسویه‌حساب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background-color: #f4f4f9; color: #333; line-height: 1.6; }
-        h1 { text-align: center; color: #2c3e50; margin: 20px 0; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        ul { list-style: none; }
-        li { background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center; }
-        p { text-align: center; font-size: 1.2em; font-weight: bold; margin: 15px 0; }
-        .buttons { text-align: center; margin-top: 20px; }
-        button { background-color: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
-        button:hover { background-color: #2980b9; }
-        .delete-btn { background-color: #e74c3c; padding: 5px 10px; font-size: 0.9em; }
-        .delete-btn:hover { background-color: #c0392b; }
-        .more-btn { background-color: #2ecc71; margin-right: 10px; }
-        .more-btn:hover { background-color: #27ae60; }
+        :root {
+            --primary-purple: #6A0DAD;
+            --dark-purple: #4B0082;
+            --light-purple-accent: #f4e8fc;
+            --button-text-color: #FFFFFF;
+            --text-primary: #333333;
+            --text-secondary: #5c5c5c;
+            --border-color: #d1c4e9;
+            --card-bg: #FFFFFF;
+            --card-shadow: rgba(106, 13, 173, 0.10);
+            --error-color: #c0392b;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Vazirmatn', Arial, sans-serif;
+            background-color: var(--light-purple-accent);
+            color: var(--text-primary);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            background: var(--card-bg);
+            max-width: 480px;
+            margin: 40px auto 0 auto;
+            padding: 32px 28px 24px 28px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: var(--dark-purple);
+            margin: 0 0 28px 0;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 18px 0;
+        }
+        li {
+            background: #f9f3ff;
+            padding: 16px 12px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(106,13,173,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+        }
+        li:last-child { margin-bottom: 0; }
+        p {
+            text-align: center;
+            font-size: 1.13em;
+            font-weight: bold;
+            margin: 18px 0 0 0;
+            color: var(--primary-purple);
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 28px;
+        }
+        .button, button {
+            background-color: var(--primary-purple);
+            color: var(--button-text-color);
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.08rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            margin: 0 6px 8px 6px;
+            box-shadow: 0 4px 12px rgba(106, 13, 173, 0.18);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover, button:hover {
+            background-color: var(--dark-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(106, 13, 173, 0.28);
+        }
+        .delete-btn {
+            background-color: var(--error-color);
+            color: #fff;
+            padding: 7px 18px;
+            font-size: 0.98em;
+            border-radius: 7px;
+            font-weight: 600;
+            margin: 0 0 0 8px;
+            box-shadow: 0 2px 8px #c0392b22;
+            border: none;
+        }
+        .delete-btn:hover {
+            background-color: #a93226;
+        }
         @media (max-width: 600px) {
-            .container { padding: 10px; }
-            li { flex-direction: column; text-align: center; }
-            button, .delete-btn { width: 100%; margin: 5px 0; }
+            .container { padding: 14px 4px 16px 4px; }
+            li { flex-direction: column; text-align: center; font-size: 1em; }
+            .button, button, .delete-btn { width: 100%; margin: 7px 0; }
         }
     </style>
 </head>
@@ -52,7 +143,7 @@
         </ul>
         <p>جمع کل: {{ total_price }} تومان</p>
         <div class="buttons">
-            <a href="{% url 'main_page' %}" class="more-btn" style="padding: 10px 20px; text-decoration: none; color: #fff; border-radius: 5px;">خرید بیشتر</a>
+            <a href="{% url 'main_page' %}" class="button">خرید بیشتر</a>
             <form method="POST" action="{% url 'cart:place_order' %}" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit">ثبت سفارش و رفتن به پرداخت</button>
