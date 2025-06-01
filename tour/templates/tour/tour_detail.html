@@ -1,247 +1,177 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl"> {# اضافه کردن dir="rtl" و lang="fa" #}
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single Product Page Design</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    direction: rtl;
-}
-.main-wrap{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #a8dadc;
-}
-.main-wrap .product{
-    width: 90%;
-    max-width: 750px;
-    display: flex;
-}
-.main-wrap .product .image-gallery{
-    flex-basis: 47%;
-    background: #011627;
-    box-shadow: -10px 5px 10px 10px rgba(0, 0, 0, 0.1);
-    transform: scale(1.07);
-    position: relative;
-    overflow: hidden; /* اضافه شد */
-}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ tour.title|default:"جزئیات محصول" }} - سفر سافاریو</title> {# عنوان داینامیک #}
+    <link rel="icon" href="{% static 'safario/img/Fevicon.png' %}" type="image/png"> {# اضافه کردن فاوآیکن از base #}
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet"> {# اضافه کردن فونت وزیرمتن #}
 
-.main-wrap .product .image-gallery img{
-    width: 100%;
-    /* padding-top: 150px; */
-    height: 100%; /* اضافه شد */
-    object-fit: cover; /* اضافه شد */
-}
-.main-wrap .product .image-gallery .controls{
-    position: absolute;
-    bottom: 40px;
-    right: 20px;
-}
-.main-wrap .product .image-gallery .controls .btn{
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba( 255, 255, 255, 0.5 );
-    display: block;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-.main-wrap .product .image-gallery .controls .btn.active{
-    background: #00b4d8;
-}
-.main-wrap .product .product-details{
-    flex-basis: 53%;
-    background: #fff;
-    box-shadow: -10px 5px 10px 10px rgba(0, 0, 0, 0.1);
-    padding: 40px 30px 40px 40px;
-}
-.main-wrap .product .product-details .details{
-    margin-bottom: 20px;
-}
-.main-wrap .product .product-details .details h2{
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 35px;
-    text-transform: capitalize;
-    margin-bottom: 10px;
-    color: #011627;
-}
-.main-wrap .product .product-details .details h3{
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 35px;
-    margin-bottom: 10px;
-    color: #011627;
-}
-.main-wrap .product .product-details .details h4{
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 25px;
-    text-transform: uppercase;
-    color: #f72585;
-    margin-bottom: 10px;
-}
-.main-wrap .product .product-details .details p{
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 25px;
-    color: #011627;
-}
-.main-wrap .product .product-details .sizes{
-    margin-bottom: 20px;
-}
-.main-wrap .product .product-details .sizes .form .select-size{
-    display: flex;
-    align-items: center;
-}
-.main-wrap .product .product-details .sizes .form .select-size h3{
-    width: 70px;
-    margin-right: 30px;
-    font-size: 20px;
-    font-weight: 500;
-    color: #011627;
-}
-.main-wrap .product .product-details .sizes .form .select-size label{
-    display: flex;
-    align-items: center;
-}
-.main-wrap .product .product-details .sizes .form .select-size label input{
-    display: none;
-}
-.main-wrap .product .product-details .sizes .form .select-size label span{
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 25px;
-    text-transform: uppercase;
-    color: #011627;
-    display: inline-block;
-    margin-right: 10px;
-    cursor: pointer;
-}
-.main-wrap .product .product-details .sizes .form .select-size label input:checked + span{
-    font-weight: 600;
-    color: #00b4d8;
-}
-.main-wrap .product .product-details .colors{
-    margin-bottom: 20px;
-}
-.main-wrap .product .product-details .colors .form .select-color{
-    display: flex;
-    align-items: center;
-}
-.main-wrap .product .product-details .colors .form .select-color h3{
-    width: 70px;
-    margin-right: 30px;
-    font-size: 20px;
-    font-weight: 500;
-    color: #011627;
-}
-.main-wrap .product .product-details .colors .form .select-color label{
-    display: flex;
-    align-items: center;
-}
-.main-wrap .product .product-details .colors .form .select-color input{
-    display: none;
-}
-.main-wrap .product .product-details .colors .form .select-color span{
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    margin-right: 10px;
-    cursor: pointer;
-}
-.main-wrap .product .product-details .colors .form .select-color .color-1{
-    background: #d90429;
-}
-.main-wrap .product .product-details .colors .form .select-color .color-2{
-    background: #38b000;
-}
-.main-wrap .product .product-details .colors .form .select-color .color-3{
-    background: #0081a7;
-}
-.main-wrap .product .product-details .colors .form .select-color .color-4{
-    background: #ffd100;
-}
-.main-wrap .product .product-details .colors .form .select-color label input:checked + span{
-    transform: scale(.7);
-    box-shadow: 0 0 0 4px #fff, 0 0 0 6px #011627;
-}
-.main-wrap .product .product-details .quantity{
-    margin-bottom: 50px;
-}
-.main-wrap .product .product-details .quantity .select-quantity{
-    display: flex;
-    align-items: center;
-}
-.main-wrap .product .product-details .quantity .select-quantity h3{
-    width: 70px;
-    margin-right: 30px;
-    font-size: 20px;
-    font-weight: 500;
-    color: #011627;
-}
-.main-wrap .product .product-details .quantity .select-quantity input{
-    background: #e8e8e8;
-    border: 0;
-    outline: 0;
-    padding: 2px 2px 2px 15px;
-    border-radius: 12px;
-    width: 50px;
-}
-.main-wrap .product .product-details .sub-btn{
-    padding: 0 30px;
-}
-.main-wrap .product .product-details .sub-btn .submit{
-    width: 100%;
-    padding: 10px;
-    border: 0;
-    outline: 0;
-    background: #0077b6;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 500;
-    border-radius: 30px;
-    box-shadow: 0 10px 10px rgba( 85, 63, 240, 0.25 );
-    cursor: pointer;
-    transition: .4s linear;
-    position: relative;
-    overflow: hidden;
-}
-.main-wrap .product .product-details .sub-btn .submit:hover{
-    background: #00b4d8;
-}
-.main-wrap .product .product-details .sub-btn .submit::before{
-    content: '';
-    position: absolute;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba( 255, 255, 255, 0.1 );
-    transform: rotate(-45deg);
-}
-.main-wrap .product .product-details .sub-btn .submit:hover::before{
-    animation: light .4s linear forwards;
-}
-@keyframes light{
-    0%{
-        left: -100%;
-    }
-    100%{
-        left: 100%;
-    }
-}
+    <style>
+        /* تعریف متغیرهای تم بنفش */
+        :root {
+            --primary-purple: #6A0DAD; /* بنفش اصلی */
+            --light-purple-bg: #f2e6ff;
+            --dark-purple-text: #4B0082; /* بنفش تیره برای متن */
+            --button-text-color: #FFFFFF;
+            --text-color-primary: #333333; /* رنگ متن اصلی */
+            --text-color-secondary: #555555; /* رنگ متن ثانویه */
+            --background-color: #f9f5ff; /* پس‌زمینه خیلی روشن بنفش برای صفحه */
+            --card-bg-color: #FFFFFF; /* پس‌زمینه کارت جزئیات */
+            --image-bg-color: #4A148C; /* پس‌زمینه برای بخش تصویر (بنفش خیلی تیره) */
+            --accent-color: #E040FB; /* یک رنگ بنفش روشن‌تر یا صورتی برای تاکید */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Poppins', sans-serif; /* اولویت با وزیرمتن */
+            direction: rtl;
+        }
+
+        body {
+            background-color: var(--background-color); /* پس‌زمینه کلی صفحه */
+            color: var(--text-color-primary);
+            line-height: 1.7;
+            display: flex; /* برای وسط‌چین کردن محتوا اگر تمام صفحه را نگیرد */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px; /* فاصله از لبه‌های صفحه */
+        }
+
+        .main-wrap { /* این دیگر به عنوان پس‌زمینه اصلی استفاده نمی‌شود، فقط برای کانتینر */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product {
+            width: 90%;
+            max-width: 850px; /* کمی افزایش عرض برای نمایش بهتر */
+            display: flex;
+            flex-wrap: wrap; /* برای واکنش‌گرایی بهتر */
+            background-color: var(--card-bg-color); /* پس‌زمینه سفید برای کارت اصلی */
+            border-radius: 15px; /* گرد کردن گوشه‌ها */
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1); /* سایه ملایم */
+            overflow: hidden; /* برای اینکه border-radius روی فرزندان اعمال شود */
+        }
+
+        .image-gallery {
+            flex-basis: 45%; /* کمی کاهش برای فضای بیشتر برای متن */
+            background: var(--image-bg-color); /* پس‌زمینه بنفش تیره برای تصویر */
+            position: relative;
+            display: flex; /* برای وسط‌چین کردن تصویر اگر لازم باشد */
+            align-items: center;
+            justify-content: center;
+            min-height: 400px; /* حداقل ارتفاع برای بخش تصویر */
+        }
+
+        .image-gallery img {
+            width: 100%;
+            height: 100%;
+            max-height: 500px; /* حداکثر ارتفاع تصویر */
+            object-fit: cover; /* تصویر کل کادر را پر کند بدون تغییر نسبت */
+            /* border-top-right-radius: 15px; */ /* گرد کردن گوشه تصویر در RTL */
+            /* border-bottom-right-radius: 15px; */
+        }
+
+        /* حذف کنترل‌های تصویر پیش‌فرض قالب چون در این صفحه جزئیات یک تصویر اصلی داریم */
+        /* .image-gallery .controls { display: none; } */
+
+        .product-details {
+            flex-basis: 55%; /* کمی افزایش برای متن */
+            background: var(--card-bg-color);
+            padding: 35px 40px; /* پدینگ مناسب */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-details .details h2 { /* عنوان تور/گردشگری */
+            font-size: 2rem; /* بزرگتر و خواناتر */
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--primary-purple); /* رنگ بنفش برای عنوان */
+            margin-bottom: 20px; /* فاصله بیشتر */
+        }
+
+        .product-details .details h3 { /* برای بخش‌های کوچکتر مثل نوع بلیط */
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-purple-text); /* بنفش تیره‌تر */
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        .product-details .details h4 { /* برای ظرفیت باقی‌مانده */
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--accent-color); /* رنگ تاکید کننده */
+            margin-bottom: 15px;
+        }
+
+        .product-details .details p {
+            font-size: 0.95rem; /* اندازه فونت مناسب برای جزئیات */
+            line-height: 1.8;
+            color: var(--text-color-secondary);
+            margin-bottom: 10px;
+        }
+        .product-details .details p strong { /* برای عناوین کوچک کنار هر مقدار */
+            color: var(--text-color-primary);
+            font-weight: 500;
+            margin-left: 8px; /* برای RTL */
+        }
+
+
+        /* حذف بخش‌های sizes, colors, quantity چون در مدل تور شما نبودند */
+
+        .product-details .sub-btn {
+            margin-top: auto; /* دکمه را به پایین کارت می‌چسباند */
+            padding-top: 25px; /* فاصله از محتوای بالا */
+        }
+
+        .product-details .sub-btn .submit {
+            width: 100%;
+            padding: 12px 20px; /* پدینگ مناسب برای دکمه */
+            border: none;
+            background: var(--primary-purple);
+            color: var(--button-text-color);
+            font-size: 1.1rem; /* فونت بزرگتر برای دکمه */
+            font-weight: 600;
+            border-radius: 8px; /* گردی کمتر و مدرن‌تر */
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.3); /* سایه بنفش */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .product-details .sub-btn .submit:hover {
+            background: var(--dark-purple-text); /* بنفش تیره‌تر در هاور */
+            transform: translateY(-2px); /* کمی حرکت به بالا */
+        }
+
+        /* واکنش‌گرایی */
+        @media (max-width: 768px) {
+            .product {
+                flex-direction: column; /* ستون‌ها زیر هم در موبایل */
+                max-width: 500px; /* محدود کردن عرض در موبایل */
+            }
+            .image-gallery, .product-details {
+                flex-basis: 100%; /* هر بخش تمام عرض را بگیرد */
+            }
+            .image-gallery img {
+                border-radius: 15px 15px 0 0; /* گرد کردن گوشه‌های بالای تصویر در موبایل */
+            }
+            .product-details {
+                 border-radius: 0 0 15px 15px; /* گرد کردن پایین بخش جزئیات */
+            }
+            .product-details .details h2 {
+                font-size: 1.8rem;
+            }
+        }
 
     </style>
 </head>
@@ -249,38 +179,71 @@
     <section class="main-wrap">
         <div class="product">
             <div class="image-gallery">
-                <img src="{{ tour.image.url }}" id="productImg" alt="{{ tour.title }}">
+                {% if tour.image %}
+                    <img src="{{ tour.image.url }}" id="productImg" alt="{{ tour.title }}">
+                {% else %}
+                    <img src="{% static 'safario/img/default_tour_image_large.png' %}" id="productImg" alt="تصویر پیش‌فرض"> {# یک تصویر پیش‌فرض بزرگتر #}
+                {% endif %}
             </div>
             <div class="product-details">
                 <div class="details">
+                    {# فرض می‌کنیم آبجکت شما tour نام دارد و فیلدهای زیر را دارد #}
+                    {# این بخش را با توجه به فیلدهای واقعی مدل خودتان (تور یا گردشگری) تطبیق دهید #}
+                    <h2>{{ tour.title|default:"عنوان تور/گردشگری" }}</h2>
 
-                    <h2>{{ tour.title }}</h2>
-{#                    <h3><p>نوع بلیط: {{ tour.get_ticket_type_display }}</p>  </h3>#}
-                    <h4>  ظرفیت باقی مانده: {{ tour.capacity }} نفر </h4>
-{#                    <p>{{ tour.idtour }}</p>#}
-                    <p>مبدا : {{ tour.firstdistination }}</p>
-                    <p>مقصد نهایی: {{ tour.lastDestination }}</p>
-                    <p>تاریخ شروع: {{ tour.startdate}}</p>
-                    <p>تاریخ پایان: {{ tour.finishdate }}</p>
-                    <p>هزینه تور: {{ tour.idtour }}</p>
-                    <p>ظرفیت: {{ tour.capacity }}</p>
-                    <p>نوع بلیط: {{ tour.get_ticket_type_display }}</p>
+                    {% if tour.capacity %}
+                        <h4>ظرفیت باقی مانده: {{ tour.capacity }} نفر</h4>
+                    {% endif %}
+
+                    {% if tour.firstdistination %}
+                        <p><strong>مبدا :</strong> {{ tour.firstdistination }}</p>
+                    {% endif %}
+                    {% if tour.lastDestination %}
+                        <p><strong>مقصد نهایی:</strong> {{ tour.lastDestination }}</p>
+                    {% endif %}
+                    {% if tour.startdate %}
+                        <p><strong>تاریخ شروع:</strong> {{ tour.startdate|date:"l, j F Y" }}</p> {# فرمت تاریخ خواناتر #}
+                    {% endif %}
+                    {% if tour.finishdate %}
+                        <p><strong>تاریخ پایان:</strong> {{ tour.finishdate|date:"l, j F Y" }}</p> {# فرمت تاریخ خواناتر #}
+                    {% endif %}
+                    {% if tour.idtour %} {# در HTML قبلی شما هزینه تور با idtour بود #}
+                        <p><strong>هزینه تور:</strong> {{ tour.idtour }} تومان</p>
+                    {% elif tour.price_tourism %} {# اگر برای گردشگری فیلد قیمت دارید #}
+                         <p><strong>هزینه:</strong> {{ tour.price_tourism }} تومان</p>
+                    {% endif %}
+
+                    {# نمایش نوع بلیط اگر وجود دارد #}
+                    {% if tour.get_ticket_type_display %}
+                        <h3>نوع بلیط</h3>
+                        <p>{{ tour.get_ticket_type_display }}</p>
+                    {% elif tour.ticket_typetourism %} {# برای مدل گردشگری قدیمی شما #}
+                         <h3>نوع بلیط</h3>
+                         <p>
+                             {% if tour.ticket_typetourism == "bus" %}اتوبوس{% endif %}
+                             {% if tour.ticket_typetourism == "train" %}قطار{% endif %}
+                             {# سایر گزینه‌ها #}
+                         </p>
+                    {% endif %}
+
+                    {# اگر توضیحات بیشتری دارید، اینجا اضافه کنید #}
+                    {% if tour.description_news %} {# اگر فیلد توضیحات از مدل خبر را اینجا هم دارید #}
+                        <h3 style="margin-top: 20px;">توضیحات بیشتر:</h3>
+                        <p>{{ tour.description_news|linebreaksbr }}</p>
+                    {% endif %}
                 </div>
                 <div class="sub-btn">
-{#                    <button class="submit">Buy Now</button>#}
+                    {# مطمئن شوید URL و نام آن برای خرید یا رزرو صحیح است #}
                     <form action="{% url 'tour:buy_tour' tour.id %}" method="post">
-    {% csrf_token %}
-    <button class="submit" type="submit">شرکت در این تور</button>
-</form>
+                    {% csrf_token %}
+                    <button class="submit" type="submit">شرکت در این تور / رزرو</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-{#    <script src="{% static 'js/app.js' %}"></script>#}
+    {# اگر از جاوااسکریپت خاصی برای این صفحه استفاده نمی‌کنید، این بخش را می‌توانید حذف کنید #}
+    {# <script src="{% static 'js/app.js' %}"></script> #}
 </body>
 </html>
-
-
-
-
