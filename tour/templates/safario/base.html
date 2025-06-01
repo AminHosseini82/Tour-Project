@@ -373,6 +373,12 @@
                         {% endif %}
 
 
+
+                        {% if request.user.is_authenticated and request.user.email == 'aminhosseini822003@gmail.com' %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'cart:admin_payment_review' %}">لیست پرداختی ها</a></li>
+                        {% endif %}
+
+
                     </ul>
 
                     <div class="nav-right py-4 py-lg-0">
