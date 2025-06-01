@@ -74,7 +74,6 @@
         }
 
 
-
     </style>
 </head>
 <body>
@@ -118,8 +117,6 @@
                 </div>
 
                 <p class="login__switch" dir="rtl">
-                    رمز خود را فراموش کردین؟
-                    {#                <button id="loginButtonRegister">ورود</button>#}
                     <a href="{% url 'accounts:choose_auth_method' %}" id="loginButtonRegister" class="btn">بازیابی
                         رمز عبور حساب
                         خود</a>
@@ -157,22 +154,18 @@
                 <p class="social-text">یا ثبت‌نام با</p>
                 <div class="social-media">
 
-
                     <a href="{% provider_login_url 'google' %}?next={% url 'main_page' %}" class="social-icon"
                        title="ثبت‌نام/ورود با گوگل">
                         <i class="fab fa-google"></i>
                     </a>
 
-
                 </div>
+
                 <p class="login__switch" dir="rtl">
-                    رمز خود را فراموش کردین؟
-                    {#                <button id="loginButtonRegister">ورود</button>#}
                     <a href="{% url 'accounts:choose_auth_method' %}" id="loginButtonRegister" class="btn">بازیابی
                         رمز عبور حساب
                         خود</a>
                 </p>
-
 
             </form>
         </div>
