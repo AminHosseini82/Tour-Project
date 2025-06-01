@@ -104,12 +104,29 @@
 
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav justify-content-start">
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">پکیج های فعال ما</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="{% url 'tour:homepage' %}">تور های
+                                    فعال</a>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'tourism:tourismpage' %}">گردشگری
+                                    های
+                                    فعال</a>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'news:news_list' %}">اخبار روز</a>
+
+                            </ul>
+                        </li>
+
+
                         <li class="nav-item active"><a class="nav-link" href="{% url 'tour:main_page' %}">خانه</a></li>
                         {#                        <li class="nav-item"><a class="nav-link" href="about.html">درباره ما</a></li>#}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'tour:homepage' %}">تور های فعال</a>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'tourism:tourismpage' %}">گردشگری های
-                            فعال</a>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'news:news_list' %}">اخبار روز</a>
+{#                        <li class="nav-item"><a class="nav-link" href="{% url 'tour:homepage' %}">تور های فعال</a>#}
+{#                        <li class="nav-item"><a class="nav-link" href="{% url 'tourism:tourismpage' %}">گردشگری های#}
+{#                            فعال</a>#}
+{#                        <li class="nav-item"><a class="nav-link" href="{% url 'news:news_list' %}">اخبار روز</a>#}
                         <li class="nav-item"><a class="nav-link" href="{% url 'tour:contact' %}">تماس با ما</a></li>
                     </ul>
                     {#TODO: این باید این استایل درستی بگیره با gemini#}
