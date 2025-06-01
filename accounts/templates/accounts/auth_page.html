@@ -59,6 +59,15 @@
             color: #856404;
             border-color: #ffeeba;
         }
+
+        /* این کد را به فایل accounts/style.css یا تگ <style> در head اضافه کنید */
+
+        .sign-in-form .social-media {
+            margin-bottom: 15px; /* یا هر مقداری که مناسب می‌دانید */
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -93,10 +102,12 @@
                 <input type="submit" value="ورود" class="btn solid"/>
                 <p class="social-text">یا ورود با</p>
                 <div class="social-media">
-                    {#                    <a href="{% provider_login_url 'google' %}?next={% url 'main_page' %}" class="social-icon"#}
-                    {#                       title="ورود با گوگل">#}
-                    {#                        <i class="fab fa-google"></i>#}
-                    {#                    </a>#}
+
+                    <a href="{% provider_login_url 'google' %}?next={% url 'main_page' %}" class="social-icon"
+                       title="ورود با گوگل">
+                        <i class="fab fa-google"></i>
+                    </a>
+
                 </div>
 
                 <p class="login__switch" dir="rtl">
@@ -140,22 +151,22 @@
                 <div class="social-media">
 
 
-                    {#                    <a href="{% provider_login_url 'google' %}?next={% url 'main_page' %}" class="social-icon"#}
-                    {#                       title="ثبت‌نام/ورود با گوگل">#}
-                    {#                        <i class="fab fa-google"></i>#}
-                    {#                    </a>#}
-
-
-                    <p class="login__switch" dir="rtl">
-                        رمز خود را فراموش کردین؟
-                        {#                <button id="loginButtonRegister">ورود</button>#}
-                        <a href="{% url 'accounts:choose_auth_method' %}" id="loginButtonRegister" class="btn">بازیابی
-                            رمز عبور حساب
-                            خود</a>
-                    </p>
+                    <a href="{% provider_login_url 'google' %}?next={% url 'main_page' %}" class="social-icon"
+                       title="ثبت‌نام/ورود با گوگل">
+                        <i class="fab fa-google"></i>
+                    </a>
 
 
                 </div>
+                <p class="login__switch" dir="rtl">
+                    رمز خود را فراموش کردین؟
+                    {#                <button id="loginButtonRegister">ورود</button>#}
+                    <a href="{% url 'accounts:choose_auth_method' %}" id="loginButtonRegister" class="btn">بازیابی
+                        رمز عبور حساب
+                        خود</a>
+                </p>
+
+
             </form>
         </div>
     </div>
