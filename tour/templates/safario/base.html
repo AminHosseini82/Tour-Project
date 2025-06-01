@@ -377,6 +377,11 @@
 
                     <div class="nav-right py-4 py-lg-0">
                         {% if request.user.is_authenticated %}
+
+
+
+
+
                             <span class="btn btn-link">سلام، {{ request.user.username }}</span>
                             <form action="{% url 'accounts:logout' %}" method="POST"
                                   style="display:inline-block; vertical-align: middle;">
