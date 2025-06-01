@@ -49,9 +49,6 @@
         }
 
 
-
-
-
         .row {
             flex-direction: row-reverse !important;
         }
@@ -110,13 +107,35 @@
                         <li class="nav-item active"><a class="nav-link" href="{% url 'tour:main_page' %}">خانه</a></li>
                         {#                        <li class="nav-item"><a class="nav-link" href="about.html">درباره ما</a></li>#}
                         <li class="nav-item"><a class="nav-link" href="{% url 'tour:homepage' %}">تور های فعال</a>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'tourism:tourismpage' %}">گردشگری های فعال</a>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'tourism:tourismpage' %}">گردشگری های
+                            فعال</a>
                         <li class="nav-item"><a class="nav-link" href="{% url 'news:news_list' %}">اخبار روز</a>
                         <li class="nav-item"><a class="nav-link" href="{% url 'tour:contact' %}">تماس با ما</a></li>
                     </ul>
-
+                    {#TODO: این باید این استایل درستی بگیره با gemini#}
                     <div class="nav-right text-center text-lg-left py-4 py-lg-0">
-                        <a class="button" href="#">شروع کنید</a>
+                        {% if request.user.is_authenticated %}
+                            <button class="btn">خوش آمدید</button>
+                        {% else %}
+                            <button class="btn"><a href="{% url 'accounts:auth_page' %}">ثبت نام در سایت</a></button>
+                        {% endif %}
+
+                        {% if request.user.is_authenticated %}
+                            <form action="{% url 'accounts:logout' %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                         width="24px"
+                                         fill="#5f6368">
+                                        <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
+                                    </svg>
+                                    خروج از حساب کاربری
+                                </button>
+                            </form>
+                        {% endif %}
+
+
+                        {#                        <a class="button" href="{% url 'accounts:login' %}">ثبت نام</a>#}
                     </div>
                 </div>
             </div>
