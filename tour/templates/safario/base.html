@@ -40,7 +40,7 @@
 
         .header_area .navbar-brand.logo_h {
             margin-right: 0;
-            margin-left: 1rem;  /* فاصله لوگو از منو در RTL */
+            margin-left: 1rem; /* فاصله لوگو از منو در RTL */
         }
 
         .header_area .navbar-collapse {
@@ -65,7 +65,7 @@
         }
 
         /* کوچک کردن و استایل دکمه‌های داخل nav-right */
-        .header_area .nav-right .btn,  /* برای دکمه‌های با کلاس .btn مثل "ورود / ثبت نام" */
+        .header_area .nav-right .btn, /* برای دکمه‌های با کلاس .btn مثل "ورود / ثبت نام" */
         .header_area .nav-right > span.btn, /* برای متن "سلام، کاربر" اگر کلاس btn دارد */
         .header_area .nav-right form button { /* برای دکمه خروج که داخل فرم است */
             padding: 5px 10px;
@@ -76,22 +76,24 @@
             vertical-align: middle; /* برای هم‌ترازی بهتر با متن "سلام" */
         }
 
-         .header_area .nav-right .btn a { /* اگر لینک داخل دکمه است */
+        .header_area .nav-right .btn a { /* اگر لینک داخل دکمه است */
             color: inherit;
             text-decoration: none;
-         }
-         .header_area .nav-right > span.btn { /* استایل برای متن "سلام، کاربر" */
+        }
+
+        .header_area .nav-right > span.btn { /* استایل برای متن "سلام، کاربر" */
             background: none !important;
             border: none !important;
             color: #555 !important; /* رنگ متن */
             padding-right: 0; /* حذف پدینگ راست برای چسبیدن به آیکن خروج */
-         }
+        }
 
 
         /* استایل برای دکمه خروج (که SVG دارد) */
         .header_area .nav-right form {
             margin-bottom: 0; /* حذف مارجین پایین فرم */
         }
+
         .header_area .nav-right form button {
             display: flex;
             align-items: center;
@@ -105,6 +107,7 @@
             /* font-size: 0.8rem; */ /* توسط استایل عمومی بالا اعمال می‌شود */
             /* line-height: 1.4; */
         }
+
         .header_area .nav-right form button:hover {
             background-color: #f0f0f0 !important;
             border-color: #aaa !important;
@@ -116,26 +119,30 @@
             height: 16px;
         }
 
-        @media (max-width: 991px) { /* حالت موبایل و تبلت */
+        @media (max-width: 991px) {
+            /* حالت موبایل و تبلت */
             .header_area .navbar-collapse {
                 width: 100%;
                 background-color: #fff;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 padding: 15px;
                 margin-top: 10px;
                 border-radius: 8px;
             }
+
             .header_area .navbar-nav.menu_nav {
                 margin-right: 0;
                 /* flex-direction: column !important; /* Bootstrap RTL این را باید مدیریت کند یا دستی اضافه شود */
             }
+
             .header_area .navbar-nav .nav-item {
                 text-align: right !important;
                 margin-bottom: 10px;
             }
-             .header_area .navbar-nav .nav-item .nav-link {
+
+            .header_area .navbar-nav .nav-item .nav-link {
                 padding: 10px 0;
-             }
+            }
 
             .header_area .nav-right {
                 margin-top: 15px !important;
@@ -148,6 +155,7 @@
                 align-items: center; /* یا stretch برای تمام عرض شدن */
                 gap: 10px;
             }
+
             .header_area .nav-right .btn,
             .header_area .nav-right > span.btn,
             .header_area .nav-right form,
@@ -157,17 +165,21 @@
                 margin-bottom: 10px;
                 text-align: center;
             }
-             .header_area .nav-right > span.btn {
-                 padding: 5px 0; /* تنظیم پدینگ برای متن سلام */
-             }
-             .header_area .nav-right form button {
+
+            .header_area .nav-right > span.btn {
+                padding: 5px 0; /* تنظیم پدینگ برای متن سلام */
+            }
+
+            .header_area .nav-right form button {
                 justify-content: center;
-             }
-             .header_area .nav-right .btn:last-child,
-             .header_area .nav-right form:last-child {
-                 margin-bottom: 0;
-             }
+            }
+
+            .header_area .nav-right .btn:last-child,
+            .header_area .nav-right form:last-child {
+                margin-bottom: 0;
+            }
         }
+
         /* --- پایان اصلاحات برای هدر --- */
 
         /* سایر استایل‌های RTL عمومی شما */
@@ -180,6 +192,7 @@
             margin-left: 24px;
             margin-right: 0;
         }
+
         .header_area .navbar-nav.menu_nav .nav-item:last-child {
             margin-left: 0;
         }
@@ -197,7 +210,7 @@
         }
 
         /* .row { */
-            /* flex-direction: row-reverse !important; /* اگر از Bootstrap RTL استفاده نمی‌کنید و لازم است */
+        /* flex-direction: row-reverse !important; /* اگر از Bootstrap RTL استفاده نمی‌کنید و لازم است */
         /* } */
 
         .owl-carousel {
@@ -205,7 +218,7 @@
         }
 
         /* .instafeed { */
-            /* flex-direction: row-reverse !important; /* اگر از Bootstrap RTL استفاده نمی‌کنید و لازم است */
+        /* flex-direction: row-reverse !important; /* اگر از Bootstrap RTL استفاده نمی‌کنید و لازم است */
         /* } */
 
         /* استایل‌های مربوط به کارت تور */
@@ -250,7 +263,7 @@
             right: 0;
             left: 0; /* برای پوشش کامل عرض */
             /* width: 100%; */ /* دیگر لازم نیست */
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 100%); /* گرادیانت از پایین به بالا */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.0) 100%); /* گرادیانت از پایین به بالا */
             padding: 15px;
             opacity: 0; /* در ابتدا کاملا مخفی */
             visibility: hidden;
@@ -262,30 +275,36 @@
             align-items: flex-end;
             /* height: 100%; */ /* باعث می‌شد کل تصویر را بپوشاند، برای افکت پایین بهتر است حذف شود */
         }
+
         body[dir="rtl"] .tour-card .tour-image-container:hover .tour-card-overlay {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
+
         body[dir="rtl"] .tour-card .tour-card-overlay .media {
             /* background: rgba(255,255,255,0.9); /* اگر می‌خواهید پس‌زمینه سفید برای متن باشد */
             padding: 0; /* حذف پدینگ اضافی از مدیا */
             width: 100%;
             border-radius: 0; /* اگر پس زمینه ندارد، لازم نیست */
         }
+
         body[dir="rtl"] .tour-card-overlay .media-body h4 {
             font-size: 1.05rem;
             margin-bottom: 4px;
             color: #fff; /* رنگ متن روی overlay */
             font-weight: bold;
         }
+
         body[dir="rtl"] .tour-card-overlay .media-body h4 a {
             color: inherit !important;
         }
+
         body[dir="rtl"] .tour-card-overlay .media-body small {
             font-size: 0.8rem;
             color: #eee; /* رنگ متن کوچک روی overlay */
         }
+
         body[dir="rtl"] .tour-card-overlay .media-body i {
             font-size: 0.75rem;
             margin: 0 3px;
@@ -302,6 +321,7 @@
             border-bottom-left-radius: 12px; /* گرد کردن گوشه‌های پایین با کارت */
             border-bottom-right-radius: 12px;
         }
+
         body[dir="rtl"] .tour-card .admin-actions .btn {
             font-size: 0.8rem;
         }
@@ -313,138 +333,154 @@
 
 <body class="bg-shape">
 
-    <header class="header_area">
-        <div class="main_menu">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container box_1620">
-                    <a class="navbar-brand logo_h" href="{% url 'tour:main_page' %}"><img
-                            src="{% static 'safario/img/logo.png' %}" alt="لوگو سافاریو"></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="تغییر وضعیت ناوبری">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container box_1620">
+                <a class="navbar-brand logo_h" href="{% url 'tour:main_page' %}"><img
+                        src="{% static 'safario/img/logo.png' %}" alt="لوگو سافاریو"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="تغییر وضعیت ناوبری">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav"> {# حذف justify-content-start از اینجا #}
-                            <li class="nav-item active"><a class="nav-link" href="{% url 'tour:main_page' %}">خانه</a></li>
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav"> {# حذف justify-content-start از اینجا #}
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'tour:main_page' %}">خانه</a></li>
 
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-haspopup="true"
-                                   aria-expanded="false">پکیج‌های فعال ما</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'tour:homepage' %}">تورهای فعال</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'tourism:tourismpage' %}">گردشگری‌های فعال</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'news:news_list' %}">اخبار روز</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'tour:contact' %}">تماس با ما</a></li>
-                        </ul>
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">پکیج‌های فعال ما</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="{% url 'tour:homepage' %}">تورهای
+                                    فعال</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'tourism:tourismpage' %}">گردشگری‌های
+                                    فعال</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'news:news_list' %}">اخبار روز</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'tour:contact' %}">تماس با ما</a></li>
 
-                        <div class="nav-right py-4 py-lg-0">
-                            {% if request.user.is_authenticated %}
-                                <span class="btn btn-link">سلام، {{ request.user.username }}</span>
-                                <form action="{% url 'accounts:logout' %}" method="POST" style="display:inline-block; vertical-align: middle;"> {# display:inline-block برای فرم #}
-                                    {% csrf_token %}
-                                    <button type="submit" title="خروج از حساب کاربری">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#444">
-                                            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
-                                        </svg>
-                                    </button>
-                                </form>
-                            {% else %}
-                                <a class="btn btn-primary" href="{% url 'accounts:auth_page' %}">ورود / ثبت نام</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        {% block content %}
-        {% endblock content %}
-    </main>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'tour:profile_view' %}">پروفایل
+                                کاربر</a></li>
 
-    <footer class="footer-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3  col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>درباره آژانس ما</h6>
-                        <p>
-                            سافاریو با سال‌ها تجربه در برگزاری تورهای داخلی و خارجی، همواره در تلاش است تا بهترین و
-                            به‌یادماندنی‌ترین سفرها را برای شما رقم بزند.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>لینک‌های مفید</h6>
-                        <div class="row">
-                            <div class="col">
-                                <ul>
-                                    <li><a href="{% url 'tour:main_page' %}">خانه</a></li>
-                                    <li><a href="{% url 'tour:homepage' %}">تور های فعال</a></li>
-                                    <li><a href="{% url 'tourism:tourismpage' %}">گردشگری های فعال</a></li>
-                                    <li><a href="{% url 'news:news_list' %}">آخرین خبرها</a></li> {# اصلاح لینک #}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3  col-md-6 col-sm-6">
-                    {# بخش خبرنامه فعلاً کامنت شده #}
-                </div>
-                <div class="col-lg-3  col-md-6 col-sm-6">
-                    <div class="single-footer-widget mail-chimp">
-                        <h6 class="mb-20">اینستاگرام ما</h6>
-                        <ul class="instafeed d-flex flex-wrap">
-                            <li><img src="{% static 'safario/img/instagram/i1.jpg' %}" alt="تصویر اینستاگرام شماره 1"></li>
-                            <li><img src="{% static 'safario/img/instagram/i2.jpg' %}" alt="تصویر اینستاگرام شماره 2"></li>
-                            <li><img src="{% static 'safario/img/instagram/i3.jpg' %}" alt="تصویر اینستاگرام شماره 3"></li>
-                            <li><img src="{% static 'safario/img/instagram/i4.jpg' %}" alt="تصویر اینستاگرام شماره 4"></li>
-                            <li><img src="{% static 'safario/img/instagram/i5.jpg' %}" alt="تصویر اینستاگرام شماره 5"></li>
-                            <li><img src="{% static 'safario/img/instagram/i6.jpg' %}" alt="تصویر اینستاگرام شماره 6"></li>
-                            <li><img src="{% static 'safario/img/instagram/i7.jpg' %}" alt="تصویر اینستاگرام شماره 7"></li>
-                            <li><img src="{% static 'safario/img/instagram/i8.jpg' %}" alt="تصویر اینستاگرام شماره 8"></li>
-                        </ul>
+                        {% endif %}
+
+
+                    </ul>
+
+                    <div class="nav-right py-4 py-lg-0">
+                        {% if request.user.is_authenticated %}
+                            <span class="btn btn-link">سلام، {{ request.user.username }}</span>
+                            <form action="{% url 'accounts:logout' %}" method="POST"
+                                  style="display:inline-block; vertical-align: middle;">
+                                {# display:inline-block برای فرم #}
+                                {% csrf_token %}
+                                <button type="submit" title="خروج از حساب کاربری">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960"
+                                         width="18px" fill="#444">
+                                        <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        {% else %}
+                            <a class="btn btn-primary" href="{% url 'accounts:auth_page' %}">ورود / ثبت نام</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+        </nav>
+    </div>
+</header>
 
-            <div class="footer-bottom">
-                <div class="row align-items-center">
-                    <p class="col-lg-8 col-sm-12 footer-text m-0 text-center text-lg-right">
-                        حق کپی رایت &copy;<script>document.write(new Date().getFullYear());</script>
-                        تمامی حقوق محفوظ است | طراحی و توسعه توسط <a href="https://github.com/AminHosseini82"
-                                                                     target="_blank" rel="noopener noreferrer">امین حسینی</a>
+<main>
+    {% block content %}
+    {% endblock content %}
+</main>
+
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3  col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h6>درباره آژانس ما</h6>
+                    <p>
+                        سافاریو با سال‌ها تجربه در برگزاری تورهای داخلی و خارجی، همواره در تلاش است تا بهترین و
+                        به‌یادماندنی‌ترین سفرها را برای شما رقم بزند.
                     </p>
-                    <div class="col-lg-4 col-sm-12 footer-social text-center text-lg-left">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-dribbble"></i></a>
-                        <a href="#"><i class="fab fa-behance"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h6>لینک‌های مفید</h6>
+                    <div class="row">
+                        <div class="col">
+                            <ul>
+                                <li><a href="{% url 'tour:main_page' %}">خانه</a></li>
+                                <li><a href="{% url 'tour:homepage' %}">تور های فعال</a></li>
+                                <li><a href="{% url 'tourism:tourismpage' %}">گردشگری های فعال</a></li>
+                                <li><a href="{% url 'news:news_list' %}">آخرین خبرها</a></li>
+                                {# اصلاح لینک #}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3  col-md-6 col-sm-6">
+                {# بخش خبرنامه فعلاً کامنت شده #}
+            </div>
+            <div class="col-lg-3  col-md-6 col-sm-6">
+                <div class="single-footer-widget mail-chimp">
+                    <h6 class="mb-20">اینستاگرام ما</h6>
+                    <ul class="instafeed d-flex flex-wrap">
+                        <li><img src="{% static 'safario/img/instagram/i1.jpg' %}" alt="تصویر اینستاگرام شماره 1"></li>
+                        <li><img src="{% static 'safario/img/instagram/i2.jpg' %}" alt="تصویر اینستاگرام شماره 2"></li>
+                        <li><img src="{% static 'safario/img/instagram/i3.jpg' %}" alt="تصویر اینستاگرام شماره 3"></li>
+                        <li><img src="{% static 'safario/img/instagram/i4.jpg' %}" alt="تصویر اینستاگرام شماره 4"></li>
+                        <li><img src="{% static 'safario/img/instagram/i5.jpg' %}" alt="تصویر اینستاگرام شماره 5"></li>
+                        <li><img src="{% static 'safario/img/instagram/i6.jpg' %}" alt="تصویر اینستاگرام شماره 6"></li>
+                        <li><img src="{% static 'safario/img/instagram/i7.jpg' %}" alt="تصویر اینستاگرام شماره 7"></li>
+                        <li><img src="{% static 'safario/img/instagram/i8.jpg' %}" alt="تصویر اینستاگرام شماره 8"></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </footer>
 
-    <script src="{% static 'safario/vendors/jquery/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'safario/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'safario/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'safario/vendors/nice-select/jquery.nice-select.min.js' %}"></script>
-    <script src="{% static 'safario/js/jquery.ajaxchimp.min.js' %}"></script>
-    <script src="{% static 'safario/js/mail-script.js' %}"></script>
-    <script src="{% static 'safario/js/skrollr.min.js' %}"></script>
-    <script src="{% static 'safario/js/main.js' %}"></script>
+        <div class="footer-bottom">
+            <div class="row align-items-center">
+                <p class="col-lg-8 col-sm-12 footer-text m-0 text-center text-lg-right">
+                    حق کپی رایت &copy;<script>document.write(new Date().getFullYear());</script>
+                    تمامی حقوق محفوظ است | طراحی و توسعه توسط <a href="https://github.com/AminHosseini82"
+                                                                 target="_blank" rel="noopener noreferrer">امین
+                    حسینی</a>
+                </p>
+                <div class="col-lg-4 col-sm-12 footer-social text-center text-lg-left">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                    <a href="#"><i class="fab fa-behance"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
-    {% block extra_js %}{% endblock extra_js %}
+<script src="{% static 'safario/vendors/jquery/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'safario/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'safario/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'safario/vendors/nice-select/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'safario/js/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'safario/js/mail-script.js' %}"></script>
+<script src="{% static 'safario/js/skrollr.min.js' %}"></script>
+<script src="{% static 'safario/js/main.js' %}"></script>
+
+{% block extra_js %}{% endblock extra_js %}
 
 </body>
 </html>
